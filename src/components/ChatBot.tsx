@@ -74,7 +74,7 @@ const ChatBot = () => {
           <CardHeader className="border-b">
             <CardTitle className="flex items-center gap-2">
               <MessageCircle className="w-5 h-5 text-accent" />
-              Madras Mic
+              AI ChatBot
             </CardTitle>
           </CardHeader>
           
