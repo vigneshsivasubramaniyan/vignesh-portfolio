@@ -38,7 +38,7 @@ const Contact = () => {
             
             <div className="space-y-4">
               <a 
-                href="mailto:vignesh@example.com" 
+                href="mailto:vigneshsivasubramaniyan@gmail.com" 
                 className="flex items-center gap-3 text-foreground/80 hover:text-accent transition-colors"
               >
                 <Mail className="w-5 h-5" />
@@ -47,7 +47,7 @@ const Contact = () => {
               
               <a 
                 href="https://linkedin.com" 
-                target="_blank" 
+                target="https://www.linkedin.com/in/vigneshwaran-sivasubramaniyan/" 
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 text-foreground/80 hover:text-accent transition-colors"
               >
@@ -57,7 +57,7 @@ const Contact = () => {
               
               <a 
                 href="https://github.com" 
-                target="_blank" 
+                target="https://github.com/vigneshsivasubramaniyan" 
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 text-foreground/80 hover:text-accent transition-colors"
               >
