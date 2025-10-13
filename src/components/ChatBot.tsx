@@ -14,7 +14,7 @@ interface Message {
 const ChatBot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
-    { text: "Hi! I'm Madras Mic, Vignesh's AI assistant. How can I help you today?", isBot: true },
+    { text: "Hi! I'm Vignesh. How can I help you today?", isBot: true },
   ]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
