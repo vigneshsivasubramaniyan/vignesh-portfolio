@@ -42,11 +42,11 @@ const Contact = () => {
                 className="flex items-center gap-3 text-foreground/80 hover:text-accent transition-colors"
               >
                 <Mail className="w-5 h-5" />
-                <span>vignesh@example.com</span>
+                <span>vigneshsivasubramaniyan@gmail.com</span>
               </a>
               
               <a 
-                href="https://linkedin.com" 
+                href="https://www.linkedin.com/in/vigneshwaran-sivasubramaniyan/" 
                 target="https://www.linkedin.com/in/vigneshwaran-sivasubramaniyan/" 
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 text-foreground/80 hover:text-accent transition-colors"
@@ -56,7 +56,7 @@ const Contact = () => {
               </a>
               
               <a 
-                href="https://github.com" 
+                href="https://github.com/vigneshsivasubramaniyan" 
                 target="https://github.com/vigneshsivasubramaniyan" 
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 text-foreground/80 hover:text-accent transition-colors"
