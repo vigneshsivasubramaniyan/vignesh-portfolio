@@ -1,13 +1,24 @@
 import { Button } from "@/components/ui/button";
 import { ArrowDown } from "lucide-react";
+import profileImage from "@/assets/profile.jpg";
 
 const Hero = () => {
   return (
     <section id="home" className="min-h-screen flex items-center justify-center hero-pattern relative">
       <div className="container mx-auto px-4 text-center animate-fade-in">
         <div className="max-w-4xl mx-auto space-y-6">
+          <div className="flex justify-center mb-8">
+            <div className="w-48 h-48 rounded-full border-4 border-accent/50 bg-transparent overflow-hidden">
+              <img 
+                src={profileImage} 
+                alt="Vignesh Sivasubramaniyan" 
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+          
           <h2 className="text-5xl md:text-7xl font-bold mb-4">
-            Hi, I'm <span className="text-gradient">Vignesh</span>
+            Hi, I'm <span className="text-gradient">Vignesh Sivasubramaniyan</span>
           </h2>
           <p className="text-xl md:text-2xl text-foreground/80 mb-8">
             A DevOps Engineer with <span className="text-accent font-semibold">8+ years</span> of experience 
