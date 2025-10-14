@@ -8,7 +8,7 @@ const Projects = () => {
       title: "HomeLab Automation",
       description: "Complete home lab setup using Docker, Portainer, and Cloudflare Tunnel for secure remote access. Includes automated backups and monitoring.",
       tags: ["Docker", "Portainer", "Cloudflare", "Automation"],
-      link: "https://github.com/vigneshsivasubramaniyan/homelab-automation",
+      link: "https://github.com/vigneshsivasubramaniyan/HomeLab",
     },
     {
       title: "n8n AI Automation Pipelines",
