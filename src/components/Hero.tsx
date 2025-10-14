@@ -11,14 +11,14 @@ const Hero = () => {
             <div className="w-48 h-48 rounded-full border-4 border-accent/50 bg-transparent overflow-hidden">
               <img 
                 src={profileImage} 
-                alt="Vignesh Sivasubramaniyan" 
+                alt="Vigneshwaran Sivasubramaniyan" 
                 className="w-full h-full object-cover"
               />
             </div>
           </div>
           
           <h2 className="text-5xl md:text-7xl font-bold mb-4">
-            Hi, I'm <span className="text-gradient">Vignesh Sivasubramaniyan</span>
+            Hi, I'm <span className="text-gradient">Vigneshwaran Sivasubramaniyan</span>
           </h2>
           <p className="text-xl md:text-2xl text-foreground/80 mb-8">
             A DevOps Engineer with <span className="text-accent font-semibold">8+ years</span> of experience 
