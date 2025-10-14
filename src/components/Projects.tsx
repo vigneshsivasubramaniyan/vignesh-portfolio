@@ -8,19 +8,19 @@ const Projects = () => {
       title: "HomeLab Automation",
       description: "Complete home lab setup using Docker, Portainer, and Cloudflare Tunnel for secure remote access. Includes automated backups and monitoring.",
       tags: ["Docker", "Portainer", "Cloudflare", "Automation"],
-      link: "#",
+      link: "https://github.com/vigneshsivasubramaniyan/homelab-automation",
     },
     {
       title: "n8n AI Automation Pipelines",
       description: "Built intelligent automation workflows including voice assistants, movie dubbing automation, and Gemini AI integration for content processing.",
       tags: ["n8n", "AI", "Gemini", "Automation", "Voice AI"],
-      link: "#",
+      link: "https://github.com/vigneshsivasubramaniyan/n8n-ai-pipelines",
     },
     {
       title: "MandiMap Platform",
       description: "Local vendor marketplace platform with containerized backend using Docker and n8n for workflow automation and vendor management.",
       tags: ["Docker", "n8n", "Backend", "Platform"],
-      link: "#",
+      link: "https://github.com/vigneshsivasubramaniyan/mandimap",
     },
   ];
 
