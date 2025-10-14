@@ -33,17 +33,23 @@ const Projects = () => {
         
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((project, index) => (
-            <Card 
-              key={index} 
-              className="bg-card border-border hover:border-accent transition-all hover:shadow-lg hover:shadow-accent/20 group"
+            <a 
+              href={project.link} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="block"
             >
-              <CardHeader>
-                <div className="flex items-start justify-between">
-                  <CardTitle className="text-xl group-hover:text-accent transition-colors">
-                    {project.title}
-                  </CardTitle>
-                  <ExternalLink className="w-5 h-5 text-foreground/50 group-hover:text-accent transition-colors" />
-                </div>
+              <Card 
+                key={index} 
+                className="bg-card border-border hover:border-accent transition-all hover:shadow-lg hover:shadow-accent/20 group cursor-pointer"
+              >
+                <CardHeader>
+                  <div className="flex items-start justify-between">
+                    <CardTitle className="text-xl group-hover:text-accent transition-colors">
+                      {project.title}
+                    </CardTitle>
+                    <ExternalLink className="w-5 h-5 text-foreground/50 group-hover:text-accent transition-colors" />
+                  </div>
                 <CardDescription className="text-foreground/70">
                   {project.description}
                 </CardDescription>
@@ -58,6 +64,7 @@ const Projects = () => {
                 </div>
               </CardContent>
             </Card>
+            </a>
           ))}
         </div>
       </div>
