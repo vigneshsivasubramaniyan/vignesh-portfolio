@@ -20,7 +20,7 @@ const Projects = () => {
       title: "MandiMap Platform",
       description: "Local vendor marketplace platform with containerized backend using Docker and n8n for workflow automation and vendor management.",
       tags: ["Docker", "n8n", "Backend", "Platform"],
-      link: "https://github.com/vigneshsivasubramaniyan/mandimap",
+      link: "https://github.com/MadrasMic1/kadimobileapp",
     },
   ];
 
