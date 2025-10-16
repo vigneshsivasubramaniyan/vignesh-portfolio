@@ -25,39 +25,46 @@ const Projects = () => {
   ];
 
   return (
-    <section id="projects" className="py-20 px-4 bg-secondary/20">
+    <section id="projects" className="py-32 px-4 bg-secondary/30">
       <div className="container mx-auto max-w-6xl">
-        <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 text-gradient">
-          Featured Projects
-        </h2>
+        <div className="text-center mb-20">
+          <h2 className="text-5xl md:text-6xl font-bold mb-4">
+            Featured <span className="text-gradient">Projects</span>
+          </h2>
+          <div className="w-20 h-1 bg-gradient-to-r from-transparent via-accent to-transparent mx-auto" />
+        </div>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
             <a 
               href={project.link} 
               target="_blank" 
               rel="noopener noreferrer"
-              className="block"
+              className="block group"
+              key={index}
             >
               <Card 
-                key={index} 
-                className="bg-card border-border hover:border-accent transition-all hover:shadow-lg hover:shadow-accent/20 group cursor-pointer"
+                className="h-full bg-card/50 backdrop-blur border-border/50 hover:border-accent/50 transition-all duration-300 hover:shadow-xl hover:shadow-accent/20 cursor-pointer hover:-translate-y-1"
               >
-                <CardHeader>
+                <CardHeader className="space-y-4">
                   <div className="flex items-start justify-between">
-                    <CardTitle className="text-xl group-hover:text-accent transition-colors">
+                    <CardTitle className="text-xl font-bold group-hover:text-accent transition-colors">
                       {project.title}
                     </CardTitle>
-                    <ExternalLink className="w-5 h-5 text-foreground/50 group-hover:text-accent transition-colors" />
+                    <ExternalLink className="w-5 h-5 text-muted-foreground group-hover:text-accent transition-colors flex-shrink-0" />
                   </div>
-                <CardDescription className="text-foreground/70">
+                <CardDescription className="text-muted-foreground leading-relaxed">
                   {project.description}
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2">
                   {project.tags.map((tag) => (
-                    <Badge key={tag} variant="secondary">
+                    <Badge 
+                      key={tag} 
+                      variant="secondary"
+                      className="bg-secondary/70 hover:bg-accent/20 transition-colors"
+                    >
                       {tag}
                     </Badge>
                   ))}
