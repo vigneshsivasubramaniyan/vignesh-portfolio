@@ -6,30 +6,44 @@ pipeline {
     }
 
     environment {
-        APP_NAME = 'Portfolio'
-        EXPOSE_PORT = '8085'
-        DOCKER_IMAGE = "portfolio:${ROLLBACK_VERSION}"
-        DOCKERFILE = 'Dockerfile'
+        APP_NAME = "portfolio"
+        PORT = "8085"
     }
-    
+
     stages {
-        stage('checkout') {
+        stage('Checkout') {
             steps {
                 git branch: 'main', url: 'https://github.com/vigneshsivasubramaniyan/vignesh-portfolio.git'
             }
         }
-        stage('Build') {
+
+        stage('Build Image') {
+            when {
+                expression { params.ROLLBACK_VERSION == '' }
+            }
             steps {
-                sh 'docker build -t ${DOCKER_IMAGE} .'
+                sh """
+                docker build --no-cache -t $APP_NAME:${env.BUILD_NUMBER} .
+                """
             }
         }
+
         stage('Deploy') {
             steps {
-                sh '''
-                docker stop ${APP_NAME} || true
-                docker rm ${APP_NAME} || true
-                docker run -d -p ${EXPOSE_PORT}:80 --restart unless-stopped --name ${APP_NAME} ${DOCKER_IMAGE}
-                '''
+                script {
+                    def imageTag = params.ROLLBACK_VERSION ?: env.BUILD_NUMBER
+
+                    sh """
+                    docker stop $APP_NAME || true
+                    docker rm $APP_NAME || true
+
+                    docker run -d \
+                      --name $APP_NAME \
+                      --restart=unless-stopped \
+                      -p $PORT:80 \
+                      $APP_NAME:$imageTag
+                    """
+                }
             }
         }
     }
