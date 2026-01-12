@@ -2,13 +2,13 @@ pipeline {
     agent any
 
     parameters {
-        string(name: 'VERSION', defaultValue: '1.0.0', description: 'Version number')
+        string(name: 'ROLLBACK_VERSION', defaultValue: '', description: 'Build number to rollback')
     }
 
     environment {
         APP_NAME = 'Portfolio'
         EXPOSE_PORT = '8085'
-        DOCKER_IMAGE = "portfolio:${VERSION}"
+        DOCKER_IMAGE = "portfolio:${ROLLBACK_VERSION}"
         DOCKERFILE = 'Dockerfile'
     }
     
