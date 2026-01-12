@@ -6,7 +6,6 @@ pipeline {
     }
 
     environment {
-        VERSION = params.VERSION
         APP_NAME = 'Portfolio'
         EXPOSE_PORT = '8085'
         DOCKER_IMAGE = "portfolio:${VERSION}"
