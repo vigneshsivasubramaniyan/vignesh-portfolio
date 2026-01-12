@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vigneshwaran Sivasubramaniyan - Portfolio</title>
+    <link rel="shortcut icon" href="assets/images/vs-logo.ico" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <nav id="mainNav">
+        <ul>
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#guides">Guides</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id="hero">
+        <div class="profile-img"></div>
+        <h1>Vigneshwaran Sivasubramaniyan</h1>
+        <p class="subtitle">Cloud & DevOps Engineer</p>
+         <p class="experience-line"><span class="highlight-years">8+ years</span> crafting scalable infrastructure, automating CI/CD pipelines, and optimizing cloud operations for high-performance systems.</p>
+         
+        <div class="cta-buttons">
+            <a href="assets/resume/VigneshWaran Sivasubramaniyan_DevOps.pdf" download="Vigneshwaran_Resume.pdf" class="btn btn-primary">Download CV</a>
+            <a href="https://www.linkedin.com/in/vigneshwaran-sivasubramaniyan/" target="_blank" class="btn btn-secondary">LinkedIn</a>
+        </div>
+        
+        <div class="about-section">
+            <h3></h3>
+            <div class="about-underline"></div>
+            <div class="about-content">
+                <p>A passionate and skilled DevOps, SRE, and Cloud Engineer with a strong background in infrastructure provisioning, automation, and monitoring. </p>
+                <p>Have experience working with tools such as Jenkins, Terraform, and Ansible to streamline development processes and ensure efficient code deployment.</p>
+            </div>
+            <div class="about-content">
+                <p>Proficient in managing and monitoring cloud infrastructure services on AWS. as well as maintaining high availability in Kubernetes-based container clusters.</p>
+                <p>Successfully implemented monitoring and logging tools like ELK, Grafana, and Datadog to ensure comprehensive visibility into system performance and implemented GitOps for managing infrastructure as code. My expertise also includes integrating automation testing into the CI/CD pipeline and developing scripts to automate tasks, improving efficiency and reducing manual effort</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2 class="split-heading">Featured <span class="highlight">Projects</span></h2>
+        <div class="projects-grid" id="projectsGrid">
+            <!-- Projects will be dynamically loaded -->
+        </div>
+    </section>
+
+    <section id="guides">
+        <h2 class="split-heading">Guides & <span class="highlight">Notes</span></h2>
+        <div class="guides-grid" id="guidesGrid">
+            <!-- Guides will be dynamically loaded -->
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="contact-header">
+            <h2 class="split-heading">Get In <span class="highlight">Touch</span></h2>
+            <div class="contact-underline"></div>
+        </div>
+
+        <div class="contact-content-wrapper">
+            <div class="contact-left">
+                <p class="contact-intro">I'm always interested in hearing about new opportunities, interesting projects, or just having a conversation about DevOps and cloud technologies.</p>
+                
+                <div class="contact-info-list" id="contactInfoList">
+                    <!-- Contact info will be dynamically loaded -->
+                </div>
+            </div>
+
+            <div class="contact-form-container">
+                <form id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="text" id="fullname" name="fullname" required placeholder="Your Name">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" required placeholder="Your Email">
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" name="message" required placeholder="Your Message"></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Message</button>
+                    <div id="formMessage" class="form-message"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

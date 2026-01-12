@@ -1,0 +1,2415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevOps Complete Notes - Master Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f8f9fa;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e0e0e0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-btn {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s;
+        }
+
+        .back-btn:hover {
+            color: #2980b9;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            padding: 120px 20px 80px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .hero h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.2em;
+            opacity: 0.95;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .section {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e0e0e0;
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 2em;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #e74c3c;
+        }
+
+        h3 {
+            color: #e74c3c;
+            font-size: 1.4em;
+            margin: 30px 0 15px 0;
+        }
+
+        h4 {
+            color: #3498db;
+            font-size: 1.2em;
+            margin: 20px 0 10px 0;
+        }
+
+        pre {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        code {
+            font-family: 'Fira Code', monospace;
+            background: #ffe8e8;
+            color: #c0392b;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        pre code {
+            background: none;
+            color: inherit;
+            padding: 0;
+        }
+
+        ul, ol {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            line-height: 1.8;
+        }
+
+        .info-box {
+            background: #e8f4fd;
+            border-left: 4px solid #3498db;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .success-box {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .fire-box {
+            background: #ffe8e8;
+            border-left: 4px solid #e74c3c;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid #e0e0e0;
+        }
+
+        th {
+            background: #e74c3c;
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .chapter-number {
+            display: inline-block;
+            background: #e74c3c;
+            color: white;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            border-radius: 50%;
+            font-weight: 600;
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+
+        .toc {
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 40px;
+        }
+
+        .toc h3 {
+            color: #2c3e50;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .toc ul {
+            list-style: none;
+            margin: 0;
+        }
+
+        .toc li {
+            margin-bottom: 8px;
+        }
+
+        .toc a {
+            color: #e74c3c;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .toc a:hover {
+            color: #c0392b;
+            text-decoration: underline;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+
+        .highlight-box h3 {
+            color: white;
+            margin-top: 0;
+        }
+
+        .pillar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .pillar-card {
+            background: #fff;
+            border: 2px solid #e74c3c;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            font-weight: 600;
+            color: #e74c3c;
+            transition: all 0.3s;
+        }
+
+        .pillar-card:hover {
+            background: #e74c3c;
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        .roadmap-step {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        .command-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .command-grid div {
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+        }
+
+        .command-grid div:nth-child(odd) {
+            font-weight: 600;
+            background: #e8f4fd;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2em;
+            }
+
+            .hero p {
+                font-size: 1em;
+            }
+
+            .section {
+                padding: 25px;
+            }
+
+            h2 {
+                font-size: 1.6em;
+            }
+
+            pre {
+                font-size: 0.8em;
+                padding: 15px;
+            }
+
+            table {
+                font-size: 0.9em;
+            }
+
+            th, td {
+                padding: 10px;
+            }
+
+            .pillar-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <a href="/index.html" class="back-btn">← Back to Portfolio</a>
+            <span style="color: #e74c3c; font-weight: 600;">⚙️ DevOps Guide</span>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <h1>🔥 DevOps Complete Master Guide</h1>
+        <p>One comprehensive resource covering the entire DevOps landscape - From fundamentals to production-ready skills</p>
+    </div>
+
+    <div class="container">
+        <div class="toc">
+            <h3>📑 Table of Contents - Complete Guide</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px;">
+                <div>
+                    <h4 style="color: #e74c3c; margin-bottom: 10px;">Part 1: Fundamentals</h4>
+                    <ul style="list-style: none; margin: 0;">
+                        <li><a href="#roadmap">1. DevOps Roadmap</a></li>
+                        <li><a href="#linux">2. Linux for DevOps</a></li>
+                        <li><a href="#git">3. Git Deep Dive</a></li>
+                        <li><a href="#networking">4. Networking</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: #e74c3c; margin-bottom: 10px;">Part 2: Cloud & IaC</h4>
+                    <ul style="list-style: none; margin: 0;">
+                        <li><a href="#aws">5. AWS for DevOps</a></li>
+                        <li><a href="#terraform">6. Terraform</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: #e74c3c; margin-bottom: 10px;">Part 3: Containers</h4>
+                    <ul style="list-style: none; margin: 0;">
+                        <li><a href="#docker">7. Docker</a></li>
+                        <li><a href="#kubernetes">8. Kubernetes</a></li>
+                        <li><a href="#helm">9. Helm</a></li>
+                        <li><a href="#argocd">10. ArgoCD</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: #e74c3c; margin-bottom: 10px;">Part 4: Automation</h4>
+                    <ul style="list-style: none; margin: 0;">
+                        <li><a href="#jenkins">11. Jenkins</a></li>
+                        <li><a href="#ansible">12. Ansible</a></li>
+                        <li><a href="#bash">13. Bash Scripting</a></li>
+                        <li><a href="#monitoring">14. Monitoring & SRE</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: #e74c3c; margin-bottom: 10px;">Part 5: Career</h4>
+                    <ul style="list-style: none; margin: 0;">
+                        <li><a href="#interview">15. Interview Prep</a></li>
+                        <li><a href="#projects">16. Real Projects</a></li>
+                        <li><a href="#checklists">17. Checklists</a></li>
+                        <li><a href="#resume">18. Resume Tips</a></li>
+                        <li><a href="#roadmap90">19. 90-Day Plan</a></li>
+                        <li><a href="#career">20. Career Path</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="roadmap">
+            <h2><span class="chapter-number">1</span>Complete DevOps Roadmap</h2>
+            
+            <h3>1.1 DevOps Definition (Real Industry Meaning)</h3>
+            <p>DevOps is not a tool. It is a combination of:</p>
+            <ul>
+                <li>Cultural principles</li>
+                <li>Automation practices</li>
+                <li>Tool sets for CI/CD, Infrastructure, Containers, and Cloud</li>
+            </ul>
+
+            <div class="highlight-box">
+                <h3>🎯 DevOps Enables:</h3>
+                <ul>
+                    <li><strong>Faster development → faster releases</strong></li>
+                    <li><strong>Stable systems → minimized downtime</strong></li>
+                    <li><strong>Automated infrastructure → no manual repetitive tasks</strong></li>
+                    <li><strong>Continuous feedback → continuous improvement</strong></li>
+                </ul>
+            </div>
+
+            <h3>1.2 Core Pillars (What You Must Master)</h3>
+            <div class="pillar-grid">
+                <div class="pillar-card">🐧 Linux</div>
+                <div class="pillar-card">🌐 Networking</div>
+                <div class="pillar-card">📦 Git</div>
+                <div class="pillar-card">🔄 CI/CD</div>
+                <div class="pillar-card">☁️ Cloud (AWS)</div>
+                <div class="pillar-card">🏗️ IaC (Terraform)</div>
+                <div class="pillar-card">🐳 Containers (Docker)</div>
+                <div class="pillar-card">☸️ Orchestration (K8s)</div>
+                <div class="pillar-card">🔧 Config Mgmt (Ansible)</div>
+                <div class="pillar-card">📊 SRE Fundamentals</div>
+            </div>
+
+            <h3>1.3 Optimal Learning Path (Sequence Order)</h3>
+            <div class="roadmap-step">
+                <strong>Phase 1:</strong> Linux → Git → Networking
+            </div>
+            <div class="roadmap-step">
+                <strong>Phase 2:</strong> AWS → Terraform → Docker → Kubernetes
+            </div>
+            <div class="roadmap-step">
+                <strong>Phase 3:</strong> Jenkins → Ansible → Monitoring & Operations
+            </div>
+
+            <h3>1.4 DevOps Workflow Overview</h3>
+            <p>A DevOps engineer deals with:</p>
+            
+            <table>
+                <tr>
+                    <th>Stage</th>
+                    <th>Tools/Skills</th>
+                    <th>Responsibilities</th>
+                </tr>
+                <tr>
+                    <td><strong>Code</strong></td>
+                    <td>Git</td>
+                    <td>Manage source versioning, branching, PRs</td>
+                </tr>
+                <tr>
+                    <td><strong>Build</strong></td>
+                    <td>Jenkins, GitHub Actions</td>
+                    <td>Compile, test, package artifacts</td>
+                </tr>
+                <tr>
+                    <td><strong>Containerize</strong></td>
+                    <td>Docker</td>
+                    <td>Convert apps into portable containers</td>
+                </tr>
+                <tr>
+                    <td><strong>Infrastructure</strong></td>
+                    <td>Terraform</td>
+                    <td>Build VPC, EC2, EKS, ALB, S3, IAM using IaC</td>
+                </tr>
+                <tr>
+                    <td><strong>Deployment</strong></td>
+                    <td>Kubernetes, ECS</td>
+                    <td>Run microservices at scale</td>
+                </tr>
+                <tr>
+                    <td><strong>Monitoring</strong></td>
+                    <td>Prometheus, Grafana, CloudWatch</td>
+                    <td>Measure logs, metrics, SLIs/SLOs</td>
+                </tr>
+                <tr>
+                    <td><strong>Automation</strong></td>
+                    <td>Ansible, Bash, Python</td>
+                    <td>Server configuration, patching, tasks</td>
+                </tr>
+            </table>
+
+            <h3>1.5 End Goal - Be Able To:</h3>
+            <ul>
+                <li>✓ Deploy microservices on AWS with Terraform</li>
+                <li>✓ Use Docker + Kubernetes for scaling</li>
+                <li>✓ Build end-to-end CI/CD pipelines</li>
+                <li>✓ Automate infrastructure + configuration</li>
+                <li>✓ Manage logs, metrics, and incidents</li>
+            </ul>
+        </div>
+
+        <div class="section" id="linux">
+            <h2><span class="chapter-number">2</span>Linux for DevOps</h2>
+            
+            <div class="fire-box">
+                <strong>🔥 Critical:</strong> Linux fundamentals form 30% of a DevOps job. Master these concepts thoroughly.
+            </div>
+
+            <h3>2.1 File System Structure</h3>
+            <pre>/          → Root directory
+/bin       → Core binaries (ls, cat, cp)
+/sbin      → System binaries (shutdown, reboot)
+/usr       → User applications
+/etc       → Configuration files
+/var       → Logs, variable data
+/home      → User home directories
+/opt       → Optional packages
+/tmp       → Temporary files
+/run       → Runtime system data
+/lib       → Libraries</pre>
+
+            <div class="info-box">
+                <strong>💡 DevOps Focus:</strong> Mainly work with <code>/etc</code>, <code>/var/log</code>, <code>/usr/bin</code>, <code>/home</code>, <code>/opt</code>, <code>/srv</code>, and <code>/run</code>
+            </div>
+
+            <h3>2.2 File Commands</h3>
+            
+            <h4>Listing Files</h4>
+            <pre>ls              # List files
+ls -l           # Long format with permissions
+ls -al          # All files including hidden
+ls -lh          # Human-readable sizes</pre>
+
+            <h4>Copy/Move/Delete</h4>
+            <pre>cp file1 file2          # Copy file
+cp -r dir1 dir2         # Copy directory recursively
+mv file1 newname        # Move/rename file
+rm file                 # Remove file
+rm -rf folder           # Remove folder forcefully</pre>
+
+            <h4>File Creation</h4>
+            <pre>touch file              # Create empty file
+nano file               # Edit with nano
+vim file                # Edit with vim</pre>
+
+            <h3>2.3 Permissions & Ownership</h3>
+            <p>Every file has:</p>
+            <ul>
+                <li><strong>Owner:</strong> User who owns the file</li>
+                <li><strong>Group:</strong> Group ownership</li>
+                <li><strong>Permissions:</strong> Read (r), Write (w), Execute (x)</li>
+            </ul>
+
+            <h4>Permission Format</h4>
+            <pre>-rwxr-xr--
+│││││││││
+│└┴┴┴┴┴┴┴┴ Permissions
+└───────── File type (- = file, d = directory)
+
+Owner: rwx (7)
+Group: r-x (5)
+Other: r-- (4)
+Result: 754</pre>
+
+            <h4>Changing Permissions</h4>
+            <pre>chmod 755 file          # rwxr-xr-x
+chmod u+x script.sh     # Add execute for owner
+chmod g-w file          # Remove write for group
+chmod o+r file          # Add read for others</pre>
+
+            <h4>Changing Ownership</h4>
+            <pre>chown user:group file
+chown -R user:group /directory
+
+# Example
+chown nginx:nginx /var/www/html</pre>
+
+            <h4>umask</h4>
+            <p>Controls default file permissions when files are created.</p>
+            <pre>umask 022               # Default: files 644, dirs 755</pre>
+
+            <h3>2.4 Process Management</h3>
+            
+            <h4>Check Processes</h4>
+            <pre>ps aux                  # All running processes
+top                     # Real-time process viewer
+htop                    # Enhanced top (if installed)
+pgrep nginx             # Find process by name
+pidof nginx             # Get PID of process</pre>
+
+            <h4>Kill Processes</h4>
+            <pre>kill PID                # Graceful termination
+kill -9 PID             # Force kill
+killall nginx           # Kill all nginx processes
+pkill -f "pattern"      # Kill by pattern match</pre>
+
+            <h3>2.5 System Services (systemd)</h3>
+            
+            <h4>Managing Services</h4>
+            <pre>systemctl start nginx           # Start service
+systemctl stop nginx            # Stop service
+systemctl restart nginx         # Restart service
+systemctl reload nginx          # Reload config
+systemctl enable nginx          # Auto-start on boot
+systemctl disable nginx         # Disable auto-start
+systemctl status nginx          # Check status</pre>
+
+            <h4>Viewing Service Logs</h4>
+            <pre>journalctl -u nginx             # View service logs
+journalctl -u nginx -f          # Follow logs
+journalctl -xe                  # View recent errors</pre>
+
+            <h3>2.6 Logs (Critical for DevOps Troubleshooting)</h3>
+            
+            <div class="warning-box">
+                <strong>⚠️ Most Important Skill:</strong> 50% of DevOps troubleshooting involves reading and analyzing logs.
+            </div>
+
+            <h4>Common Log Locations</h4>
+            <pre>/var/log/messages           # General system messages
+/var/log/syslog             # System logs (Debian/Ubuntu)
+/var/log/dmesg              # Kernel boot messages
+/var/log/auth.log           # Authentication logs
+/var/log/secure             # Security logs (RHEL/CentOS)
+/var/log/nginx/             # Nginx logs
+/var/log/apache2/           # Apache logs
+/var/log/mysql/             # MySQL logs</pre>
+
+            <h4>Log Commands</h4>
+            <pre>tail -f /var/log/syslog     # Follow log in real-time
+tail -n 100 logfile         # Last 100 lines
+head -n 50 logfile          # First 50 lines
+grep "ERROR" logfile        # Search for errors
+journalctl -xe              # systemd journal errors</pre>
+
+            <h3>2.7 Networking Commands</h3>
+            
+            <pre>ip a                        # Show network interfaces
+ip addr show                # Same as above
+ip r                        # Show routing table
+ip route show               # Same as above
+
+ss -tln                     # Show listening TCP ports
+ss -uln                     # Show listening UDP ports
+netstat -tulpn              # Legacy network stats
+
+curl -I https://example.com # Test HTTP headers
+curl -v https://example.com # Verbose output
+wget https://example.com    # Download files
+
+ping google.com             # Test connectivity
+traceroute google.com       # Trace route to host
+dig google.com              # DNS lookup (detailed)
+nslookup google.com         # DNS lookup (simple)</pre>
+
+            <h3>2.8 Disk & Memory Management</h3>
+            
+            <h4>Disk Usage</h4>
+            <pre>df -h                       # Disk space usage
+df -i                       # Inode usage
+du -sh /var/log             # Folder size
+du -h --max-depth=1         # Size of subdirectories
+lsblk                       # List block devices
+fdisk -l                    # List partitions</pre>
+
+            <h4>Memory & CPU</h4>
+            <pre>free -h                     # RAM usage
+vmstat                      # Virtual memory stats
+iostat                      # I/O statistics
+mpstat                      # CPU statistics
+sar                         # System activity report
+uptime                      # System uptime and load</pre>
+
+            <h3>2.9 User & Group Management</h3>
+            
+            <pre># Create user
+useradd username
+useradd -m -s /bin/bash username
+
+# Set password
+passwd username
+
+# Create group
+groupadd devops
+
+# Add user to group
+usermod -aG devops username
+
+# Delete user
+userdel username
+userdel -r username         # Delete with home directory
+
+# View user info
+id username
+groups username
+cat /etc/passwd</pre>
+
+            <h3>2.10 SSH Essentials</h3>
+            
+            <h4>Connect to Server</h4>
+            <pre>ssh user@server
+ssh -i keyfile user@server
+ssh -p 2222 user@server     # Custom port</pre>
+
+            <h4>File Transfer</h4>
+            <pre># SCP - Secure Copy
+scp file user@server:/path
+scp user@server:/path/file .
+
+# Rsync - Efficient sync
+rsync -avz local/ user@server:/remote/
+rsync -avz --delete local/ remote/</pre>
+
+            <h4>SSH Keys</h4>
+            <pre># Generate key pair
+ssh-keygen -t rsa -b 4096
+
+# Copy public key to server
+ssh-copy-id user@server
+
+# Manual copy
+cat ~/.ssh/id_rsa.pub | ssh user@server 'cat >> ~/.ssh/authorized_keys'</pre>
+
+            <h3>2.11 Cron Jobs (Scheduled Tasks)</h3>
+            
+            <pre># Edit crontab
+crontab -e
+
+# View current cron jobs
+crontab -l
+
+# Cron format:
+# * * * * * command
+# │ │ │ │ │
+# │ │ │ │ └─── Day of week (0-7, Sunday=0 or 7)
+# │ │ │ └───── Month (1-12)
+# │ │ └─────── Day of month (1-31)
+# │ └───────── Hour (0-23)
+# └─────────── Minute (0-59)
+
+# Examples
+0 2 * * * /backup.sh        # Daily at 2 AM
+*/15 * * * * /check.sh      # Every 15 minutes
+0 0 * * 0 /weekly.sh        # Weekly on Sunday
+0 3 1 * * /monthly.sh       # Monthly on 1st at 3 AM</pre>
+
+            <h3>2.12 SELinux / Firewall Basics</h3>
+            
+            <h4>SELinux</h4>
+            <pre>getenforce                  # Check SELinux status
+setenforce 0                # Disable temporarily
+setenforce 1                # Enable
+sestatus                    # Detailed status</pre>
+
+            <h4>Firewalld</h4>
+            <pre>firewall-cmd --list-all
+firewall-cmd --add-port=8080/tcp --permanent
+firewall-cmd --reload
+firewall-cmd --remove-port=8080/tcp --permanent</pre>
+
+            <h4>iptables (Legacy)</h4>
+            <pre>iptables -L                 # List rules
+iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+iptables -D INPUT 1         # Delete rule</pre>
+
+            <h3>2.13 Package Management</h3>
+            
+            <h4>RPM-Based (RHEL, CentOS, Amazon Linux)</h4>
+            <pre>yum install nginx
+yum update
+yum remove nginx
+yum search keyword
+rpm -qa                     # List installed packages
+rpm -ql package             # List package files
+
+# DNF (newer)
+dnf install nginx
+dnf update
+dnf remove nginx</pre>
+
+            <h4>Debian-Based (Ubuntu, Debian)</h4>
+            <pre>apt update
+apt install nginx
+apt upgrade
+apt remove nginx
+apt search keyword
+dpkg -l                     # List installed packages
+dpkg -L package             # List package files</pre>
+
+            <h3>2.14 Shell Scripting Essentials</h3>
+            
+            <h4>Variables</h4>
+            <pre>#!/bin/bash
+NAME="DevOps"
+echo $NAME
+echo "Hello $NAME"</pre>
+
+            <h4>Conditions</h4>
+            <pre>if [ "$x" -gt 10 ]; then
+    echo "Greater than 10"
+elif [ "$x" -eq 10 ]; then
+    echo "Equal to 10"
+else
+    echo "Less than 10"
+fi
+
+# String comparison
+if [ "$name" = "admin" ]; then
+    echo "Admin user"
+fi</pre>
+
+            <h4>Loops</h4>
+            <pre># For loop
+for i in *.log; do
+   echo "Processing $i"
+done
+
+# While loop
+while [ $count -lt 5 ]; do
+    echo $count
+    ((count++))
+done
+
+# Loop through array
+SERVERS=("web1" "web2" "web3")
+for server in "${SERVERS[@]}"; do
+    echo "Connecting to $server"
+done</pre>
+
+            <h4>Functions</h4>
+            <pre>backup() {
+    echo "Backing up $1"
+    tar -czf backup.tar.gz $1
+}
+
+# Call function
+backup /var/www/html</pre>
+
+            <h4>Exit Codes</h4>
+            <pre># Check last command status
+if [ $? -eq 0 ]; then
+    echo "Success"
+else
+    echo "Failed"
+fi
+
+# Exit with code
+exit 0  # Success
+exit 1  # Error</pre>
+
+            <div class="success-box">
+                <strong>✓ DevOps Tip:</strong> Master shell scripting for automation. Write scripts for backups, health checks, log cleanup, and deployment tasks.
+            </div>
+        </div>
+
+        <div class="section" id="git">
+            <h2><span class="chapter-number">3</span>Git (Depth for DevOps)</h2>
+            
+            <div class="fire-box">
+                <strong>🔥 Essential:</strong> Git is required in every DevOps pipeline. Version control is fundamental to CI/CD.
+            </div>
+
+            <h3>3.1 Git Basics</h3>
+            
+            <h4>Initial Configuration</h4>
+            <pre>git config --global user.name "Vigneshwaran"
+git config --global user.email "you@example.com"
+git config --list
+
+# Set default editor
+git config --global core.editor vim</pre>
+
+            <h4>Repository Operations</h4>
+            <pre># Initialize repository
+git init
+
+# Clone repository
+git clone https://github.com/user/repo.git
+git clone git@github.com:user/repo.git
+
+# Check status
+git status
+
+# View changes
+git diff
+git diff --staged</pre>
+
+            <h3>3.2 Branching Strategy</h3>
+            
+            <pre># List branches
+git branch
+git branch -a               # All branches (local + remote)
+
+# Create branch
+git branch feature/login
+
+# Switch branch
+git checkout feature/login
+git checkout -b feature/signup  # Create and switch
+
+# Modern way (Git 2.23+)
+git switch feature/login
+git switch -c feature/signup
+
+# Delete branch
+git branch -d feature/login
+git branch -D feature/login     # Force delete</pre>
+
+            <h3>3.3 Staging & Committing</h3>
+            
+            <pre># Add files to staging
+git add file.txt
+git add .                   # Add all files
+git add *.js                # Add all JS files
+
+# Commit changes
+git commit -m "Add login feature"
+git commit -am "Quick commit"   # Add and commit tracked files
+
+# Amend last commit
+git commit --amend -m "Updated message"
+
+# Push to remote
+git push origin main
+git push origin feature/login
+
+# Pull from remote
+git pull origin main
+git fetch origin                # Fetch without merging</pre>
+
+            <h3>3.4 Merging & Rebasing</h3>
+            
+            <h4>Merge</h4>
+            <pre># Merge feature into main
+git checkout main
+git merge feature/login
+
+# Merge with no fast-forward (preserves history)
+git merge --no-ff feature/login</pre>
+
+            <h4>Rebase (Clean History)</h4>
+            <pre># Rebase feature on top of main
+git checkout feature/login
+git rebase main
+
+# Interactive rebase (squash commits)
+git rebase -i HEAD~3
+
+# Continue after resolving conflicts
+git rebase --continue
+git rebase --abort              # Cancel rebase</pre>
+
+            <div class="info-box">
+                <strong>💡 When to Use:</strong>
+                <ul>
+                    <li><strong>Merge:</strong> Preserves complete history, good for main branches</li>
+                    <li><strong>Rebase:</strong> Creates linear history, good for feature branches before merge</li>
+                </ul>
+            </div>
+
+            <h3>3.5 Stash (Temporary Storage)</h3>
+            
+            <pre># Save current work
+git stash
+git stash save "WIP: working on feature"
+
+# List stashes
+git stash list
+
+# Apply stash
+git stash apply
+git stash apply stash@{0}
+
+# Apply and remove stash
+git stash pop
+
+# Remove stash
+git stash drop stash@{0}
+git stash clear                 # Remove all stashes</pre>
+
+            <h3>3.6 Tags (Version Control)</h3>
+            
+            <pre># Create tag
+git tag v1.0.0
+git tag -a v1.0.0 -m "Release version 1.0.0"
+
+# List tags
+git tag
+git tag -l "v1.*"
+
+# Push tags to remote
+git push origin v1.0.0
+git push --tags                 # Push all tags
+
+# Delete tag
+git tag -d v1.0.0
+git push origin :refs/tags/v1.0.0  # Delete remote tag</pre>
+
+            <h3>3.7 GitFlow (Real CI/CD Strategy)</h3>
+            
+            <div class="highlight-box">
+                <h3>🔄 GitFlow Branches</h3>
+                <table style="background: white; color: #2c3e50;">
+                    <tr>
+                        <th>Branch</th>
+                        <th>Purpose</th>
+                        <th>Lifespan</th>
+                    </tr>
+                    <tr>
+                        <td><code>main</code></td>
+                        <td>Production-ready code</td>
+                        <td>Permanent</td>
+                    </tr>
+                    <tr>
+                        <td><code>develop</code></td>
+                        <td>Integration branch for features</td>
+                        <td>Permanent</td>
+                    </tr>
+                    <tr>
+                        <td><code>feature/*</code></td>
+                        <td>New features</td>
+                        <td>Temporary</td>
+                    </tr>
+                    <tr>
+                        <td><code>release/*</code></td>
+                        <td>Release preparation</td>
+                        <td>Temporary</td>
+                    </tr>
+                    <tr>
+                        <td><code>hotfix/*</code></td>
+                        <td>Emergency production fixes</td>
+                        <td>Temporary</td>
+                    </tr>
+                </table>
+            </div>
+
+            <h4>GitFlow Workflow</h4>
+            <pre># Start feature
+git checkout -b feature/user-auth develop
+
+# Finish feature
+git checkout develop
+git merge --no-ff feature/user-auth
+git branch -d feature/user-auth
+
+# Create release
+git checkout -b release/1.2.0 develop
+
+# Finish release
+git checkout main
+git merge --no-ff release/1.2.0
+git tag -a v1.2.0
+git checkout develop
+git merge --no-ff release/1.2.0
+
+# Hotfix
+git checkout -b hotfix/1.2.1 main
+# ... fix bug ...
+git checkout main
+git merge --no-ff hotfix/1.2.1
+git tag -a v1.2.1</pre>
+
+            <h3>3.8 Webhooks (Critical for Jenkins CI/CD)</h3>
+            
+            <div class="success-box">
+                <strong>✓ CI/CD Flow:</strong>
+                <ol>
+                    <li>Developer pushes code to GitHub</li>
+                    <li>GitHub webhook triggers Jenkins</li>
+                    <li>Jenkins pipeline automatically starts</li>
+                    <li>Pipeline: Build → Test → Docker → Deploy</li>
+                </ol>
+            </div>
+
+            <h4>GitHub Webhook Setup</h4>
+            <pre>Payload URL: http://jenkins-server:8080/github-webhook/
+Content type: application/json
+Events: Just the push event
+Active: ✓</pre>
+
+            <h3>3.9 Pull Request Best Practices</h3>
+            
+            <ul>
+                <li>✓ Keep PRs small and focused (300-400 lines max)</li>
+                <li>✓ Write meaningful commit messages</li>
+                <li>✓ Use conventional commits: <code>feat:</code>, <code>fix:</code>, <code>docs:</code></li>
+                <li>✓ Add description explaining what and why</li>
+                <li>✓ Link related issues</li>
+                <li>✓ Request reviews from appropriate team members</li>
+                <li>✓ Use squash and merge to keep history clean</li>
+                <li>✓ Ensure CI checks pass before merge</li>
+                <li>✓ Delete branch after merge</li>
+            </ul>
+
+            <h3>3.10 Advanced Git Commands</h3>
+            
+            <pre># View commit history
+git log
+git log --oneline
+git log --graph --oneline --all
+
+# Cherry-pick (apply specific commit)
+git cherry-pick commit-hash
+
+# Reset (undo commits)
+git reset --soft HEAD~1     # Keep changes staged
+git reset --mixed HEAD~1    # Keep changes unstaged
+git reset --hard HEAD~1     # Discard changes
+
+# Revert (create new commit undoing changes)
+git revert commit-hash
+
+# Clean untracked files
+git clean -n                # Dry run
+git clean -f                # Remove files
+git clean -fd               # Remove files and directories
+
+# Show file at specific commit
+git show commit-hash:path/to/file
+
+# Blame (who changed what)
+git blame filename
+
+# Search commits
+git log --grep="bug fix"
+git log -S "function_name"  # Search code changes</pre>
+
+            <h3>3.11 Git Conflicts Resolution</h3>
+            
+            <pre># When merge conflict occurs
+git status                  # See conflicted files
+
+# Edit files to resolve conflicts
+# Look for markers:
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+Your changes
+=======
+Their changes
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; branch-name
+
+# After resolving
+git add conflicted-file
+git commit
+
+# Or abort merge
+git merge --abort</pre>
+
+            <h3>3.12 .gitignore Best Practices</h3>
+            
+            <pre># .gitignore example
+node_modules/
+*.log
+.env
+.DS_Store
+dist/
+build/
+*.pyc
+__pycache__/
+.vscode/
+.idea/
+*.swp
+*.swo</pre>
+        </div>
+
+        <div class="section" id="networking">
+            <h2><span class="chapter-number">4</span>Networking for DevOps</h2>
+            
+            <div class="fire-box">
+                <strong>🔥 Critical:</strong> Networking is mandatory because DevOps engineers troubleshoot 50% of issues related to connectivity.
+            </div>
+
+            <h3>4.1 OSI Model (DevOps Focus)</h3>
+            
+            <table>
+                <tr>
+                    <th>Layer</th>
+                    <th>Name</th>
+                    <th>DevOps Relevance</th>
+                </tr>
+                <tr>
+                    <td>Layer 7</td>
+                    <td>Application</td>
+                    <td>HTTP, DNS, SSH - Most troubleshooting happens here</td>
+                </tr>
+                <tr>
+                    <td>Layer 4</td>
+                    <td>Transport</td>
+                    <td>TCP/UDP, ports - Load balancers, firewalls</td>
+                </tr>
+                <tr>
+                    <td>Layer 3</td>
+                    <td>Network</td>
+                    <td>IP addressing, routing, VPC</td>
+                </tr>
+                <tr>
+                    <td>Layer 2</td>
+                    <td>Data Link</td>
+                    <td>MAC addresses, switches (less common)</td>
+                </tr>
+                <tr>
+                    <td>Layer 1</td>
+                    <td>Physical</td>
+                    <td>Cables, hardware (rarely dealt with)</td>
+                </tr>
+            </table>
+
+            <h3>4.2 TCP vs UDP</h3>
+            
+            <table>
+                <tr>
+                    <th>Feature</th>
+                    <th>TCP</th>
+                    <th>UDP</th>
+                </tr>
+                <tr>
+                    <td>Connection</td>
+                    <td>Connection-oriented</td>
+                    <td>Connectionless</td>
+                </tr>
+                <tr>
+                    <td>Reliability</td>
+                    <td>Reliable, ordered delivery</td>
+                    <td>Unreliable, no guarantee</td>
+                </tr>
+                <tr>
+                    <td>Speed</td>
+                    <td>Slower (overhead)</td>
+                    <td>Faster (minimal overhead)</td>
+                </tr>
+                <tr>
+                    <td>Handshake</td>
+                    <td>3-way handshake</td>
+                    <td>No handshake</td>
+                </tr>
+                <tr>
+                    <td>Use Cases</td>
+                    <td>HTTP, SSH, FTP, Databases</td>
+                    <td>DNS, Video streaming, VoIP, Gaming</td>
+                </tr>
+            </table>
+
+            <h3>4.3 IP Addressing, Subnets, CIDR</h3>
+            
+            <h4>CIDR Notation</h4>
+            <pre>10.0.0.0/16  → 10.0.0.0 - 10.0.255.255  (65,536 IPs)
+10.0.0.0/24  → 10.0.0.0 - 10.0.0.255    (256 IPs)
+10.0.0.0/28  → 10.0.0.0 - 10.0.0.15     (16 IPs)</pre>
+
+            <h4>Common Subnet Masks</h4>
+            <pre>/8   = 255.0.0.0        → 16,777,216 IPs
+/16  = 255.255.0.0      → 65,536 IPs
+/24  = 255.255.255.0    → 256 IPs
+/32  = 255.255.255.255  → 1 IP (host)</pre>
+
+            <h4>VPC Example (AWS)</h4>
+            <pre>VPC:        10.0.0.0/16
+├─ Public Subnet 1:   10.0.1.0/24  (ap-south-1a)
+├─ Public Subnet 2:   10.0.2.0/24  (ap-south-1b)
+├─ Private Subnet 1:  10.0.11.0/24 (ap-south-1a)
+└─ Private Subnet 2:  10.0.12.0/24 (ap-south-1b)</pre>
+
+            <h4>Public vs Private IP Ranges</h4>
+            <pre>Private IP Ranges (RFC 1918):
+10.0.0.0/8        → 10.0.0.0 - 10.255.255.255
+172.16.0.0/12     → 172.16.0.0 - 172.31.255.255
+192.168.0.0/16    → 192.168.0.0 - 192.168.255.255
+
+Public IPs: Everything else</pre>
+
+            <div class="info-box">
+                <strong>💡 DevOps Must Understand:</strong>
+                <ul>
+                    <li>Public vs Private IPs</li>
+                    <li>Subnet segmentation</li>
+                    <li>Route tables</li>
+                    <li>NAT Gateway usage</li>
+                    <li>Internet Gateway for public access</li>
+                </ul>
+            </div>
+
+            <h3>4.4 DNS Essentials</h3>
+            
+            <h4>DNS Record Types</h4>
+            <table>
+                <tr>
+                    <th>Record</th>
+                    <th>Purpose</th>
+                    <th>Example</th>
+                </tr>
+                <tr>
+                    <td><strong>A</strong></td>
+                    <td>Maps domain to IPv4</td>
+                    <td>example.com → 192.0.2.1</td>
+                </tr>
+                <tr>
+                    <td><strong>AAAA</strong></td>
+                    <td>Maps domain to IPv6</td>
+                    <td>example.com → 2001:db8::1</td>
+                </tr>
+                <tr>
+                    <td><strong>CNAME</strong></td>
+                    <td>Alias to another domain</td>
+                    <td>www → example.com</td>
+                </tr>
+                <tr>
+                    <td><strong>MX</strong></td>
+                    <td>Mail exchange server</td>
+                    <td>mail.example.com</td>
+                </tr>
+                <tr>
+                    <td><strong>TXT</strong></td>
+                    <td>Text records, verification</td>
+                    <td>SPF, DKIM, domain verification</td>
+                </tr>
+                <tr>
+                    <td><strong>NS</strong></td>
+                    <td>Name server</td>
+                    <td>ns1.example.com</td>
+                </tr>
+            </table>
+
+            <h4>DNS Testing</h4>
+            <pre># Dig command (detailed)
+dig google.com
+dig google.com A
+dig google.com MX
+dig @8.8.8.8 google.com     # Query specific DNS server
+
+# Nslookup (simple)
+nslookup google.com
+nslookup google.com 8.8.8.8
+
+# Host command
+host google.com</pre>
+
+            <h3>4.5 HTTP Essentials</h3>
+            
+            <h4>HTTP Methods</h4>
+            <table>
+                <tr>
+                    <th>Method</th>
+                    <th>Purpose</th>
+                    <th>Idempotent</th>
+                </tr>
+                <tr>
+                    <td>GET</td>
+                    <td>Retrieve data</td>
+                    <td>Yes</td>
+                </tr>
+                <tr>
+                    <td>POST</td>
+                    <td>Create resource</td>
+                    <td>No</td>
+                </tr>
+                <tr>
+                    <td>PUT</td>
+                    <td>Update/Replace resource</td>
+                    <td>Yes</td>
+                </tr>
+                <tr>
+                    <td>PATCH</td>
+                    <td>Partial update</td>
+                    <td>No</td>
+                </tr>
+                <tr>
+                    <td>DELETE</td>
+                    <td>Remove resource</td>
+                    <td>Yes</td>
+                </tr>
+            </table>
+
+            <h4>HTTP Status Codes (DevOps Must Know)</h4>
+            <pre>2xx - Success
+200 OK                  → Request successful
+201 Created             → Resource created
+204 No Content          → Success, no response body
+
+3xx - Redirection
+301 Moved Permanently   → Permanent redirect
+302 Found               → Temporary redirect
+304 Not Modified        → Cached version is valid
+
+4xx - Client Errors
+400 Bad Request         → Invalid request
+401 Unauthorized        → Authentication required
+403 Forbidden           → Access denied
+404 Not Found           → Resource doesn't exist
+429 Too Many Requests   → Rate limited
+
+5xx - Server Errors
+500 Internal Server Error  → Generic server error
+502 Bad Gateway           → Upstream server error
+503 Service Unavailable   → Server overloaded/down
+504 Gateway Timeout       → Upstream timeout</pre>
+
+            <h4>Testing with curl</h4>
+            <pre># Check HTTP headers
+curl -I https://example.com
+
+# Verbose output
+curl -v https://example.com
+
+# Follow redirects
+curl -L https://example.com
+
+# POST request
+curl -X POST -d "key=value" https://api.example.com
+
+# With JSON
+curl -X POST -H "Content-Type: application/json" \
+  -d '{"name":"test"}' https://api.example.com
+
+# Check response time
+curl -w "@curl-format.txt" -o /dev/null -s https://example.com</pre>
+
+            <h3>4.6 Load Balancers</h3>
+            
+            <h4>Types of Load Balancers</h4>
+            <table>
+                <tr>
+                    <th>Type</th>
+                    <th>Layer</th>
+                    <th>Features</th>
+                    <th>Use Case</th>
+                </tr>
+                <tr>
+                    <td><strong>ALB</strong></td>
+                    <td>Layer 7</td>
+                    <td>HTTP/HTTPS, path-based routing, host-based routing</td>
+                    <td>Web applications, microservices</td>
+                </tr>
+                <tr>
+                    <td><strong>NLB</strong></td>
+                    <td>Layer 4</td>
+                    <td>TCP/UDP, ultra-low latency, static IP</td>
+                    <td>Gaming, IoT, TCP workloads</td>
+                </tr>
+                <tr>
+                    <td><strong>CLB</strong></td>
+                    <td>Layer 4/7</td>
+                    <td>Legacy, basic features</td>
+                    <td>Older applications (deprecated)</td>
+                </tr>
+            </table>
+
+            <h4>DevOps Tasks with Load Balancers</h4>
+            <ul>
+                <li>Configure target groups</li>
+                <li>Set up health checks</li>
+                <li>Define listener rules</li>
+                <li>SSL/TLS termination</li>
+                <li>Path-based routing for microservices</li>
+                <li>Configure sticky sessions</li>
+            </ul>
+
+            <h3>4.7 Nginx Reverse Proxy Basics</h3>
+            
+            <pre># /etc/nginx/nginx.conf or /etc/nginx/sites-available/default
+
+server {
+    listen 80;
+    server_name example.com;
+
+    location / {
+        proxy_pass http://backend:8080;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    # Load balancing
+    location /api/ {
+        proxy_pass http://backend_servers;
+    }
+}
+
+upstream backend_servers {
+    server backend1:8080;
+    server backend2:8080;
+    server backend3:8080;
+}</pre>
+
+            <h3>4.8 NAT, Routing, Security Groups</h3>
+            
+            <h4>NAT Gateway</h4>
+            <div class="info-box">
+                <strong>💡 Purpose:</strong> Allows private subnet instances to access the internet for updates, but prevents inbound connections from internet.
+                <pre>Private Subnet → NAT Gateway → Internet Gateway → Internet
+Internet → Internet Gateway → NAT Gateway ✗ (Blocked)</pre>
+            </div>
+
+            <h4>Internet Gateway</h4>
+            <pre>Public Subnet ↔ Internet Gateway ↔ Internet
+(Bidirectional access)</pre>
+
+            <h4>Security Groups (Stateful Firewall)</h4>
+            <table>
+                <tr>
+                    <th>Type</th>
+                    <th>Protocol</th>
+                    <th>Port</th>
+                    <th>Source</th>
+                    <th>Purpose</th>
+                </tr>
+                <tr>
+                    <td>Inbound</td>
+                    <td>TCP</td>
+                    <td>22</td>
+                    <td>Your IP</td>
+                    <td>SSH access</td>
+                </tr>
+                <tr>
+                    <td>Inbound</td>
+                    <td>TCP</td>
+                    <td>80</td>
+                    <td>0.0.0.0/0</td>
+                    <td>HTTP public</td>
+                </tr>
+                <tr>
+                    <td>Inbound</td>
+                    <td>TCP</td>
+                    <td>443</td>
+                    <td>0.0.0.0/0</td>
+                    <td>HTTPS public</td>
+                </tr>
+                <tr>
+                    <td>Inbound</td>
+                    <td>TCP</td>
+                    <td>3306</td>
+                    <td>SG-app</td>
+                    <td>MySQL from app</td>
+                </tr>
+                <tr>
+                    <td>Outbound</td>
+                    <td>All</td>
+                    <td>All</td>
+                    <td>0.0.0.0/0</td>
+                    <td>Allow all outbound</td>
+                </tr>
+            </table>
+
+            <h4>Route Tables</h4>
+            <pre># Public Subnet Route Table
+Destination         Target
+10.0.0.0/16        → local (VPC)
+0.0.0.0/0          → igw-xxxxxx (Internet Gateway)
+
+# Private Subnet Route Table
+Destination         Target
+10.0.0.0/16        → local (VPC)
+0.0.0.0/0          → nat-xxxxxx (NAT Gateway)</pre>
+
+            <h3>4.9 Debugging Common Issues</h3>
+            
+            <h4>Case 1: App Cannot Connect to Database</h4>
+            <div class="warning-box">
+                <strong>⚠️ Checklist:</strong>
+                <pre>1. Check Security Group inbound rules
+   - Does DB SG allow port 3306 from app SG?
+
+2. Check Security Group outbound rules
+   - Does app SG allow outbound to DB port?
+
+3. Check VPC routes
+   - Are both in same VPC or peered VPCs?
+
+4. Check DNS resolution
+   - Can you resolve DB hostname?
+   - nslookup db.example.com
+
+5. Check if port is open
+   - telnet db-host 3306
+   - nc -zv db-host 3306
+
+6. Check database is running
+   - systemctl status mysql
+
+7. Check database logs
+   - /var/log/mysql/error.log</pre>
+            </div>
+
+            <h4>Case 2: Pod Cannot Talk to Pod (Kubernetes)</h4>
+            <div class="warning-box">
+                <strong>⚠️ Checklist:</strong>
+                <pre>1. Check cluster DNS
+   - kubectl exec -it pod -- nslookup kubernetes.default
+
+2. Check CNI plugin
+   - kubectl get pods -n kube-system | grep cni
+
+3. Check Network Policies
+   - kubectl get networkpolicy
+   - kubectl describe networkpolicy policy-name
+
+4. Check service endpoints
+   - kubectl get endpoints service-name
+
+5. Check pod IP and connectivity
+   - kubectl exec -it pod1 -- ping pod2-ip</pre>
+            </div>
+
+            <h4>Case 3: Website Not Loading</h4>
+            <div class="warning-box">
+                <strong>⚠️ Checklist:</strong>
+                <pre>1. Check DNS resolution
+   - dig example.com
+   - Does it return correct IP?
+
+2. Check if server is reachable
+   - ping server-ip
+   - telnet server-ip 80
+
+3. Check web server status
+   - systemctl status nginx
+   - systemctl status apache2
+
+4. Check web server logs
+   - tail -f /var/log/nginx/error.log
+
+5. Check firewall rules
+   - firewall-cmd --list-all
+   - iptables -L
+
+6. Check Security Group (if cloud)
+   - Is port 80/443 open to 0.0.0.0/0?
+
+7. Check SSL certificate (if HTTPS)
+   - openssl s_client -connect example.com:443</pre>
+            </div>
+        </div>
+
+        <div class="section" id="aws">
+            <h2><span class="chapter-number">5</span>AWS for DevOps (Full Guide)</h2>
+            
+            <div class="fire-box">
+                <strong>🔥 Critical:</strong> AWS is 40-50% of a DevOps workload. Master these 14 essential services.
+            </div>
+
+            <h3>5.1 AWS Account Structure</h3>
+            <p>Concepts you must know:</p>
+            <ul>
+                <li><strong>IAM Users:</strong> Individual account access</li>
+                <li><strong>IAM Groups:</strong> Manage permissions collectively</li>
+                <li><strong>IAM Roles:</strong> Temporary credentials for services</li>
+                <li><strong>IAM Policies:</strong> Define permissions (JSON)</li>
+                <li><strong>Root Account:</strong> Never use for daily tasks</li>
+                <li><strong>MFA:</strong> Enable everywhere</li>
+                <li><strong>Least Privilege:</strong> Grant minimum necessary permissions</li>
+            </ul>
+
+            <h4>DevOps Role Uses:</h4>
+            <pre># Common IAM roles created by DevOps
+- EC2 instance role (access to S3, SSM)
+- Jenkins role (deploy to ECS, push to ECR)
+- Terraform role (create infrastructure)
+- EKS node role (pull images, write logs)
+- Lambda execution role</pre>
+
+            <h3>5.2 AWS Global Basics</h3>
+            <table>
+                <tr>
+                    <th>Concept</th>
+                    <th>Description</th>
+                    <th>DevOps Rule</th>
+                </tr>
+                <tr>
+                    <td><strong>Regions</strong></td>
+                    <td>Geographical locations (e.g., ap-south-1)</td>
+                    <td>Choose based on latency & compliance</td>
+                </tr>
+                <tr>
+                    <td><strong>Availability Zones</strong></td>
+                    <td>Isolated datacenters within region</td>
+                    <td>Always deploy across 2-3 AZs</td>
+                </tr>
+            </table>
+
+            <h3>5.3 VPC - The Most Important AWS Topic</h3>
+            <div class="highlight-box">
+                <h3>🎯 Critical Understanding</h3>
+                <p><strong>If you don't understand VPC, you cannot do DevOps on AWS.</strong></p>
+            </div>
+
+            <h4>Core VPC Components:</h4>
+            <ul>
+                <li>VPC (Virtual Private Cloud)</li>
+                <li>Subnets (Public + Private)</li>
+                <li>Route tables</li>
+                <li>Internet Gateway (IGW)</li>
+                <li>NAT Gateway</li>
+                <li>Security Groups</li>
+                <li>Network ACLs (NACLs)</li>
+                <li>VPC Endpoints</li>
+                <li>VPC Peering</li>
+                <li>Transit Gateway (advanced)</li>
+            </ul>
+
+            <h4>5.3.1 VPC CIDR Example</h4>
+            <pre>10.0.0.0/16     → Entire VPC (65,536 IPs)
+├─ 10.0.1.0/24  → Public subnet 1 (256 IPs)
+├─ 10.0.2.0/24  → Public subnet 2
+├─ 10.0.11.0/24 → Private app subnet 1
+├─ 10.0.12.0/24 → Private app subnet 2
+├─ 10.0.21.0/24 → Private DB subnet 1
+└─ 10.0.22.0/24 → Private DB subnet 2</pre>
+
+            <h4>5.3.2 Public vs Private Subnets</h4>
+            <table>
+                <tr>
+                    <th>Feature</th>
+                    <th>Public Subnet</th>
+                    <th>Private Subnet</th>
+                </tr>
+                <tr>
+                    <td><strong>Route</strong></td>
+                    <td>0.0.0.0/0 → IGW</td>
+                    <td>0.0.0.0/0 → NAT</td>
+                </tr>
+                <tr>
+                    <td><strong>Public IP</strong></td>
+                    <td>Yes</td>
+                    <td>No</td>
+                </tr>
+                <tr>
+                    <td><strong>Use Cases</strong></td>
+                    <td>ALB, Bastion, NAT Gateway</td>
+                    <td>App servers, ECS tasks, EKS nodes, Databases</td>
+                </tr>
+                <tr>
+                    <td><strong>Internet Access</strong></td>
+                    <td>Direct (bidirectional)</td>
+                    <td>Via NAT (outbound only)</td>
+                </tr>
+            </table>
+
+            <h4>5.3.3 Routing Configuration</h4>
+            <pre># Public Subnet Route Table
+Destination         Target
+10.0.0.0/16    →   local (VPC internal)
+0.0.0.0/0      →   igw-xxxxxx (Internet Gateway)
+
+# Private Subnet Route Table
+Destination         Target
+10.0.0.0/16    →   local (VPC internal)
+0.0.0.0/0      →   nat-xxxxxx (NAT Gateway)
+
+# DB Subnet Route Table (Most Secure)
+Destination         Target
+10.0.0.0/16    →   local (VPC internal only)</pre>
+
+            <h4>5.3.4 VPC Endpoints (Important for Private Subnets)</h4>
+            <p>Allow private subnet resources to access AWS services without internet:</p>
+            <pre>Supported Services:
+- S3 (Gateway endpoint - free)
+- DynamoDB (Gateway endpoint - free)
+- ECR (Interface endpoint)
+- SSM (Interface endpoint)
+- Secrets Manager (Interface endpoint)
+- CloudWatch Logs (Interface endpoint)</pre>
+
+            <h3>5.4 EC2 (Compute Layer)</h3>
+            
+            <h4>DevOps Focus Areas:</h4>
+            <ul>
+                <li><strong>Launch Templates:</strong> Standardized EC2 configuration</li>
+                <li><strong>Auto Scaling Groups:</strong> Automatic scaling based on demand</li>
+                <li><strong>Security Groups:</strong> Instance-level firewall</li>
+                <li><strong>SSH Key Pairs:</strong> Secure access</li>
+                <li><strong>EBS Volumes:</strong> Persistent storage</li>
+                <li><strong>User Data Scripts:</strong> Bootstrap automation</li>
+                <li><strong>AMI Creation:</strong> Custom images</li>
+                <li><strong>ALB Integration:</strong> Load balancing</li>
+            </ul>
+
+            <h4>User Data Example (Bootstrap Script):</h4>
+            <pre>#!/bin/bash
+yum update -y
+yum install httpd -y
+systemctl enable httpd
+systemctl start httpd
+echo "Hello from $(hostname)" > /var/www/html/index.html</pre>
+
+            <h3>5.5 Elastic Load Balancers</h3>
+            
+            <table>
+                <tr>
+                    <th>Type</th>
+                    <th>Layer</th>
+                    <th>Protocol</th>
+                    <th>Use Case</th>
+                </tr>
+                <tr>
+                    <td><strong>ALB</strong></td>
+                    <td>7</td>
+                    <td>HTTP/HTTPS</td>
+                    <td>Web apps, microservices, path-based routing</td>
+                </tr>
+                <tr>
+                    <td><strong>NLB</strong></td>
+                    <td>4</td>
+                    <td>TCP/UDP</td>
+                    <td>Ultra-low latency, static IP, gaming</td>
+                </tr>
+                <tr>
+                    <td><strong>Gateway LB</strong></td>
+                    <td>3</td>
+                    <td>IP</td>
+                    <td>Firewall appliances, IDS/IPS</td>
+                </tr>
+            </table>
+
+            <h4>Target Group Health Check:</h4>
+            <pre>Path: /health or /status
+Protocol: HTTP
+Port: 8080
+Healthy threshold: 2
+Unhealthy threshold: 3
+Timeout: 5 seconds
+Interval: 30 seconds</pre>
+
+            <h3>5.6 Auto Scaling Groups (ASG)</h3>
+            
+            <p><strong>Used to:</strong></p>
+            <ul>
+                <li>Scale up/down based on metrics</li>
+                <li>Ensure high availability</li>
+                <li>Replace unhealthy instances automatically</li>
+                <li>Distribute instances across AZs</li>
+            </ul>
+
+            <h4>Scaling Policies:</h4>
+            <pre># Target Tracking
+- CPU utilization > 70% → scale out
+- CPU utilization < 30% → scale in
+
+# Step Scaling
+- CPU > 80% → add 2 instances
+- CPU > 90% → add 4 instances
+
+# Scheduled Scaling
+- Scale to 10 instances at 9 AM
+- Scale to 2 instances at 6 PM</pre>
+
+            <h3>5.7 S3 (Storage Layer)</h3>
+            
+            <h4>DevOps Must Know:</h4>
+            <ul>
+                <li><strong>Versioning:</strong> Track file changes</li>
+                <li><strong>Lifecycle Rules:</strong> Auto-archive/delete old files</li>
+                <li><strong>Replication:</strong> Cross-region backup</li>
+                <li><strong>Encryption:</strong> SSE-S3, SSE-KMS</li>
+                <li><strong>Static Website Hosting:</strong> Host frontend</li>
+                <li><strong>CloudFront Integration:</strong> CDN</li>
+                <li><strong>Bucket Policies:</strong> Access control</li>
+            </ul>
+
+            <h4>Important Commands:</h4>
+            <pre>aws s3 cp file.txt s3://bucket/
+aws s3 sync folder/ s3://bucket/folder/
+aws s3 ls s3://bucket/
+aws s3 rm s3://bucket/file.txt</pre>
+
+            <h3>5.8 IAM (Authentication + Authorization)</h3>
+            
+            <h4>IAM Policy Example (JSON):</h4>
+            <pre>{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject",
+        "s3:PutObject"
+      ],
+      "Resource": "arn:aws:s3:::my-bucket/*"
+    }
+  ]
+}</pre>
+
+            <h4>IAM Roles (Used By Services):</h4>
+            <pre>EC2 Instance Role:
+- Allows EC2 to access S3, SSM, CloudWatch
+
+ECS Task Role:
+- Allows containers to access specific AWS services
+
+Lambda Execution Role:
+- Allows Lambda to write logs, access DynamoDB</pre>
+
+            <h4>IAM Best Practices:</h4>
+            <ul>
+                <li>✓ Never use root account for daily work</li>
+                <li>✓ Never store access keys in Git</li>
+                <li>✓ Always use roles for EC2/ECS/Lambda</li>
+                <li>✓ Enable MFA on all accounts</li>
+                <li>✓ Use temporary credentials</li>
+                <li>✓ Follow least privilege principle</li>
+                <li>✓ Rotate keys regularly</li>
+            </ul>
+
+            <h3>5.9 CloudWatch (Observability)</h3>
+            
+            <h4>Key Features:</h4>
+            <ul>
+                <li><strong>Logs:</strong> Application and system logs</li>
+                <li><strong>Metrics:</strong> CPU, memory, custom metrics</li>
+                <li><strong>Alarms:</strong> Notifications on threshold breach</li>
+                <li><strong>Log Insights:</strong> Query and analyze logs</li>
+                <li><strong>Dashboards:</strong> Visualize metrics</li>
+            </ul>
+
+            <h4>Common Log Sources:</h4>
+            <pre>- EC2 instance logs (via CloudWatch agent)
+- ECS container logs
+- Lambda function logs
+- VPC Flow Logs
+- ALB access logs
+- CloudTrail (API audit logs)</pre>
+
+            <h4>CloudWatch Alarm Example:</h4>
+            <pre>Metric: CPUUtilization
+Threshold: > 80%
+Duration: 5 minutes
+Action: Send SNS notification, Trigger Auto Scaling</pre>
+
+            <h3>5.10 ECR (Elastic Container Registry)</h3>
+            
+            <h4>Complete Workflow:</h4>
+            <pre># 1. Login to ECR
+aws ecr get-login-password --region ap-south-1 | \
+  docker login --username AWS --password-stdin \
+  123456789.dkr.ecr.ap-south-1.amazonaws.com
+
+# 2. Build image
+docker build -t myapp:v1 .
+
+# 3. Tag for ECR
+docker tag myapp:v1 \
+  123456789.dkr.ecr.ap-south-1.amazonaws.com/myapp:v1
+
+# 4. Push to ECR
+docker push 123456789.dkr.ecr.ap-south-1.amazonaws.com/myapp:v1</pre>
+
+            <div class="success-box">
+                <strong>✓ CI/CD Integration:</strong> Jenkins pipelines use these exact commands to push images to ECR after build.
+            </div>
+
+            <h3>5.11 ECS (Container Orchestration)</h3>
+            
+            <h4>ECS Modes:</h4>
+            <table>
+                <tr>
+                    <th>Mode</th>
+                    <th>Description</th>
+                    <th>Use Case</th>
+                </tr>
+                <tr>
+                    <td><strong>EC2</strong></td>
+                    <td>You manage EC2 instances</td>
+                    <td>More control, cost-effective for steady workloads</td>
+                </tr>
+                <tr>
+                    <td><strong>Fargate</strong></td>
+                    <td>AWS manages infrastructure</td>
+                    <td>Serverless, pay per task, simpler</td>
+                </tr>
+            </table>
+
+            <h4>ECS Components:</h4>
+            <ul>
+                <li><strong>Task Definition:</strong> Blueprint (like Dockerfile)</li>
+                <li><strong>Service:</strong> Maintains desired task count</li>
+                <li><strong>Cluster:</strong> Logical grouping</li>
+                <li><strong>Target Group:</strong> Connects to ALB</li>
+                <li><strong>Execution Role:</strong> Pull images, push logs</li>
+                <li><strong>Task Role:</strong> App permissions (S3, DynamoDB)</li>
+            </ul>
+
+            <h3>5.12 EKS (Kubernetes on AWS)</h3>
+            
+            <h4>DevOps Must Handle:</h4>
+            <ul>
+                <li>Control plane (managed by AWS)</li>
+                <li>Worker node groups (EC2 or Fargate)</li>
+                <li>IAM → RBAC mapping</li>
+                <li>Node autoscaling (Cluster Autoscaler)</li>
+                <li>Ingress controller (AWS ALB Ingress)</li>
+                <li>External DNS (Route53 integration)</li>
+                <li>Metrics server</li>
+                <li>Logging (FluentBit → CloudWatch)</li>
+            </ul>
+
+            <h3>5.13 RDS (Managed Databases)</h3>
+            
+            <h4>Production Requirements:</h4>
+            <ul>
+                <li>✓ <strong>Multi-AZ:</strong> Automatic failover</li>
+                <li>✓ <strong>Automated Backups:</strong> Point-in-time recovery</li>
+                <li>✓ <strong>Parameter Groups:</strong> DB configuration</li>
+                <li>✓ <strong>Security Groups:</strong> Restrict access to app layer only</li>
+                <li>✓ <strong>No Public Access:</strong> Always in private subnets</li>
+                <li>✓ <strong>Encryption:</strong> At rest and in transit</li>
+            </ul>
+
+            <h3>5.14 CloudFront (CDN)</h3>
+            
+            <p><strong>Used for:</strong></p>
+            <ul>
+                <li>Content Delivery Network (CDN)</li>
+                <li>S3 static website acceleration</li>
+                <li>Low latency global delivery</li>
+                <li>API caching</li>
+                <li>DDoS protection (with AWS Shield)</li>
+            </ul>
+        </div>
+
+        <div class="section" id="terraform">
+            <h2><span class="chapter-number">6</span>Terraform (Full DevOps Guide)</h2>
+            
+            <div class="highlight-box">
+                <h3>🏗️ Infrastructure as Code</h3>
+                <p>Terraform is your primary IaC tool for managing cloud infrastructure declaratively.</p>
+            </div>
+
+            <h3>6.1 Terraform Core Concepts</h3>
+            
+            <h4>Provider Configuration:</h4>
+            <pre>provider "aws" {
+  region = "ap-south-1"
+  profile = "default"
+}</pre>
+
+            <h4>Resource Definition:</h4>
+            <pre>resource "aws_instance" "web" {
+  ami           = "ami-0c55b159cbfafe1f0"
+  instance_type = "t3.medium"
+  
+  tags = {
+    Name = "WebServer"
+    Environment = "Production"
+  }
+}</pre>
+
+            <h4>Variables:</h4>
+            <pre>variable "instance_type" {
+  description = "EC2 instance type"
+  type        = string
+  default     = "t3.medium"
+}
+
+# Usage
+instance_type = var.instance_type</pre>
+
+            <h4>Outputs:</h4>
+            <pre>output "public_ip" {
+  description = "Public IP of EC2 instance"
+  value       = aws_instance.web.public_ip
+}</pre>
+
+            <h3>6.2 Remote State (MANDATORY for Teams)</h3>
+            
+            <div class="warning-box">
+                <strong>⚠️ Critical:</strong> Never store state locally in production. Always use remote backend with locking.
+            </div>
+
+            <h4>S3 Backend + DynamoDB Lock:</h4>
+            <pre>terraform {
+  backend "s3" {
+    bucket         = "tf-state-prod-bucket"
+    key            = "vpc/terraform.tfstate"
+    region         = "ap-south-1"
+    dynamodb_table = "terraform-state-lock"
+    encrypt        = true
+  }
+}</pre>
+
+            <h4>Create Lock Table:</h4>
+            <pre>aws dynamodb create-table \
+  --table-name terraform-state-lock \
+  --attribute-definitions AttributeName=LockID,AttributeType=S \
+  --key-schema AttributeName=LockID,KeyType=HASH \
+  --billing-mode PAY_PER_REQUEST</pre>
+
+            <h3>6.3 Terraform Modules (Professional Structure)</h3>
+            
+            <pre>project/
+├── modules/
+│   ├── vpc/
+│   │   ├── main.tf
+│   │   ├── variables.tf
+│   │   └── outputs.tf
+│   ├── ec2/
+│   ├── alb/
+│   ├── rds/
+│   └── eks/
+└── environments/
+    ├── dev/
+    │   ├── main.tf
+    │   ├── variables.tf
+    │   └── terraform.tfvars
+    ├── staging/
+    └── prod/</pre>
+
+            <h4>Module Usage:</h4>
+            <pre>module "vpc" {
+  source = "../../modules/vpc"
+  
+  cidr_block = "10.0.0.0/16"
+  environment = "production"
+  enable_nat_gateway = true
+  enable_vpn_gateway = false
+  
+  tags = {
+    Terraform = "true"
+    Environment = "prod"
+  }
+}</pre>
+
+            <h3>6.4 Terraform Workspaces</h3>
+            
+            <p>Used for managing multiple environments:</p>
+            <pre># Create workspace
+terraform workspace new prod
+
+# List workspaces
+terraform workspace list
+
+# Switch workspace
+terraform workspace select prod
+
+# Show current workspace
+terraform workspace show</pre>
+
+            <h3>6.5 Terraform Commands (Real Use Cases)</h3>
+            
+            <pre># Initialize (download providers)
+terraform init
+
+# Format code
+terraform fmt
+
+# Validate configuration
+terraform validate
+
+# Create execution plan
+terraform plan
+terraform plan -var-file=prod.tfvars
+terraform plan -out=tfplan
+
+# Apply changes
+terraform apply
+terraform apply -auto-approve
+terraform apply tfplan
+
+# Destroy infrastructure
+terraform destroy
+terraform destroy -target=aws_instance.web
+
+# Show current state
+terraform show
+
+# List resources
+terraform state list
+
+# Import existing resource
+terraform import aws_instance.web i-1234567890abcdef0
+
+# Taint resource (force recreation)
+terraform taint aws_instance.web
+
+# Refresh state
+terraform refresh
+
+# Graph visualization
+terraform graph | dot -Tpng > graph.png</pre>
+
+            <h3>6.6 Production Terraform Patterns</h3>
+            
+            <h4>You Must Know:</h4>
+            <ul>
+                <li><strong>Version Pinning:</strong> Lock provider versions</li>
+                <li><strong>tfenv:</strong> Terraform version manager</li>
+                <li><strong>Sensitive Variables:</strong> Mark secrets as sensitive</li>
+                <li><strong>Secrets Management:</strong> Use AWS SSM or Secrets Manager</li>
+                <li><strong>CI/CD for Terraform:</strong> Automated apply via Jenkins</li>
+                <li><strong>PR-based Changes:</strong> Plan on PR, apply on merge</li>
+                <li><strong>Drift Detection:</strong> Regular <code>terraform plan</code></li>
+                <li><strong>State Locking:</strong> Prevent concurrent modifications</li>
+            </ul>
+
+            <h4>Version Pinning Example:</h4>
+            <pre>terraform {
+  required_version = ">= 1.0"
+  
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
+    }
+  }
+}</pre>
+
+            <h4>Sensitive Variables:</h4>
+            <pre>variable "db_password" {
+  description = "Database password"
+  type        = string
+  sensitive   = true
+}</pre>
+
+            <h3>6.7 Terraform + Jenkins Integration</h3>
+            
+            <h4>Jenkins Pipeline for Terraform:</h4>
+            <pre>pipeline {
+    agent any
+    
+    stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/org/terraform-infra'
+            }
+        }
+        
+        stage('Terraform Init') {
+            steps {
+                sh 'terraform init'
+            }
+        }
+        
+        stage('Terraform Plan') {
+            steps {
+                sh 'terraform plan -out=tfplan'
+            }
+        }
+        
+        stage('Approval') {
+            steps {
+                input message: 'Apply Terraform changes?'
+            }
+        }
+        
+        stage('Terraform Apply') {
+            steps {
+                sh 'terraform apply -auto-approve tfplan'
+            }
+        }
+    }
+    
+    post {
+        always {
+            cleanWs()
+        }
+    }
+}</pre>
+
+            <h3>6.8 Real-World VPC Module Example</h3>
+            
+            <pre># modules/vpc/main.tf
+resource "aws_vpc" "main" {
+  cidr_block           = var.cidr_block
+  enable_dns_hostnames = true
+  enable_dns_support   = true
+  
+  tags = merge(
+    var.tags,
+    {
+      Name = "${var.environment}-vpc"
+    }
+  )
+}
+
+resource "aws_subnet" "public" {
+  count             = length(var.public_subnet_cidrs)
+  vpc_id            = aws_vpc.main.id
+  cidr_block        = var.public_subnet_cidrs[count.index]
+  availability_zone = var.azs[count.index]
+  
+  map_public_ip_on_launch = true
+  
+  tags = {
+    Name = "${var.environment}-public-${count.index + 1}"
+    Type = "Public"
+  }
+}
+
+resource "aws_internet_gateway" "main" {
+  vpc_id = aws_vpc.main.id
+  
+  tags = {
+    Name = "${var.environment}-igw"
+  }
+}
+
+resource "aws_route_table" "public" {
+  vpc_id = aws_vpc.main.id
+  
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.main.id
+  }
+  
+  tags = {
+    Name = "${var.environment}-public-rt"
+  }
+}</pre>
+
+            <div class="success-box">
+                <strong>✓ Production Ready:</strong> This module pattern is used in real companies to standardize infrastructure deployment across environments.
+            </div>
+        </div>
+
+        <div class="section" id="checklist">
+            <h2>🎯 Intermediate Checklist - Parts 1-2 Complete</h2>
+            
+            <div class="highlight-box">
+                <h3>✅ You Are Job-Ready If You Can:</h3>
+            </div>
+
+            <h3>Infrastructure</h3>
+            <ul>
+                <li>☐ Build AWS infrastructure using Terraform modules</li>
+                <li>☐ Create VPC with public/private subnets</li>
+                <li>☐ Deploy EC2 instances with proper security groups</li>
+                <li>☐ Configure ALB/NLB for load balancing</li>
+                <li>☐ Set up RDS databases with backups</li>
+                <li>☐ Deploy applications on ECS/EKS</li>
+            </ul>
+
+            <h3>CI/CD</h3>
+            <ul>
+                <li>☐ Create Jenkins pipelines from scratch</li>
+                <li>☐ Implement: Build → Test → Docker → Terraform → Deploy to K8s</li>
+                <li>☐ Set up GitHub webhooks for automatic triggers</li>
+                <li>☐ Manage credentials and secrets securely</li>
+                <li>☐ Implement rollback strategies</li>
+            </ul>
+
+            <h3>DevOps Fundamentals</h3>
+            <ul>
+                <li>☐ Comfortable with Linux administration (users, permissions, services)</li>
+                <li>☐ Troubleshoot networking issues (DNS, connectivity, firewalls)</li>
+                <li>☐ Use Git proficiently (branching, merging, rebasing, PRs)</li>
+                <li>☐ Write Bash scripts for automation</li>
+                <li>☐ Read and analyze logs effectively</li>
+            </ul>
+
+            <h3>Platform Operations</h3>
+            <ul>
+                <li>☐ Dockerize applications with multi-stage builds</li>
+                <li>☐ Deploy microservices to Kubernetes</li>
+                <li>☐ Configure scaling (HPA, VPA)</li>
+                <li>☐ Implement zero-downtime releases</li>
+                <li>☐ Set up monitoring and alerting</li>
+            </ul>
+
+            <h3>Problem-Solving</h3>
+            <ul>
+                <li>☐ Debug application connectivity issues</li>
+                <li>☐ Investigate and resolve deployment failures</li>
+                <li>☐ Analyze performance bottlenecks</li>
+                <li>☐ Implement security best practices</li>
+                <li>☐ Document infrastructure and processes</li>
+            </ul>
+
+            <div class="success-box">
+                <strong>✓ Next Steps:</strong>
+                <p>This is Part 1 of the complete DevOps guide. Coming next:</p>
+                <ul>
+                    <li><strong>Part 2:</strong> AWS Deep Dive + Terraform</li>
+                    <li><strong>Part 3:</strong> Docker + Kubernetes Complete</li>
+                    <li><strong>Part 4:</strong> Jenkins + Ansible + Monitoring</li>
+                    <li><strong>Part 5:</strong> Interview Questions + Real Scenarios</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📚 Additional Resources</h2>
+            <ul>
+                <li><a href="https://www.linux.org/forums/" target="_blank">Linux Forums</a></li>
+                <li><a href="https://git-scm.com/doc" target="_blank">Git Official Documentation</a></li>
+                <li><a href="https://roadmap.sh/devops" target="_blank">DevOps Roadmap</a></li>
+                <li><a href="https://github.com/bregman-arie/devops-exercises" target="_blank">DevOps Exercises</a></li>
+            </ul>
+        </div>
+
+        <div style="text-align: center; margin-top: 60px; padding: 40px 0; border-top: 2px solid #e0e0e0;">
+            <a href="/index.html" class="back-btn" style="font-size: 1.1em;">← Back to Portfolio</a>
+        </div>
+    </div>
+</body>
+</html>

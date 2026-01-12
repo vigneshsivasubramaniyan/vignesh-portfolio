@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CI/CD Best Practices - AWS Jenkins Pipeline Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f8f9fa;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e0e0e0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-btn {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s;
+        }
+
+        .back-btn:hover {
+            color: #2980b9;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            padding: 120px 20px 80px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .hero h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.2em;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .section {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e0e0e0;
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 2em;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #3498db;
+        }
+
+        h3 {
+            color: #3498db;
+            font-size: 1.4em;
+            margin: 30px 0 15px 0;
+        }
+
+        pre {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        code {
+            font-family: 'Fira Code', monospace;
+            background: #e8f4fd;
+            color: #2980b9;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        pre code {
+            background: none;
+            color: inherit;
+            padding: 0;
+        }
+
+        ul, ol {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            line-height: 1.8;
+        }
+
+        .info-box {
+            background: #e8f4fd;
+            border-left: 4px solid #3498db;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .error-box {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .success-box {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid #e0e0e0;
+        }
+
+        th {
+            background: #3498db;
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .step-number {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            width: 35px;
+            height: 35px;
+            line-height: 35px;
+            text-align: center;
+            border-radius: 50%;
+            font-weight: 600;
+            margin-right: 10px;
+        }
+
+        .toc {
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 40px;
+        }
+
+        .toc h3 {
+            color: #2c3e50;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .toc ul {
+            list-style: none;
+            margin: 0;
+        }
+
+        .toc li {
+            margin-bottom: 8px;
+        }
+
+        .toc a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .toc a:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2em;
+            }
+
+            .hero p {
+                font-size: 1em;
+            }
+
+            .section {
+                padding: 25px;
+            }
+
+            h2 {
+                font-size: 1.6em;
+            }
+
+            pre {
+                font-size: 0.8em;
+                padding: 15px;
+            }
+
+            table {
+                font-size: 0.9em;
+            }
+
+            th, td {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <a href="/index.html" class="back-btn">← Back to Portfolio</a>
+            <span style="color: #3498db; font-weight: 600;">CI/CD Guide</span>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <h1>🔧 CI/CD Best Practices</h1>
+        <p>Complete AWS Jenkins → Docker → ECR → EC2 Pipeline Documentation</p>
+    </div>
+
+    <div class="container">
+        <div class="toc">
+            <h3>📑 Table of Contents</h3>
+            <ul>
+                <li><a href="#section1">1. AWS Account Preparation</a></li>
+                <li><a href="#section2">2. Launch EC2 Server</a></li>
+                <li><a href="#section3">3. Install Docker</a></li>
+                <li><a href="#section4">4. Install Jenkins</a></li>
+                <li><a href="#section5">5. Configure Docker Access</a></li>
+                <li><a href="#section6">6. Create ECR Repository</a></li>
+                <li><a href="#section7">7. Add AWS Credentials</a></li>
+                <li><a href="#section8">8. GitHub Repository Structure</a></li>
+                <li><a href="#section9">9. Dockerfile Configuration</a></li>
+                <li><a href="#section10">10. Jenkinsfile Pipeline</a></li>
+                <li><a href="#section11">11. GitHub Webhook Setup</a></li>
+                <li><a href="#section12">12. Testing the Pipeline</a></li>
+                <li><a href="#section13">13. Rollback Procedures</a></li>
+                <li><a href="#section14">14. Troubleshooting Guide</a></li>
+                <li><a href="#section15">15. Enterprise Comparison</a></li>
+            </ul>
+        </div>
+
+        <div class="section" id="section1">
+            <h2><span class="step-number">1</span>AWS Account Preparation</h2>
+            <p>Before starting, ensure you have the following AWS resources configured:</p>
+            <ul>
+                <li>Active AWS account with billing enabled</li>
+                <li>IAM user created with appropriate permissions</li>
+                <li>Access Key ID and Secret Access Key generated</li>
+                <li>Selected region: <code>ap-south-1</code> (Mumbai)</li>
+            </ul>
+            <div class="info-box">
+                <strong>💡 Tip:</strong> Use IAM roles for EC2 instances in production environments instead of storing credentials directly.
+            </div>
+        </div>
+
+        <div class="section" id="section2">
+            <h2><span class="step-number">2</span>Launch EC2 Server</h2>
+            <p>Create an EC2 instance with the following specifications:</p>
+            <pre>AMI: Amazon Linux 2023
+Instance Type: t2.micro (Free Tier eligible)
+Storage: 8 GB gp3
+
+Security Group Rules:
+  - Port 22   → SSH (Your IP only)
+  - Port 8080 → Jenkins Web UI
+  - Port 8085 → Application</pre>
+            <div class="warning-box">
+                <strong>⚠️ Security Note:</strong> Restrict SSH access (port 22) to your IP address only. Never use 0.0.0.0/0 in production.
+            </div>
+        </div>
+
+        <div class="section" id="section3">
+            <h2><span class="step-number">3</span>Install Docker</h2>
+            <p>SSH into your EC2 instance and install Docker:</p>
+            <pre>sudo dnf update -y
+sudo dnf install docker -y
+sudo systemctl start docker
+sudo systemctl enable docker
+sudo usermod -aG docker ec2-user
+
+# Verify installation
+docker --version</pre>
+            <div class="success-box">
+                <strong>✓ Verification:</strong> After running these commands, logout and login again for group changes to take effect.
+            </div>
+        </div>
+
+        <div class="section" id="section4">
+            <h2><span class="step-number">4</span>Install Jenkins</h2>
+            <p>Install Java and Jenkins on your EC2 instance:</p>
+            <pre># Install Java 17
+sudo dnf install java-17-amazon-corretto -y
+
+# Add Jenkins repository
+sudo wget -O /etc/yum.repos.d/jenkins.repo \
+  https://pkg.jenkins.io/redhat-stable/jenkins.repo
+sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+
+# Install and start Jenkins
+sudo dnf install jenkins -y
+sudo systemctl start jenkins
+sudo systemctl enable jenkins
+
+# Get initial admin password
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword</pre>
+            <p>Access Jenkins at: <code>http://&lt;EC2-PUBLIC-IP&gt;:8080</code></p>
+        </div>
+
+        <div class="section" id="section5">
+            <h2><span class="step-number">5</span>Give Docker Access to Jenkins</h2>
+            <p>Allow Jenkins user to execute Docker commands:</p>
+            <pre>sudo usermod -aG docker jenkins
+sudo systemctl restart jenkins
+
+# Verify (may need to restart Jenkins completely)
+sudo su - jenkins -s /bin/bash
+docker ps
+exit</pre>
+        </div>
+
+        <div class="section" id="section6">
+            <h2><span class="step-number">6</span>Create ECR Repository</h2>
+            <p>Create an Elastic Container Registry to store your Docker images:</p>
+            <pre>aws ecr create-repository \
+  --repository-name html-ci-demo \
+  --region ap-south-1
+
+# Save the repository URI from output
+# Format: &lt;aws_account_id&gt;.dkr.ecr.ap-south-1.amazonaws.com/html-ci-demo</pre>
+        </div>
+
+        <div class="section" id="section7">
+            <h2><span class="step-number">7</span>Add AWS Credentials to Jenkins</h2>
+            <p>Configure AWS credentials in Jenkins:</p>
+            <ol>
+                <li>Navigate to: <strong>Manage Jenkins → Credentials</strong></li>
+                <li>Click <strong>Global → Add Credentials</strong></li>
+                <li>Select <strong>AWS Credentials</strong> from the dropdown</li>
+                <li>Enter your Access Key ID and Secret Access Key</li>
+                <li>Set ID as: <code>aws-ecr</code></li>
+                <li>Add a description and save</li>
+            </ol>
+        </div>
+
+        <div class="section" id="section8">
+            <h2><span class="step-number">8</span>GitHub Repository Structure</h2>
+            <p>Your repository should have the following structure:</p>
+            <pre>cicd_jenkins_to_docker/
+ ├── Dockerfile
+ ├── Jenkinsfile
+ └── index.html</pre>
+            <div class="info-box">
+                <strong>💡 Best Practice:</strong> Keep your Jenkinsfile in the root of your repository for easy pipeline configuration.
+            </div>
+        </div>
+
+        <div class="section" id="section9">
+            <h2><span class="step-number">9</span>Dockerfile</h2>
+            <p>Create a simple Dockerfile for your application:</p>
+            <pre>FROM nginx:alpine
+COPY index.html /usr/share/nginx/html/index.html
+EXPOSE 80</pre>
+            <p>This creates a lightweight container running Nginx with your static HTML content.</p>
+        </div>
+
+        <div class="section" id="section10">
+            <h2><span class="step-number">10</span>Jenkinsfile Pipeline</h2>
+            <p>Create a declarative Jenkins pipeline:</p>
+            <pre>pipeline {
+    agent any
+
+    environment {
+        AWS_REGION = "ap-south-1"
+        ECR_REPO = "&lt;aws_account_id&gt;.dkr.ecr.ap-south-1.amazonaws.com/html-ci-demo"
+        APP_NAME = "html-ci-demo"
+        PORT = "8085"
+    }
+
+    stages {
+        stage('Build Docker Image') {
+            steps {
+                sh "docker build -t $APP_NAME:${BUILD_NUMBER} ."
+            }
+        }
+
+        stage('Push Image to ECR') {
+            steps {
+                withCredentials([[ 
+                  $class: 'AmazonWebServicesCredentialsBinding', 
+                  credentialsId: 'aws-ecr' 
+                ]]) {
+                    sh '''
+                    aws ecr get-login-password --region $AWS_REGION | \
+                    docker login --username AWS --password-stdin $ECR_REPO
+
+                    docker tag $APP_NAME:${BUILD_NUMBER} $ECR_REPO:${BUILD_NUMBER}
+                    docker push $ECR_REPO:${BUILD_NUMBER}
+                    '''
+                }
+            }
+        }
+
+        stage('Deploy to EC2') {
+            steps {
+                sh '''
+                docker stop $APP_NAME || true
+                docker rm $APP_NAME || true
+                docker run -d --name $APP_NAME -p $PORT:80 \
+                  $ECR_REPO:${BUILD_NUMBER}
+                '''
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "Pipeline completed successfully!"
+        }
+        failure {
+            echo "Pipeline failed. Check logs for details."
+        }
+    }
+}</pre>
+        </div>
+
+        <div class="section" id="section11">
+            <h2><span class="step-number">11</span>Configure GitHub Webhook</h2>
+            <p>Set up automatic pipeline triggers on code push:</p>
+            <ol>
+                <li>Go to your GitHub repository</li>
+                <li>Navigate to <strong>Settings → Webhooks → Add webhook</strong></li>
+                <li>Payload URL: <code>http://&lt;EC2-PUBLIC-IP&gt;:8080/github-webhook/</code></li>
+                <li>Content type: <code>application/json</code></li>
+                <li>Select: <strong>Just the push event</strong></li>
+                <li>Click <strong>Add webhook</strong></li>
+            </ol>
+            <div class="warning-box">
+                <strong>⚠️ Important:</strong> The webhook URL must end with <code>/github-webhook/</code> (note the trailing slash).
+            </div>
+        </div>
+
+        <div class="section" id="section12">
+            <h2><span class="step-number">12</span>Test the Pipeline</h2>
+            <p>Verify your CI/CD pipeline is working:</p>
+            <ol>
+                <li>Make a change to your <code>index.html</code> file</li>
+                <li>Commit and push the changes:
+                    <pre>git add .
+git commit -m "Update homepage content"
+git push origin main</pre>
+                </li>
+                <li>Check Jenkins dashboard for automatic build trigger</li>
+                <li>Monitor build progress through console output</li>
+                <li>Access your application at: <code>http://&lt;EC2-PUBLIC-IP&gt;:8085</code></li>
+            </ol>
+        </div>
+
+        <div class="section" id="section13">
+            <h2><span class="step-number">13</span>Rollback Instructions</h2>
+            <p>To rollback to a previous version:</p>
+            <pre># Stop current container
+docker stop html-ci-demo
+docker rm html-ci-demo
+
+# Deploy specific build (e.g., build #12)
+docker run -d --name html-ci-demo -p 8085:80 \
+  &lt;aws_account_id&gt;.dkr.ecr.ap-south-1.amazonaws.com/html-ci-demo:12
+
+# Verify deployment
+docker ps
+curl http://localhost:8085</pre>
+            <div class="info-box">
+                <strong>💡 Pro Tip:</strong> Tag stable releases with semantic versions (v1.0.0) in addition to build numbers for easier rollbacks.
+            </div>
+        </div>
+
+        <div class="section" id="section14">
+            <h2><span class="step-number">14</span>Troubleshooting Guide</h2>
+            
+            <h3>❌ Issue: "docker: permission denied"</h3>
+            <div class="error-box">
+                <strong>Cause:</strong> Jenkins user doesn't have Docker permissions
+                <pre>sudo usermod -aG docker jenkins
+sudo systemctl restart jenkins</pre>
+            </div>
+
+            <h3>❌ Issue: Webhook not triggering Jenkins</h3>
+            <div class="error-box">
+                <strong>Common causes:</strong>
+                <ul>
+                    <li>Security Group doesn't allow port 8080 from GitHub IPs</li>
+                    <li>Using localhost instead of public IP</li>
+                    <li>Wrong webhook path (missing <code>/github-webhook/</code>)</li>
+                    <li>GitHub webhook shows error in "Recent Deliveries"</li>
+                </ul>
+                <strong>Fix:</strong> Check GitHub webhook deliveries for HTTP status. Should return 200 OK.
+            </div>
+
+            <h3>❌ Issue: "Image not found" during deploy</h3>
+            <div class="error-box">
+                <strong>Cause:</strong> Image wasn't pushed to ECR successfully
+                <pre># Verify images in ECR
+aws ecr list-images --repository-name html-ci-demo --region ap-south-1
+
+# Check Jenkins push stage logs</pre>
+            </div>
+
+            <h3>❌ Issue: Jenkins cannot connect to ECR</h3>
+            <div class="error-box">
+                <strong>Possible causes:</strong>
+                <ul>
+                    <li>IAM user missing ECR permissions (AmazonEC2ContainerRegistryFullAccess)</li>
+                    <li>Incorrect AWS region in Jenkinsfile</li>
+                    <li>Expired or invalid AWS credentials in Jenkins</li>
+                </ul>
+            </div>
+
+            <h3>❌ Issue: Jenkins cannot clone GitHub repo</h3>
+            <div class="error-box">
+                <strong>Solutions:</strong>
+                <ul>
+                    <li>For private repos: Add GitHub Personal Access Token to Jenkins credentials</li>
+                    <li>Verify branch name in Jenkins pipeline configuration</li>
+                    <li>Check GitHub repository URL format</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section" id="section15">
+            <h2><span class="step-number">15</span>What Companies Do Differently</h2>
+            <p>Understanding the gap between learning projects and production systems:</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Your Setup (Learning/POC)</th>
+                        <th>Enterprise Production Setup</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Single EC2 running Jenkins + Docker</td>
+                        <td>Jenkins Master + Multiple Agents, or GitHub Actions + Self-hosted runners</td>
+                    </tr>
+                    <tr>
+                        <td>Docker run on EC2</td>
+                        <td>AWS ECS, EKS (Kubernetes), Fargate, or ArgoCD for GitOps</td>
+                    </tr>
+                    <tr>
+                        <td>Manual rollback using docker run</td>
+                        <td>Automated rollback with Canary/Blue-Green deployments using AWS CodeDeploy or Spinnaker</td>
+                    </tr>
+                    <tr>
+                        <td>Basic GitHub webhook</td>
+                        <td>GitHub App integration with SSO, branch protection, and IAM role assumptions</td>
+                    </tr>
+                    <tr>
+                        <td>Images stored in ECR</td>
+                        <td>Versioned images + lifecycle policies + vulnerability scanning + image signing</td>
+                    </tr>
+                    <tr>
+                        <td>One pipeline per application</td>
+                        <td>Shared libraries, reusable templates, centralized CI/CD platform (e.g., Jenkins X, Tekton)</td>
+                    </tr>
+                    <tr>
+                        <td>Direct SSH access</td>
+                        <td>AWS Systems Manager Session Manager, no direct SSH, audit logging</td>
+                    </tr>
+                    <tr>
+                        <td>No automated testing</td>
+                        <td>Unit tests, integration tests, security scans, compliance checks in pipeline</td>
+                    </tr>
+                    <tr>
+                        <td>No monitoring</td>
+                        <td>CloudWatch, Prometheus, Grafana, PagerDuty, distributed tracing</td>
+                    </tr>
+                    <tr>
+                        <td>Credentials in Jenkins</td>
+                        <td>AWS Secrets Manager, HashiCorp Vault, rotated credentials, least-privilege IAM roles</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="success-box">
+                <strong>✓ Key Takeaway:</strong> This guide follows real enterprise principles while staying within free-tier constraints. It's an excellent foundation for understanding production CI/CD workflows.
+            </div>
+
+            <h3>Next Steps for Production-Ready Pipelines:</h3>
+            <ul>
+                <li>Implement automated testing (unit, integration, E2E)</li>
+                <li>Add security scanning (SAST, DAST, container scanning)</li>
+                <li>Set up comprehensive monitoring and alerting</li>
+                <li>Implement proper secrets management</li>
+                <li>Use Infrastructure as Code (Terraform, CloudFormation)</li>
+                <li>Add approval gates for production deployments</li>
+                <li>Implement proper logging and audit trails</li>
+                <li>Set up disaster recovery and backup procedures</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>📚 Additional Resources</h2>
+            <ul>
+                <li><a href="https://www.jenkins.io/doc/" target="_blank">Jenkins Official Documentation</a></li>
+                <li><a href="https://docs.aws.amazon.com/ecr/" target="_blank">AWS ECR Documentation</a></li>
+                <li><a href="https://docs.docker.com/" target="_blank">Docker Documentation</a></li>
+                <li><a href="https://docs.github.com/en/webhooks" target="_blank">GitHub Webhooks Guide</a></li>
+            </ul>
+        </div>
+
+        <div style="text-align: center; margin-top: 60px; padding: 40px 0; border-top: 2px solid #e0e0e0;">
+            <a href="/index.html" class="back-btn" style="font-size: 1.1em;">← Back to Portfolio</a>
+        </div>
+    </div>
+</body>
+</html>

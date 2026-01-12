@@ -1,0 +1,1625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kubernetes & Docker Notes - Complete Professional Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f8f9fa;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e0e0e0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-btn {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s;
+        }
+
+        .back-btn:hover {
+            color: #2980b9;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 120px 20px 80px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .hero h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.2em;
+            opacity: 0.95;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .section {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e0e0e0;
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 2em;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        h3 {
+            color: #667eea;
+            font-size: 1.4em;
+            margin: 30px 0 15px 0;
+        }
+
+        h4 {
+            color: #764ba2;
+            font-size: 1.2em;
+            margin: 20px 0 10px 0;
+        }
+
+        pre {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        code {
+            font-family: 'Fira Code', monospace;
+            background: #f0e7ff;
+            color: #764ba2;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        pre code {
+            background: none;
+            color: inherit;
+            padding: 0;
+        }
+
+        ul, ol {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            line-height: 1.8;
+        }
+
+        .info-box {
+            background: #e8f4fd;
+            border-left: 4px solid #3498db;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .success-box {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .fire-box {
+            background: #fff5f5;
+            border-left: 4px solid #e74c3c;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid #e0e0e0;
+        }
+
+        th {
+            background: #667eea;
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .chapter-number {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            border-radius: 50%;
+            font-weight: 600;
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+
+        .toc {
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 40px;
+        }
+
+        .toc h3 {
+            color: #2c3e50;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .toc ul {
+            list-style: none;
+            margin: 0;
+        }
+
+        .toc li {
+            margin-bottom: 8px;
+        }
+
+        .toc a {
+            color: #667eea;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .toc a:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+
+        .highlight-box h3 {
+            color: white;
+            margin-top: 0;
+        }
+
+        .command-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .command-grid div {
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+        }
+
+        .command-grid div:nth-child(odd) {
+            font-weight: 600;
+            background: #f0e7ff;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2em;
+            }
+
+            .hero p {
+                font-size: 1em;
+            }
+
+            .section {
+                padding: 25px;
+            }
+
+            h2 {
+                font-size: 1.6em;
+            }
+
+            pre {
+                font-size: 0.8em;
+                padding: 15px;
+            }
+
+            table {
+                font-size: 0.9em;
+            }
+
+            th, td {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <a href="/index.html" class="back-btn">← Back to Portfolio</a>
+            <span style="color: #667eea; font-weight: 600;">☸️ Kubernetes & Docker Guide</span>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <h1>☸️ Kubernetes & Docker</h1>
+        <p>Full Professional Guide - From Containerization to Production Orchestration</p>
+    </div>
+
+    <div class="container">
+        <div class="toc">
+            <h3>📑 Table of Contents</h3>
+            <ul>
+                <li><a href="#docker">Chapter 7: Docker (Full DevOps Guide)</a></li>
+                <li><a href="#kubernetes">Chapter 8: Kubernetes (Advanced Guide)</a></li>
+                <li><a href="#helm">Chapter 9: Helm (Package Manager)</a></li>
+                <li><a href="#argocd">Chapter 10: ArgoCD (GitOps)</a></li>
+            </ul>
+        </div>
+
+        <div class="section" id="docker">
+            <h2><span class="chapter-number">7</span>Docker (Full DevOps Guide)</h2>
+            
+            <div class="fire-box">
+                <strong>🔥 Non-Negotiable:</strong> Docker is essential for DevOps. If you cannot build efficient images, you cannot deploy to Kubernetes.
+            </div>
+
+            <h3>7.1 What Docker Actually Solves</h3>
+            
+            <ul>
+                <li>✓ Eliminates "works on my machine" syndrome</li>
+                <li>✓ Consistent runtime environment across all stages</li>
+                <li>✓ Lightweight and fast compared to VMs</li>
+                <li>✓ Ideal for microservices architecture</li>
+                <li>✓ Base layer caching = faster builds</li>
+                <li>✓ Easy deployment pipeline integration</li>
+                <li>✓ Kubernetes-ready packaging</li>
+            </ul>
+
+            <h3>7.2 Docker Architecture</h3>
+            
+            <pre>Components:
+├── Docker CLI (command-line interface)
+├── Docker Daemon (dockerd - background service)
+├── Container Runtime (containerd)
+├── Images & Layers (read-only templates)
+├── Volumes (persistent data storage)
+└── Networks (container communication)</pre>
+
+            <h3>7.3 Dockerfile - Mandatory Knowledge</h3>
+            
+            <p>Every DevOps engineer must master these instructions:</p>
+            
+            <table>
+                <tr>
+                    <th>Command</th>
+                    <th>Purpose</th>
+                    <th>Example</th>
+                </tr>
+                <tr>
+                    <td><code>FROM</code></td>
+                    <td>Base image</td>
+                    <td><code>FROM node:18-alpine</code></td>
+                </tr>
+                <tr>
+                    <td><code>WORKDIR</code></td>
+                    <td>Set working directory</td>
+                    <td><code>WORKDIR /app</code></td>
+                </tr>
+                <tr>
+                    <td><code>COPY</code></td>
+                    <td>Copy files to image</td>
+                    <td><code>COPY . .</code></td>
+                </tr>
+                <tr>
+                    <td><code>RUN</code></td>
+                    <td>Execute commands during build</td>
+                    <td><code>RUN npm install</code></td>
+                </tr>
+                <tr>
+                    <td><code>CMD</code></td>
+                    <td>Default command (can be overridden)</td>
+                    <td><code>CMD ["node", "server.js"]</code></td>
+                </tr>
+                <tr>
+                    <td><code>ENTRYPOINT</code></td>
+                    <td>Fixed command</td>
+                    <td><code>ENTRYPOINT ["python", "app.py"]</code></td>
+                </tr>
+                <tr>
+                    <td><code>EXPOSE</code></td>
+                    <td>Document port</td>
+                    <td><code>EXPOSE 8080</code></td>
+                </tr>
+                <tr>
+                    <td><code>ENV</code></td>
+                    <td>Set environment variables</td>
+                    <td><code>ENV NODE_ENV=production</code></td>
+                </tr>
+                <tr>
+                    <td><code>USER</code></td>
+                    <td>Run as specific user</td>
+                    <td><code>USER nodejs</code></td>
+                </tr>
+                <tr>
+                    <td><code>HEALTHCHECK</code></td>
+                    <td>Container health check</td>
+                    <td><code>HEALTHCHECK CMD curl -f http://localhost/health</code></td>
+                </tr>
+                <tr>
+                    <td><code>VOLUME</code></td>
+                    <td>Mount point for volumes</td>
+                    <td><code>VOLUME /data</code></td>
+                </tr>
+            </table>
+
+            <h3>7.4 Dockerfile Best Practices (Production Level)</h3>
+            
+            <h4>1. Use Small Base Images</h4>
+            <div class="command-grid">
+                <div>❌ Bad</div>
+                <div><code>FROM ubuntu</code> (~70 MB base)</div>
+                <div>✓ Good</div>
+                <div><code>FROM alpine</code> (~5 MB) or <code>FROM python:3.11-slim</code></div>
+            </div>
+
+            <h4>2. Multi-Stage Builds (Critical for Production)</h4>
+            <p>Reduces image size dramatically by separating build and runtime environments:</p>
+            
+            <pre># Build stage
+FROM node:18 AS builder
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build
+
+# Production stage
+FROM nginx:alpine
+COPY --from=builder /app/dist /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]</pre>
+
+            <div class="success-box">
+                <strong>✓ Result:</strong> Final image is ~20MB instead of 1GB. Only production artifacts are included, no build dependencies.
+            </div>
+
+            <h4>3. Don't Run as Root User</h4>
+            <pre>FROM node:18-alpine
+WORKDIR /app
+
+# Create non-root user
+RUN adduser -D appuser
+
+COPY --chown=appuser:appuser . .
+RUN npm install
+
+# Switch to non-root user
+USER appuser
+
+CMD ["node", "server.js"]</pre>
+
+            <div class="warning-box">
+                <strong>⚠️ Security:</strong> Running containers as root is a major security risk. Always use non-root users in production.
+            </div>
+
+            <h4>4. Use HEALTHCHECK</h4>
+            <pre>HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD curl -f http://localhost:8080/health || exit 1</pre>
+
+            <h4>5. Use .dockerignore</h4>
+            <p>Reduces build context by excluding unnecessary files:</p>
+            <pre># .dockerignore
+.git
+node_modules
+coverage
+venv
+*.md
+.vscode
+.DS_Store
+npm-debug.log
+Dockerfile
+.dockerignore</pre>
+
+            <h3>7.5 Docker Build & Run Commands</h3>
+            
+            <pre># Build image
+docker build -t app:v1 .
+docker build -t app:v1 -f Dockerfile.prod .
+
+# Run container
+docker run -p 8080:8080 app:v1
+docker run -d --name myapp -p 8080:8080 app:v1
+docker run -d --restart=unless-stopped app
+
+# View logs
+docker logs myapp
+docker logs -f myapp              # Follow logs in real-time
+
+# Execute commands in container
+docker exec -it myapp bash
+docker exec myapp ls -la
+
+# Stop/Start/Restart
+docker stop myapp
+docker start myapp
+docker restart myapp
+
+# Remove containers
+docker rm myapp
+docker rm -f myapp               # Force remove running container</pre>
+
+            <h3>7.6 Docker Networking</h3>
+            
+            <table>
+                <tr>
+                    <th>Network Type</th>
+                    <th>Description</th>
+                    <th>Use Case</th>
+                </tr>
+                <tr>
+                    <td><strong>bridge</strong></td>
+                    <td>Default network, containers on same host</td>
+                    <td>Most common for single-host setups</td>
+                </tr>
+                <tr>
+                    <td><strong>host</strong></td>
+                    <td>Container uses host network directly</td>
+                    <td>Performance-critical applications</td>
+                </tr>
+                <tr>
+                    <td><strong>none</strong></td>
+                    <td>No network access</td>
+                    <td>Maximum isolation</td>
+                </tr>
+                <tr>
+                    <td><strong>overlay</strong></td>
+                    <td>Multi-host networking</td>
+                    <td>Docker Swarm, Kubernetes</td>
+                </tr>
+            </table>
+
+            <pre># Check existing networks
+docker network ls
+
+# Create custom network
+docker network create my-network
+
+# Run container on network
+docker run -d --network my-network --name web nginx</pre>
+
+            <h3>7.7 Docker Volumes (Persistent Data)</h3>
+            
+            <pre># Create named volume
+docker volume create dbdata
+
+# Run with volume
+docker run -v dbdata:/var/lib/mysql mysql
+
+# List volumes
+docker volume ls
+
+# Inspect volume
+docker volume inspect dbdata
+
+# Remove volume
+docker volume rm dbdata</pre>
+
+            <div class="info-box">
+                <strong>💡 Important:</strong> Without volumes, all data is lost when container is removed. Always use volumes for databases and stateful applications.
+            </div>
+
+            <h3>7.8 Docker Compose (Multi-Container Local Dev)</h3>
+            
+            <pre># docker-compose.yml
+version: "3.9"
+
+services:
+  web:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - NODE_ENV=production
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+  db:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: appdb
+    volumes:
+      - dbdata:/var/lib/mysql
+    networks:
+      - app-network
+
+networks:
+  app-network:
+
+volumes:
+  dbdata:</pre>
+
+            <h4>Docker Compose Commands:</h4>
+            <pre>docker-compose up -d            # Start all services
+docker-compose down             # Stop and remove
+docker-compose ps               # List running services
+docker-compose logs -f web      # Follow logs
+docker-compose restart web      # Restart specific service</pre>
+
+            <h3>7.9 Working with Private Registries</h3>
+            
+            <h4>Docker Hub:</h4>
+            <pre>docker login
+docker tag app:v1 username/app:v1
+docker push username/app:v1</pre>
+
+            <h4>AWS ECR:</h4>
+            <pre>aws ecr get-login-password --region ap-south-1 | \
+  docker login --username AWS --password-stdin \
+  123456.dkr.ecr.ap-south-1.amazonaws.com
+
+docker tag app:v1 123456.dkr.ecr.ap-south-1.amazonaws.com/app:v1
+docker push 123456.dkr.ecr.ap-south-1.amazonaws.com/app:v1</pre>
+
+            <h3>7.10 Docker Security Best Practices</h3>
+            
+            <ul>
+                <li>✗ Never store secrets inside Dockerfile</li>
+                <li>✓ Always use non-root user</li>
+                <li>✓ Scan images regularly with Trivy, Clair, or docker scan</li>
+                <li>✓ Pin base image versions (avoid <code>latest</code>)</li>
+                <li>✓ Minimize layers and image size</li>
+                <li>✓ Use multi-stage builds</li>
+                <li>✓ Keep base images updated</li>
+                <li>✓ Use .dockerignore to exclude sensitive files</li>
+            </ul>
+
+            <h4>Scan Images for Vulnerabilities:</h4>
+            <pre># Using Trivy
+trivy image myapp:v1
+
+# Using Docker scan
+docker scan myapp:v1</pre>
+
+            <h3>7.11 Docker Troubleshooting</h3>
+            
+            <h4>Container Keeps Restarting:</h4>
+            <pre>docker logs container-name
+docker inspect container-name | grep -i error
+docker events --filter 'container=container-name'</pre>
+
+            <h4>High Memory Usage:</h4>
+            <pre>docker stats
+docker stats --no-stream container-name</pre>
+
+            <h4>Port Not Working:</h4>
+            <pre># Check port mapping
+docker inspect container | grep -i port
+
+# Check if port is listening
+netstat -tulpn | grep 8080
+ss -tulpn | grep 8080
+
+# Test connectivity
+curl http://localhost:8080</pre>
+        </div>
+
+        <div class="section" id="kubernetes">
+            <h2><span class="chapter-number">8</span>Kubernetes (Advanced DevOps Guide)</h2>
+            
+            <div class="highlight-box">
+                <h3>☸️ The Heart of Modern DevOps</h3>
+                <p>Kubernetes is used by virtually all major tech companies for container orchestration at scale.</p>
+            </div>
+
+            <h3>8.1 Kubernetes Architecture</h3>
+            
+            <h4>Control Plane Components:</h4>
+            <ul>
+                <li><strong>API Server:</strong> Frontend for Kubernetes, handles all REST requests</li>
+                <li><strong>etcd:</strong> Distributed key-value store for all cluster data</li>
+                <li><strong>Scheduler:</strong> Assigns pods to nodes based on resources</li>
+                <li><strong>Controller Manager:</strong> Runs controller processes (replication, endpoints, etc.)</li>
+            </ul>
+
+            <h4>Worker Node Components:</h4>
+            <ul>
+                <li><strong>Kubelet:</strong> Agent running on each node, ensures containers are running</li>
+                <li><strong>Kube-proxy:</strong> Network proxy, maintains network rules</li>
+                <li><strong>Container Runtime:</strong> containerd, CRI-O (runs containers)</li>
+            </ul>
+
+            <h3>8.2 Kubernetes Core Concepts</h3>
+            
+            <table>
+                <tr>
+                    <th>Object</th>
+                    <th>Purpose</th>
+                    <th>Key Features</th>
+                </tr>
+                <tr>
+                    <td><strong>Pod</strong></td>
+                    <td>Smallest deployable unit</td>
+                    <td>One or more containers, shared network</td>
+                </tr>
+                <tr>
+                    <td><strong>ReplicaSet</strong></td>
+                    <td>Ensures pod count</td>
+                    <td>Auto-healing, maintains desired replicas</td>
+                </tr>
+                <tr>
+                    <td><strong>Deployment</strong></td>
+                    <td>Manages ReplicaSets</td>
+                    <td>Rolling updates, rollback capability</td>
+                </tr>
+                <tr>
+                    <td><strong>Service</strong></td>
+                    <td>Network abstraction</td>
+                    <td>ClusterIP, NodePort, LoadBalancer</td>
+                </tr>
+                <tr>
+                    <td><strong>ConfigMap</strong></td>
+                    <td>Configuration data</td>
+                    <td>Non-sensitive key-value pairs</td>
+                </tr>
+                <tr>
+                    <td><strong>Secret</strong></td>
+                    <td>Sensitive data</td>
+                    <td>Base64 encoded credentials</td>
+                </tr>
+                <tr>
+                    <td><strong>Ingress</strong></td>
+                    <td>External HTTP/HTTPS routing</td>
+                    <td>Path-based, host-based routing</td>
+                </tr>
+                <tr>
+                    <td><strong>PersistentVolume</strong></td>
+                    <td>Storage resource</td>
+                    <td>Independent of pod lifecycle</td>
+                </tr>
+            </table>
+
+            <h3>8.3 Pod Example</h3>
+            
+            <pre>apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+  labels:
+    app: web
+spec:
+  containers:
+  - name: nginx
+    image: nginx:1.21
+    ports:
+    - containerPort: 80</pre>
+
+            <h3>8.4 Deployments (Most Important Resource)</h3>
+            
+            <pre>apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-app
+  labels:
+    app: web
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+      - name: app
+        image: myapp:v1
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"</pre>
+
+            <h3>8.5 Services</h3>
+            
+            <h4>ClusterIP (Internal Only):</h4>
+            <pre>apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc
+spec:
+  type: ClusterIP
+  selector:
+    app: web
+  ports:
+  - port: 80
+    targetPort: 8080</pre>
+
+            <h4>NodePort (External Access via Node):</h4>
+            <pre>apiVersion: v1
+kind: Service
+metadata:
+  name: app-nodeport
+spec:
+  type: NodePort
+  selector:
+    app: web
+  ports:
+  - port: 80
+    targetPort: 8080
+    nodePort: 30080  # Range: 30000-32767</pre>
+
+            <h4>LoadBalancer (Cloud Load Balancer):</h4>
+            <pre>apiVersion: v1
+kind: Service
+metadata:
+  name: app-lb
+spec:
+  type: LoadBalancer
+  selector:
+    app: web
+  ports:
+  - port: 80
+    targetPort: 8080</pre>
+
+            <h3>8.6 Ingress (Mandatory for Real Applications)</h3>
+            
+            <p>Ingress sits "in front" of services and provides HTTP/HTTPS routing:</p>
+            
+            <pre>apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: web-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  rules:
+  - host: example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: app-svc
+            port:
+              number: 80
+      - path: /api
+        pathType: Prefix
+        backend:
+          service:
+            name: api-svc
+            port:
+              number: 8080</pre>
+
+            <h3>8.7 ConfigMaps & Secrets</h3>
+            
+            <h4>ConfigMap (Non-Sensitive Data):</h4>
+            <pre>apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  ENV: "production"
+  LOG_LEVEL: "info"
+  DATABASE_HOST: "db.example.com"</pre>
+
+            <h4>Secret (Sensitive Data - Base64 Encoded):</h4>
+            <pre>apiVersion: v1
+kind: Secret
+metadata:
+  name: db-secret
+type: Opaque
+data:
+  password: cGFzcw==  # Base64 encoded "pass"</pre>
+
+            <div class="warning-box">
+                <strong>⚠️ Note:</strong> Secrets are only base64 encoded, not encrypted. Use encryption at rest or external secret managers for production.
+            </div>
+
+            <h3>8.8 Persistent Volumes & Claims</h3>
+            
+            <pre>apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: data-pvc
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: gp3
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app-with-storage
+spec:
+  containers:
+  - name: app
+    image: myapp:v1
+    volumeMounts:
+    - name: data
+      mountPath: /data
+  volumes:
+  - name: data
+    persistentVolumeClaim:
+      claimName: data-pvc</pre>
+
+            <h3>8.9 Horizontal Pod Autoscaler (HPA)</h3>
+            
+            <pre>apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: web-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: web-app
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 60</pre>
+
+            <h3>8.10 Liveness & Readiness Probes</h3>
+            
+            <h4>Readiness Probe (Is pod ready for traffic?):</h4>
+            <pre>readinessProbe:
+  httpGet:
+    path: /ready
+    port: 8080
+  initialDelaySeconds: 5
+  periodSeconds: 5
+  timeoutSeconds: 3
+  successThreshold: 1
+  failureThreshold: 3</pre>
+
+            <h4>Liveness Probe (Is container alive?):</h4>
+            <pre>livenessProbe:
+  httpGet:
+    path: /health
+    port: 8080
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 3</pre>
+
+            <div class="info-box">
+                <strong>💡 Difference:</strong>
+                <ul>
+                    <li><strong>Liveness:</strong> Restarts container if fails</li>
+                    <li><strong>Readiness:</strong> Removes pod from service if fails (doesn't restart)</li>
+                </ul>
+            </div>
+
+            <h3>8.11 Rolling Updates</h3>
+            
+            <p>Kubernetes handles zero-downtime releases automatically:</p>
+            
+            <pre># Update image
+kubectl set image deployment/web-app app=myapp:v2
+
+# Check rollout status
+kubectl rollout status deployment/web-app
+
+# View rollout history
+kubectl rollout history deployment/web-app
+
+# Undo rollout (rollback)
+kubectl rollout undo deployment/web-app
+
+# Rollback to specific revision
+kubectl rollout undo deployment/web-app --to-revision=2</pre>
+
+            <h4>Rolling Update Strategy:</h4>
+            <pre>spec:
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1    # Max pods down during update
+      maxSurge: 1          # Max extra pods during update</pre>
+
+            <h3>8.12 Blue-Green Deployment</h3>
+            
+            <div class="highlight-box">
+                <h3>🔄 Blue-Green Strategy</h3>
+                <ul>
+                    <li>Deploy new version (green) alongside old version (blue)</li>
+                    <li>Test green deployment thoroughly</li>
+                    <li>Switch Service selector to green instantly</li>
+                    <li>If issues: instant rollback by switching back to blue</li>
+                    <li>Once stable: delete blue deployment</li>
+                </ul>
+            </div>
+
+            <h3>8.13 Canary Deployment (SRE Best Practice)</h3>
+            
+            <p>Percentage-based progressive rollout:</p>
+            
+            <pre>Rollout Strategy:
+1% traffic   → Monitor metrics
+10% traffic  → Check error rates
+25% traffic  → Validate performance
+50% traffic  → Final validation
+100% traffic → Full deployment
+
+If errors detected at any stage → Auto rollback</pre>
+
+            <h4>Tools for Canary:</h4>
+            <ul>
+                <li>NGINX Ingress Controller with traffic splitting</li>
+                <li>Istio service mesh</li>
+                <li>Argo Rollouts (advanced progressive delivery)</li>
+            </ul>
+
+            <h3>8.14 Kubernetes Security</h3>
+            
+            <h4>Key Security Concepts:</h4>
+            <ul>
+                <li><strong>RBAC:</strong> Role-Based Access Control (who can do what)</li>
+                <li><strong>Service Accounts:</strong> Identity for pods</li>
+                <li><strong>Namespaces:</strong> Logical isolation</li>
+                <li><strong>Network Policies:</strong> Pod-to-pod traffic rules</li>
+                <li><strong>Secrets Encryption:</strong> Encrypt etcd at rest</li>
+                <li><strong>Pod Security Standards:</strong> Restrict privileged containers</li>
+            </ul>
+
+            <h4>Example Network Policy:</h4>
+            <pre>apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-from-frontend
+spec:
+  podSelector:
+    matchLabels:
+      app: backend
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: frontend
+    ports:
+    - protocol: TCP
+      port: 8080</pre>
+
+            <h3>8.15 Kubernetes Troubleshooting</h3>
+            
+            <h4>Pod Not Starting (Pending):</h4>
+            <pre>kubectl describe pod pod-name
+# Check Events section for errors
+
+Common issues:
+- Insufficient CPU/memory resources
+- Image pull errors
+- Volume mount issues
+- Node selector/affinity constraints</pre>
+
+            <h4>CrashLoopBackOff:</h4>
+            <pre>kubectl logs pod-name
+kubectl logs pod-name --previous    # Previous container logs
+
+Common causes:
+- Application crash on startup
+- Missing environment variables
+- Failed health checks
+- Database connection errors</pre>
+
+            <h4>ImagePullBackOff:</h4>
+            <pre>kubectl describe pod pod-name
+
+Common issues:
+- Typo in image name
+- Missing or wrong image tag
+- Registry authentication failed
+- Image doesn't exist in registry</pre>
+
+            <h4>Service Not Reachable:</h4>
+            <pre>kubectl get svc service-name
+kubectl get endpoints service-name
+
+# If endpoints are empty:
+# Service selector labels don't match pod labels</pre>
+
+            <h4>Ingress Returns 404:</h4>
+            <pre>kubectl describe ingress ingress-name
+
+Check:
+- Ingress controller is running
+- Service exists and is healthy
+- Path and host configurations
+- Backend service endpoints</pre>
+
+            <div class="warning-box">
+                <strong>⚠️ Debugging Workflow:</strong>
+                <ol>
+                    <li>Check pod status: <code>kubectl get pods</code></li>
+                    <li>Describe the pod: <code>kubectl describe pod</code></li>
+                    <li>Check logs: <code>kubectl logs pod-name</code></li>
+                    <li>Check events: <code>kubectl get events --sort-by='.lastTimestamp'</code></li>
+                    <li>Verify service/endpoints: <code>kubectl get svc,ep</code></li>
+                </ol>
+            </div>
+
+            <h3>8.16 Essential kubectl Commands</h3>
+            
+            <pre># Get resources
+kubectl get pods
+kubectl get deployments
+kubectl get services
+kubectl get all
+
+# Describe resources (detailed info)
+kubectl describe pod pod-name
+kubectl describe deployment deploy-name
+
+# Create/Apply resources
+kubectl apply -f deployment.yaml
+kubectl create deployment nginx --image=nginx
+
+# Delete resources
+kubectl delete pod pod-name
+kubectl delete -f deployment.yaml
+
+# Logs
+kubectl logs pod-name
+kubectl logs -f pod-name              # Follow logs
+kubectl logs pod-name -c container    # Specific container
+
+# Execute commands
+kubectl exec -it pod-name -- bash
+kubectl exec pod-name -- ls -la
+
+# Port forward (local testing)
+kubectl port-forward pod-name 8080:80
+
+# Scale deployment
+kubectl scale deployment web-app --replicas=5
+
+# Edit resources
+kubectl edit deployment web-app
+
+# Get resource YAML
+kubectl get deployment web-app -o yaml
+
+# Get resource JSON
+kubectl get pod pod-name -o json</pre>
+        </div>
+
+        <div class="section" id="helm">
+            <h2><span class="chapter-number">9</span>Helm (Package Manager for Kubernetes)</h2>
+            
+            <p>Helm simplifies Kubernetes application deployment by packaging resources into reusable charts.</p>
+
+            <h3>9.1 What is Helm?</h3>
+            
+            <ul>
+                <li>Package manager for Kubernetes (like apt/yum for Linux)</li>
+                <li>Bundles multiple K8s manifests into a single chart</li>
+                <li>Templating engine for dynamic values</li>
+                <li>Version control for deployments</li>
+                <li>Easy rollback capabilities</li>
+            </ul>
+
+            <h3>9.2 Helm Basic Commands</h3>
+            
+            <h4>Repository Management:</h4>
+            <pre># Add repository
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm repo add stable https://charts.helm.sh/stable
+
+# Update repositories
+helm repo update
+
+# List repositories
+helm repo list
+
+# Search charts
+helm search repo mysql
+helm search hub wordpress</pre>
+
+            <h4>Install & Manage Releases:</h4>
+            <pre># Install chart
+helm install mydb bitnami/mysql
+
+# Install with specific version
+helm install mydb bitnami/mysql --version 9.3.4
+
+# Install with custom values
+helm install mydb bitnami/mysql -f values.yaml
+helm install mydb bitnami/mysql --set auth.rootPassword=secret
+
+# List installed releases
+helm list
+helm list --all-namespaces
+
+# Get release status
+helm status mydb
+
+# Get release values
+helm get values mydb
+
+# Get release manifest
+helm get manifest mydb
+
+# Upgrade release
+helm upgrade mydb bitnami/mysql
+helm upgrade mydb bitnami/mysql --set replicas=3
+
+# Rollback release
+helm rollback mydb 1    # Rollback to revision 1
+
+# Uninstall release
+helm uninstall mydb</pre>
+
+            <h3>9.3 Creating Custom Helm Chart</h3>
+            
+            <pre># Create new chart
+helm create myapp
+
+# Chart structure
+myapp/
+├── Chart.yaml          # Chart metadata
+├── values.yaml         # Default configuration values
+├── charts/             # Chart dependencies
+└── templates/
+    ├── deployment.yaml
+    ├── service.yaml
+    ├── ingress.yaml
+    ├── configmap.yaml
+    ├── _helpers.tpl    # Template helpers
+    └── NOTES.txt       # Post-install notes</pre>
+
+            <h4>Example values.yaml:</h4>
+            <pre>replicaCount: 3
+
+image:
+  repository: myapp
+  tag: "1.0.0"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: true
+  className: "nginx"
+  hosts:
+    - host: myapp.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+
+resources:
+  requests:
+    memory: "64Mi"
+    cpu: "250m"
+  limits:
+    memory: "128Mi"
+    cpu: "500m"</pre>
+
+            <h4>Using Values in Templates:</h4>
+            <pre># templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    app: {{ .Chart.Name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Chart.Name }}
+    spec:
+      containers:
+      - name: {{ .Chart.Name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        ports:
+        - containerPort: 8080
+        resources:
+          {{- toYaml .Values.resources | nindent 12 }}</pre>
+
+            <h4>Package & Install Chart:</h4>
+            <pre># Package chart
+helm package myapp/
+
+# Install local chart
+helm install myrelease ./myapp
+
+# Install packaged chart
+helm install myrelease myapp-1.0.0.tgz
+
+# Dry run (test without installing)
+helm install myrelease ./myapp --dry-run --debug</pre>
+
+            <h3>9.4 Helm Best Practices</h3>
+            
+            <ul>
+                <li>✓ Use version pinning in Chart.yaml</li>
+                <li>✓ Document all values in values.yaml comments</li>
+                <li>✓ Use _helpers.tpl for reusable templates</li>
+                <li>✓ Include NOTES.txt for post-install instructions</li>
+                <li>✓ Test charts with <code>helm lint</code></li>
+                <li>✓ Use namespaces for isolation</li>
+                <li>✓ Keep charts modular and reusable</li>
+            </ul>
+
+            <div class="success-box">
+                <strong>✓ Production Tip:</strong> Use Helm charts for all application deployments. Store charts in Git for version control and use ArgoCD for GitOps-based deployment.
+            </div>
+        </div>
+
+        <div class="section" id="argocd">
+            <h2><span class="chapter-number">10</span>ArgoCD (GitOps)</h2>
+            
+            <div class="highlight-box">
+                <h3>🔄 GitOps Workflow</h3>
+                <pre>Git Repository (Single Source of Truth)
+       ↓
+   ArgoCD Monitors Changes
+       ↓
+   Automatic Sync to Kubernetes
+       ↓
+   Continuous Reconciliation</pre>
+            </div>
+
+            <h3>10.1 What is GitOps?</h3>
+            
+            <p>GitOps is a methodology where:</p>
+            <ul>
+                <li>Git is the single source of truth for infrastructure and applications</li>
+                <li>Changes are made via Git commits (not kubectl commands)</li>
+                <li>Automated agents sync Git state to cluster</li>
+                <li>Declarative infrastructure definitions</li>
+                <li>Full audit trail in Git history</li>
+            </ul>
+
+            <h3>10.2 ArgoCD Core Concepts</h3>
+            
+            <table>
+                <tr>
+                    <th>Concept</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td><strong>Application</strong></td>
+                    <td>Group of Kubernetes resources managed by ArgoCD</td>
+                </tr>
+                <tr>
+                    <td><strong>Project</strong></td>
+                    <td>Logical grouping of applications</td>
+                </tr>
+                <tr>
+                    <td><strong>Sync</strong></td>
+                    <td>Process of bringing cluster to desired state from Git</td>
+                </tr>
+                <tr>
+                    <td><strong>Diff</strong></td>
+                    <td>Shows differences between Git and cluster state</td>
+                </tr>
+                <tr>
+                    <td><strong>Auto-sync</strong></td>
+                    <td>Automatic synchronization when Git changes detected</td>
+                </tr>
+                <tr>
+                    <td><strong>Health</strong></td>
+                    <td>Application health status (Healthy, Degraded, etc.)</td>
+                </tr>
+            </table>
+
+            <h3>10.3 ArgoCD Installation</h3>
+            
+            <pre># Create namespace
+kubectl create namespace argocd
+
+# Install ArgoCD
+kubectl apply -n argocd -f \
+  https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
+# Wait for pods to be ready
+kubectl get pods -n argocd -w
+
+# Get admin password
+kubectl -n argocd get secret argocd-initial-admin-secret \
+  -o jsonpath="{.data.password}" | base64 -d
+
+# Port forward to access UI
+kubectl port-forward svc/argocd-server -n argocd 8080:443
+
+# Access UI: https://localhost:8080
+# Username: admin
+# Password: (from command above)</pre>
+
+            <h3>10.4 Creating ArgoCD Application</h3>
+            
+            <pre>apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: myapp
+  namespace: argocd
+spec:
+  project: default
+  
+  source:
+    repoURL: https://github.com/myorg/myapp
+    targetRevision: main
+    path: k8s
+  
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: production
+  
+  syncPolicy:
+    automated:
+      prune: true        # Delete resources not in Git
+      selfHeal: true     # Auto-sync on drift
+    syncOptions:
+    - CreateNamespace=true</pre>
+
+            <h4>Apply Application:</h4>
+            <pre>kubectl apply -f application.yaml
+
+# Or create via CLI
+argocd app create myapp \
+  --repo https://github.com/myorg/myapp \
+  --path k8s \
+  --dest-server https://kubernetes.default.svc \
+  --dest-namespace production</pre>
+
+            <h3>10.5 ArgoCD CLI Commands</h3>
+            
+            <pre># Login
+argocd login localhost:8080
+
+# List applications
+argocd app list
+
+# Get application details
+argocd app get myapp
+
+# Sync application
+argocd app sync myapp
+
+# View application history
+argocd app history myapp
+
+# Rollback to previous version
+argocd app rollback myapp
+
+# Delete application
+argocd app delete myapp</pre>
+
+            <h3>10.6 GitOps Workflow Example</h3>
+            
+            <pre>1. Developer updates deployment manifest in Git
+   - Changes image tag from v1.0 to v1.1
+   - Commits and pushes to main branch
+
+2. ArgoCD detects Git change
+   - Polls repository every 3 minutes (default)
+   - Or receives webhook notification
+
+3. ArgoCD shows "OutOfSync" status
+   - Displays diff between Git and cluster
+
+4. Auto-sync triggers (if enabled)
+   - Applies new manifest to cluster
+   - Updates deployment with new image
+
+5. ArgoCD monitors health
+   - Watches pod rollout
+   - Validates readiness probes
+   - Shows "Healthy" when complete
+
+6. If issues occur
+   - Self-heal reverts changes
+   - Or manual rollback via Git revert</pre>
+
+            <h3>10.7 GitOps Benefits</h3>
+            
+            <div class="success-box">
+                <strong>✓ Key Advantages:</strong>
+                <ul>
+                    <li><strong>Single Source of Truth:</strong> Git always reflects production state</li>
+                    <li><strong>Automatic Deployment:</strong> Commit = Deploy (no manual kubectl)</li>
+                    <li><strong>Easy Rollback:</strong> Git revert = instant rollback</li>
+                    <li><strong>Audit Trail:</strong> Full history in Git commits</li>
+                    <li><strong>Declarative:</strong> Describe desired state, not commands</li>
+                    <li><strong>Disaster Recovery:</strong> Rebuild cluster from Git</li>
+                    <li><strong>Access Control:</strong> Use Git permissions</li>
+                </ul>
+            </div>
+
+            <h3>10.8 Production Setup</h3>
+            
+            <h4>Repository Structure:</h4>
+            <pre>gitops-repo/
+├── apps/
+│   ├── frontend/
+│   │   ├── deployment.yaml
+│   │   ├── service.yaml
+│   │   └── ingress.yaml
+│   ├── backend/
+│   └── database/
+├── infrastructure/
+│   ├── monitoring/
+│   └── ingress-controller/
+└── argocd/
+    ├── applications/
+    │   ├── frontend.yaml
+    │   └── backend.yaml
+    └── projects/
+        └── production.yaml</pre>
+
+            <h4>Multi-Environment Setup:</h4>
+            <pre>environments/
+├── dev/
+│   └── kustomization.yaml
+├── staging/
+│   └── kustomization.yaml
+└── production/
+    └── kustomization.yaml
+
+# Each environment overlays base configs with environment-specific values</pre>
+
+            <div class="info-box">
+                <strong>💡 Best Practice:</strong> Use ArgoCD with Helm charts for complex applications. Store Helm values in Git and let ArgoCD manage the deployment lifecycle.
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🎓 Summary & Next Steps</h2>
+            
+            <div class="highlight-box">
+                <h3>🚀 What You've Learned</h3>
+                <ul>
+                    <li><strong>Docker:</strong> Containerization, multi-stage builds, security best practices</li>
+                    <li><strong>Kubernetes:</strong> Orchestration, deployments, services, scaling, troubleshooting</li>
+                    <li><strong>Helm:</strong> Package management, chart creation, templating</li>
+                    <li><strong>ArgoCD:</strong> GitOps workflows, automated deployments, continuous sync</li>
+                </ul>
+            </div>
+
+            <h3>📚 Recommended Practice Projects</h3>
+            <ol>
+                <li><strong>Dockerize a multi-tier application</strong> (frontend + backend + database)</li>
+                <li><strong>Deploy to Kubernetes</strong> with proper resource limits and health checks</li>
+                <li><strong>Create Helm chart</strong> for your application with configurable values</li>
+                <li><strong>Setup ArgoCD</strong> and implement GitOps workflow</li>
+                <li><strong>Implement monitoring</strong> with Prometheus and Grafana</li>
+                <li><strong>Setup CI/CD pipeline</strong> that builds, tests, and deploys to K8s</li>
+            </ol>
+
+            <h3>🎯 Key Takeaways</h3>
+            <ul>
+                <li>✓ Docker provides consistency across all environments</li>
+                <li>✓ Kubernetes enables scalable, resilient deployments</li>
+                <li>✓ Helm simplifies complex application management</li>
+                <li>✓ GitOps with ArgoCD ensures declarative, auditable deployments</li>
+                <li>✓ Master these tools to become a production-ready DevOps engineer</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>📚 Additional Resources</h2>
+            <ul>
+                <li><a href="https://docs.docker.com/" target="_blank">Docker Official Documentation</a></li>
+                <li><a href="https://kubernetes.io/docs/home/" target="_blank">Kubernetes Documentation</a></li>
+                <li><a href="https://helm.sh/docs/" target="_blank">Helm Documentation</a></li>
+                <li><a href="https://argo-cd.readthedocs.io/" target="_blank">ArgoCD Documentation</a></li>
+                <li><a href="https://github.com/kelseyhightower/kubernetes-the-hard-way" target="_blank">Kubernetes The Hard Way</a></li>
+            </ul>
+        </div>
+
+        <div style="text-align: center; margin-top: 60px; padding: 40px 0; border-top: 2px solid #e0e0e0;">
+            <a href="/index.html" class="back-btn" style="font-size: 1.1em;">← Back to Portfolio</a>
+        </div>
+    </div>
+</body>
+</html>

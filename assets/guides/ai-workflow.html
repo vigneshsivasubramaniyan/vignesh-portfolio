@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI & Automation Master Guide - MadrasMic</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f8f9fa;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e0e0e0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-btn {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s;
+        }
+
+        .back-btn:hover {
+            color: #9b59b6;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #8e44ad 0%, #3498db 100%);
+            color: white;
+            padding: 120px 20px 80px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .hero h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.2em;
+            opacity: 0.95;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .section {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e0e0e0;
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 2em;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #8e44ad;
+        }
+
+        h3 {
+            color: #8e44ad;
+            font-size: 1.4em;
+            margin: 30px 0 15px 0;
+        }
+
+        h4 {
+            color: #3498db;
+            font-size: 1.2em;
+            margin: 20px 0 10px 0;
+        }
+
+        pre {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        code {
+            font-family: 'Fira Code', monospace;
+            background: #f3e5f5;
+            color: #8e44ad;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        pre code {
+            background: none;
+            color: inherit;
+            padding: 0;
+        }
+
+        ul, ol {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            line-height: 1.8;
+        }
+
+        .info-box {
+            background: #e8f4fd;
+            border-left: 4px solid #3498db;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .success-box {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .purple-box {
+            background: #f3e5f5;
+            border-left: 4px solid #8e44ad;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid #e0e0e0;
+        }
+
+        th {
+            background: #8e44ad;
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .chapter-number {
+            display: inline-block;
+            background: #8e44ad;
+            color: white;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            border-radius: 50%;
+            font-weight: 600;
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+
+        .toc {
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 40px;
+        }
+
+        .toc h3 {
+            color: #2c3e50;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .toc ul {
+            list-style: none;
+            margin: 0;
+        }
+
+        .toc li {
+            margin-bottom: 8px;
+        }
+
+        .toc a {
+            color: #8e44ad;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .toc a:hover {
+            color: #9b59b6;
+            text-decoration: underline;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #8543a1 0%, #3498db 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+
+        .highlight-box h3 {
+            color: white;
+            margin-top: 0;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2em;
+            }
+
+            .hero p {
+                font-size: 1em;
+            }
+
+            .section {
+                padding: 25px;
+            }
+
+            h2 {
+                font-size: 1.6em;
+            }
+
+            pre {
+                font-size: 0.8em;
+                padding: 15px;
+            }
+
+            table {
+                font-size: 0.9em;
+            }
+
+            th, td {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <a href="/index.html" class="back-btn">← Back to Portfolio</a>
+            <span style="color: #3498db; font-weight: 600;">🤖 AI & Automation Guide</span>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <h1>🤖 AI & Automation Master Guide</h1>
+        <p>Complete manual covering AI fundamentals, n8n automation, ML workflows, voice assistants, and all project blueprints</p>
+    </div>
+
+    <div class="container">
+        <div class="toc">
+            <h3>📑 Complete Table of Contents</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px;">
+                <div>
+                    <h4 style="color: #8e44ad; margin-bottom: 10px;">Fundamentals</h4>
+                    <ul style="list-style: none; margin: 0;">
+                        <li><a href="#ai-foundations">1. AI Foundations</a></li>
+                        <li><a href="#ai-tools">2. AI Tools Overview</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: #8e44ad; margin-bottom: 10px;">Automation</h4>
+                    <ul style="list-style: none; margin: 0;">
+                        <li><a href="#n8n">3. n8n Automation</a></li>
+                        <li><a href="#voice-ai">4. Voice AI Systems</a></li>
+                        <li><a href="#api">5. API Integrations</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: #8e44ad; margin-bottom: 10px;">Advanced Topics</h4>
+                    <ul style="list-style: none; margin: 0;">
+                        <li><a href="#ml">6. ML Workflows</a></li>
+                        <li><a href="#best-practices">7. Best Practices</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: #8e44ad; margin-bottom: 10px;">Real Projects</h4>
+                    <ul style="list-style: none; margin: 0;">
+                        <li><a href="#use-cases">8. Your Use Cases</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- CHAPTER 1: AI FOUNDATIONS -->
+        <div class="section" id="ai-foundations">
+            <h2><span class="chapter-number">1</span>AI Foundations</h2>
+            
+            <p>This chapter gives a compact and accurate foundation required to design, build, and automate AI systems. Focus is on practical concepts used in n8n workflows, API integrations, and local model deployments.</p>
+
+            <h3>1.1 What AI Actually Is</h3>
+            <p>AI is pattern prediction. Large models don't "understand"; they map input → output using probability. Good automation comes from knowing how models process:</p>
+            <ul>
+                <li>Tokenization</li>
+                <li>Context windows</li>
+                <li>Prompt → reasoning → response cycles</li>
+                <li>Limitations (memory, hallucination, ambiguity)</li>
+            </ul>
+
+            <h3>1.2 Model Categories</h3>
+            
+            <h4>Text LLMs</h4>
+            <p>Used for reasoning, generation, analysis.</p>
+            <ul>
+                <li>GPT-4o/5 series</li>
+                <li>Claude 3 series</li>
+                <li>Gemini 2.0</li>
+                <li>Llama 3, Mistral (local)</li>
+            </ul>
+
+            <h4>Vision Models</h4>
+            <p>Process images and video frames.</p>
+            <ul>
+                <li>GPT-4o vision</li>
+                <li>Gemini 2 Vision</li>
+                <li>Claude Opus Vision</li>
+            </ul>
+
+            <h4>Audio Models</h4>
+            <ul>
+                <li>Whisper (STT)</li>
+                <li>OpenAI Realtime API (STT + TTS)</li>
+                <li>ElevenLabs (TTS)</li>
+            </ul>
+
+            <h4>Embedding Models</h4>
+            <p>Convert text → vector numbers for search, RAG, clustering.</p>
+
+            <h4>Fine-Tuned Models</h4>
+            <p>Domain-specialized models trained on custom data.</p>
+
+            <h3>1.3 How LLMs Work (The Short Version)</h3>
+            <p>LLMs break text into tokens. They predict the next token based on training data + instructions. They do not access external data unless you provide:</p>
+            <ul>
+                <li>documents</li>
+                <li>APIs</li>
+                <li>a vector database</li>
+                <li>a workflow engine (like n8n)</li>
+            </ul>
+
+            <h4>Context Window</h4>
+            <p>The maximum text a model can read at once. Bigger window = longer memory.</p>
+
+            <h4>Temperature</h4>
+            <ul>
+                <li><strong>Low (0–0.3):</strong> accurate, deterministic</li>
+                <li><strong>Medium (0.5):</strong> balanced</li>
+                <li><strong>High (0.7–1):</strong> creative, less reliable</li>
+            </ul>
+
+            <h3>1.4 Embeddings</h3>
+            <p>Embedding = 1536+ dimensional numerical vector representing meaning. Use cases:</p>
+            <ul>
+                <li>semantic search</li>
+                <li>RAG (Retrieval Augmented Generation)</li>
+                <li>recommendation systems</li>
+                <li>document similarity</li>
+            </ul>
+
+            <h4>Common Embedding Models</h4>
+            <ul>
+                <li>OpenAI text-embedding-3-large</li>
+                <li>Voyage-large</li>
+                <li>bge-large (local option)</li>
+            </ul>
+
+            <h3>1.5 Vector Databases</h3>
+            <p>Store embeddings. Used for RAG and large document workflows.</p>
+            <ul>
+                <li>Pinecone</li>
+                <li>Weaviate</li>
+                <li>Chroma (local)</li>
+                <li>Qdrant</li>
+            </ul>
+
+            <h4>How RAG Works</h4>
+            <pre>User Query → Embed → Search Vectors → Top Matches → Feed to LLM → Final Answer</pre>
+
+            <h3>1.6 Prompt Engineering</h3>
+            
+            <h4>Basic Structure</h4>
+            <pre>Role: Tell the model who it is.
+Goal: Tell what outcome is expected.
+Input: Actual user data.
+Rules: Constraints (format, steps, tone).
+Output: Expected final format.</pre>
+
+            <h4>Don'ts</h4>
+            <ul>
+                <li>Don't overload prompts with irrelevant details.</li>
+                <li>Don't ask the model to "think step-by-step" unless necessary.</li>
+                <li>Don't mix instructions and data.</li>
+            </ul>
+
+            <h4>In n8n automation</h4>
+            <p>Use the Function node or separate variables to keep prompts clean.</p>
+
+            <h3>1.7 Agents</h3>
+            <p>Agent = LLM + tools + memory.</p>
+            <p>Tools an agent may use:</p>
+            <ul>
+                <li>HTTP requests</li>
+                <li>file operations</li>
+                <li>vector search</li>
+                <li>database query</li>
+            </ul>
+            <p>n8n acts as the tool executor.</p>
+
+            <h3>1.8 Local Models (Ollama)</h3>
+            <p>Ollama allows running Llama, Mistral, Phi, Gemma locally. Good for:</p>
+            <ul>
+                <li>offline tasks</li>
+                <li>cheap inference</li>
+                <li>simple chatbots</li>
+                <li>private workflows</li>
+            </ul>
+
+            <h4>Useful Local Models</h4>
+            <ul>
+                <li>llama3</li>
+                <li>mistral</li>
+                <li>phi4</li>
+                <li>qwen2</li>
+            </ul>
+
+            <h4>Integration with n8n</h4>
+            <p>Use HTTP Request node → POST to <code>http://localhost:11434/api/generate</code>.</p>
+
+            <h3>1.9 Model Selection Guide</h3>
+            <ul>
+                <li><strong>Reasoning:</strong> GPT-5, Claude Opus</li>
+                <li><strong>Multimodal:</strong> GPT-4o, Gemini 2.0</li>
+                <li><strong>Fast & cheap:</strong> GPT-4o-mini, Claude Haiku</li>
+                <li><strong>Local:</strong> Llama3-8B, Mistral-7B</li>
+                <li><strong>STT:</strong> Whisper</li>
+                <li><strong>TTS:</strong> OpenAI TTS / ElevenLabs</li>
+            </ul>
+
+            <h3>1.10 Deployment Approaches</h3>
+            
+            <h4>Cloud API</h4>
+            <ul>
+                <li>best performance</li>
+                <li>simple scaling</li>
+                <li>higher cost</li>
+            </ul>
+
+            <h4>Self-Hosted (Ollama + Docker)</h4>
+            <ul>
+                <li>private</li>
+                <li>low cost</li>
+                <li>limited to 7B–14B models without GPU</li>
+            </ul>
+
+            <h4>Hybrid Approach</h4>
+            <ul>
+                <li>local model for simple tasks</li>
+                <li>cloud model for reasoning</li>
+            </ul>
+
+            <h3>1.11 Strengths & Limitations</h3>
+            
+            <h4>Strengths</h4>
+            <ul>
+                <li>pattern recognition</li>
+                <li>summarization</li>
+                <li>classification</li>
+                <li>data extraction</li>
+                <li>automation</li>
+            </ul>
+
+            <h4>Limitations</h4>
+            <ul>
+                <li>no built-in real-time memory</li>
+                <li>hallucinations</li>
+                <li>poor math unless specialized</li>
+                <li>poor at long-term planning</li>
+                <li>depends entirely on input quality</li>
+            </ul>
+
+            <h3>1.12 When to Use AI</h3>
+            
+            <h4>Good Use Cases</h4>
+            <ul>
+                <li>conversation</li>
+                <li>summaries</li>
+                <li>automations</li>
+                <li>data extraction</li>
+                <li>API glue logic</li>
+            </ul>
+
+            <h4>Bad Use Cases</h4>
+            <ul>
+                <li>precise legal, medical, financial advice</li>
+                <li>real-time safety decisions</li>
+                <li>math-heavy engineering</li>
+            </ul>
+        </div>
+
+        <!-- CHAPTER 2: AI TOOLS -->
+        <div class="section" id="ai-tools">
+            <h2><span class="chapter-number">2</span>AI Tools Overview</h2>
+            
+            <p>These are the primary tools used to build automation pipelines, AI-powered applications, and intelligent workflows in your projects.</p>
+
+            <h3>2.1 n8n</h3>
+            <p>n8n is the automation engine at the center of most practical AI workflows.</p>
+
+            <h4>What n8n Does Well</h4>
+            <ul>
+                <li>API integrations</li>
+                <li>File processing</li>
+                <li>Background jobs</li>
+                <li>Webhook-driven automation</li>
+                <li>Orchestration for LLM tasks</li>
+                <li>STT/TTS pipelines</li>
+            </ul>
+
+            <h4>Common n8n Nodes Used in AI</h4>
+            <ul>
+                <li><strong>HTTP Request</strong> → calling LLM APIs</li>
+                <li><strong>Function Code</strong> → custom logic</li>
+                <li><strong>Webhook</strong> → bots & chat interfaces</li>
+                <li><strong>Wait</strong> → long-running processes</li>
+                <li><strong>Split in Batches</strong> → large input handling</li>
+                <li><strong>Google Cloud / AWS nodes</strong> → cloud STT/TTS</li>
+            </ul>
+
+            <h4>Why n8n Works Well with AI</h4>
+            <ul>
+                <li>LLMs can't call tools directly → n8n executes actions.</li>
+                <li>Handles retries, errors, and structured orchestration.</li>
+                <li>Connects to APIs without custom backend code.</li>
+            </ul>
+
+            <h3>2.2 LangChain</h3>
+            <p>LangChain is a Python/JS framework for building agent-based and RAG systems.</p>
+
+            <h4>What LangChain Does</h4>
+            <ul>
+                <li>Document loaders</li>
+                <li>Text splitters</li>
+                <li>Embedding and vector search</li>
+                <li>Agent tool calling</li>
+                <li>Chains and pipelines</li>
+            </ul>
+
+            <h4>When You Should Use LangChain</h4>
+            <ul>
+                <li>Complex RAG systems</li>
+                <li>Agents that require multi-step reasoning</li>
+                <li>Desktop or server-based AI apps</li>
+                <li>Batch document processing</li>
+            </ul>
+
+            <h4>When You Should Not Use LangChain</h4>
+            <ul>
+                <li>Simple automations → better in n8n</li>
+                <li>APIs without complex data flow</li>
+            </ul>
+
+            <h3>2.3 Vector Databases</h3>
+            <p>Store and query embeddings for semantic search, memory, and RAG.</p>
+
+            <h4>Popular Options</h4>
+            <ul>
+                <li>Pinecone → cloud, scalable</li>
+                <li>Weaviate → open-source + cloud</li>
+                <li>Chroma → local, simple</li>
+                <li>Qdrant → fast, great for production</li>
+            </ul>
+
+            <h4>When You Need a Vector DB</h4>
+            <ul>
+                <li>Document chat</li>
+                <li>Large audio transcriptions</li>
+                <li>Multi-file knowledge-base chatbots</li>
+                <li>Memory for agents</li>
+            </ul>
+
+            <h3>2.4 Whisper (Speech-to-Text)</h3>
+            
+            <h4>Whisper Types</h4>
+            <ul>
+                <li><strong>whisper-large-v3:</strong> best accuracy</li>
+                <li><strong>whisper-medium:</strong> lighter</li>
+                <li><strong>whisper-small:</strong> fast</li>
+            </ul>
+
+            <h4>When to Use Whisper</h4>
+            <ul>
+                <li>Transcribing video and movie files</li>
+                <li>Voice command pipelines</li>
+                <li>Customer support voicemail processing</li>
+            </ul>
+
+            <h4>Whisper in n8n</h4>
+            <p>Upload → HTTP request → Receive transcription → Process with LLM</p>
+
+            <h3>2.5 Text-to-Speech (TTS)</h3>
+            
+            <h4>Tools</h4>
+            <ul>
+                <li>OpenAI TTS (fast + natural)</li>
+                <li>ElevenLabs (most realistic)</li>
+                <li>Azure TTS (enterprise quality)</li>
+            </ul>
+
+            <h4>Use Cases</h4>
+            <ul>
+                <li>Voice assistants</li>
+                <li>Movie dubbing</li>
+                <li>Audio responses for bots</li>
+            </ul>
+
+            <h3>2.6 Image Tools</h3>
+            
+            <h4>Vision Models</h4>
+            <ul>
+                <li>GPT-4o Vision</li>
+                <li>Gemini 2 Vision</li>
+                <li>Claude Vision</li>
+            </ul>
+
+            <h4>Capabilities</h4>
+            <ul>
+                <li>OCR</li>
+                <li>UI/UX analysis</li>
+                <li>Image-to-text</li>
+                <li>Content classification</li>
+                <li>Object detection</li>
+            </ul>
+
+            <h4>When Relevant</h4>
+            <ul>
+                <li>Product catalog extraction</li>
+                <li>Image-based data entry</li>
+                <li>Automated screenshot analysis</li>
+            </ul>
+
+            <h3>2.7 Video Tools</h3>
+            
+            <h4>What You Can Do Today</h4>
+            <ul>
+                <li>Video → Whisper → Text</li>
+                <li>Frame extraction + Vision analysis</li>
+                <li>Scene detection</li>
+                <li>Automated subtitles</li>
+                <li>AI-based summarization</li>
+            </ul>
+
+            <h4>Tools Used</h4>
+            <ul>
+                <li>FFmpeg (processing)</li>
+                <li>Whisper (transcription)</li>
+                <li>Vision LLMs (frame analysis)</li>
+                <li>OpenAI/Gemini (summaries)</li>
+            </ul>
+
+            <h3>2.8 RAG Tools</h3>
+            
+            <h4>Popular RAG Systems</h4>
+            <ul>
+                <li>LangChain RAG pipelines</li>
+                <li>LlamaIndex</li>
+                <li>Pinecone Retrieval</li>
+                <li>Weaviate Hybrid Search</li>
+            </ul>
+
+            <h4>Core Functions</h4>
+            <ul>
+                <li>Chunking content</li>
+                <li>Embedding text</li>
+                <li>Semantic search</li>
+                <li>Feeding context to LLM</li>
+            </ul>
+
+            <h3>2.9 Local AI Stack (Ollama + Docker)</h3>
+            <p>Ideal for offline or privacy-focused pipelines.</p>
+
+            <h4>What You Can Run Locally</h4>
+            <ul>
+                <li>Llama 3</li>
+                <li>Mistral</li>
+                <li>Phi 4</li>
+                <li>Qwen</li>
+            </ul>
+
+            <h4>Running Models in Docker</h4>
+            <pre>services:
+  ollama:
+    image: ollama/ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ./ollama_data:/root/.ollama</pre>
+
+            <h4>Local vs Cloud</h4>
+            <ul>
+                <li>Cloud → better reasoning, expensive</li>
+                <li>Local → cheaper, weaker</li>
+                <li>Hybrid → ideal</li>
+            </ul>
+
+            <h3>2.10 OpenAI Tools</h3>
+            <p>Useful for high-quality pipelines.</p>
+            <ul>
+                <li><strong>GPT-4o</strong> → multimodal</li>
+                <li><strong>Whisper</strong> → STT</li>
+                <li><strong>DALL·E</strong> → image</li>
+                <li><strong>OpenAI Realtime</strong> → live conversations</li>
+            </ul>
+
+            <h3>2.11 Gemini Tools</h3>
+            <ul>
+                <li>Gemini 2.0 Flash → cheapest fast model</li>
+                <li>Gemini 2.0 Pro → reasoning</li>
+                <li>Gemini Realtime → live voice bots</li>
+                <li>Gemini Vision → image/video</li>
+            </ul>
+
+            <h3>2.12 MLOps & Deployment Tools</h3>
+            <ul>
+                <li>Docker</li>
+                <li>Kubernetes</li>
+                <li>Ray Serve</li>
+                <li>FastAPI</li>
+                <li>Airflow</li>
+            </ul>
+
+            <h3>2.13 When to Use Which Tool</h3>
+            
+            <table>
+                <tr>
+                    <th>Task</th>
+                    <th>Best Tool</th>
+                </tr>
+                <tr>
+                    <td>Automation</td>
+                    <td>n8n</td>
+                </tr>
+                <tr>
+                    <td>Chatbot backend</td>
+                    <td>OpenAI / Gemini</td>
+                </tr>
+                <tr>
+                    <td>RAG system</td>
+                    <td>LangChain + vector DB</td>
+                </tr>
+                <tr>
+                    <td>Voice assistant</td>
+                    <td>Whisper + TTS + n8n</td>
+                </tr>
+                <tr>
+                    <td>Offline AI</td>
+                    <td>Ollama</td>
+                </tr>
+                <tr>
+                    <td>File processing</td>
+                    <td>n8n + FFmpeg</td>
+                </tr>
+                <tr>
+                    <td>Website chatbot</td>
+                    <td>n8n webhook + JS</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Continue with remaining chapters... -->
+        
+        <div style
