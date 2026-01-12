@@ -6,7 +6,7 @@ pipeline {
     }
 
     environment {
-        APP_NAME = "portfolio"
+        APP_NAME = "Vignesh-Portfolio"
         PORT = "8085"
     }
 
