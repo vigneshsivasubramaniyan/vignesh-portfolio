@@ -375,6 +375,27 @@ h2.split-heading::after {
     margin-bottom: 15px;
     font-size: 0.95em;
 }
+/* ADD THESE NEW CLASSES HERE */
+.project-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.live-link {
+    color: #2ecc71;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: color 0.3s;
+}
+
+.live-link:hover {
+    color: #27ae60;
+    gap: 8px;
+}
 
 .tech-stack {
     display: flex;

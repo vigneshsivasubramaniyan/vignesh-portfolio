@@ -22,9 +22,16 @@ const portfolioData = {
         },
         {
             title: "N8N Chatbot on Website",
-            description: "AI-powered movie dubbing pipeline with automated voice synthesis and translation",
+            description: "RAG-based AI chatbot embedded in my portfolio website that answers user queries about my profile and experience.",
             techStack: ["n8n", "AI", "Gemini API"],
             githubUrl: "https://github.com/vigneshsivasubramaniyan/cicd_jenkins_to_docker"
+        },
+        {
+            title: "AI ATS Resume Optimizer",
+            description: "Python web app that parses uploaded resumes and regenerates ATS-optimized versions using the Perplexity API.",
+            techStack: ["Python", "AI", "Perplexity API"],
+            githubUrl: "https://github.com/vigneshsivasubramaniyan/cicd_jenkins_to_docker",
+            websiteUrl: "https://ats.madrasmic.in"
         }
     ],
 

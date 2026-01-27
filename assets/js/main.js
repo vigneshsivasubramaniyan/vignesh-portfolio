@@ -127,11 +127,21 @@ const contentLoader = {
             projectCard.innerHTML = `
                 <h3>${project.title}</h3>
                 <p>${project.description}</p>
+
                 <div class="tech-stack">
-                    ${techStackHTML}
+                     ${techStackHTML}
                 </div>
-                <a href="${project.githubUrl}" target="_blank" class="github-link">View on GitHub →</a>
-            `;
+
+                <div class="project-links">
+                    ${project.githubUrl 
+                        ? `<a href="${project.githubUrl}" target="_blank" class="github-link">GitHub →</a>` 
+                        : ``}
+
+                    ${project.websiteUrl 
+                        ? `<a href="${project.websiteUrl}" target="_blank" class="live-link">Live Demo</a>` 
+                        : ``}
+                </div>
+        `;
 
             projectsGrid.appendChild(projectCard);
         });
