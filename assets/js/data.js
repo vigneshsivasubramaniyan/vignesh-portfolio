@@ -30,7 +30,7 @@ const portfolioData = {
             title: "AI ATS Resume Optimizer",
             description: "Python web app that parses uploaded resumes and regenerates ATS-optimized versions using the Perplexity API.",
             techStack: ["Python", "AI", "Perplexity API"],
-            githubUrl: "https://github.com/vigneshsivasubramaniyan/cicd_jenkins_to_docker",
+            githubUrl: "https://github.com/vigneshsivasubramaniyan/ai-ats-optimizer",
             websiteUrl: "https://ats.madrasmic.in"
         }
     ],
