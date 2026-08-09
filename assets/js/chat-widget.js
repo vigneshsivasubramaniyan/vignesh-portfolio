@@ -3,25 +3,25 @@
 
     const styles = `
         .n8n-chat-widget {
-            --chat--color-primary: #3498db;
-            --chat--color-secondary: #2980b9;
-            --chat--color-background: #ffffff;
-            --chat--color-font: #2c3e50;
-            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --chat--color-primary: #00c4f5;
+            --chat--color-secondary: #00cdd4;
+            --chat--color-background: #F5F0E8;
+            --chat--color-font: #111111;
+            font-family: 'Space Grotesk', 'Inter', -apple-system, sans-serif;
         }
 
         .n8n-chat-widget .chat-container {
             position: fixed;
-            bottom: 20px;
+            bottom: 100px;
             right: 20px;
             z-index: 1000;
             display: none;
             width: 360px;
-            height: 600px;
+            height: 580px;
             background: var(--chat--color-background);
-            border-radius: 16px;
-            box-shadow: 0 10px 50px rgba(52, 152, 219, 0.2);
-            border: 2px solid #3498db;
+            border-radius: 4px;
+            box-shadow: 7px 7px 0px #111111;
+            border: 2px solid #111111;
             overflow: hidden;
             font-family: inherit;
         }
@@ -37,12 +37,13 @@
         }
 
         .n8n-chat-widget .brand-header {
-            padding: 20px;
+            padding: 16px 20px;
             display: flex;
             align-items: center;
             gap: 12px;
-            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            background: #111111;
             position: relative;
+            border-bottom: 2px solid #333;
         }
 
         .n8n-chat-widget .close-button {
@@ -68,16 +69,17 @@
         }
 
         .n8n-chat-widget .brand-header img {
-            width: 45px;
-            height: 45px;
-            border-radius: 20%;
-            background: #3498db;
+            width: 36px;
+            height: 36px;
+            border-radius: 4px;
+            border: 1px solid #444;
         }
 
         .n8n-chat-widget .brand-header span {
-            font-size: 18px;
-            font-weight: 600;
+            font-size: 15px;
+            font-weight: 700;
             color: #ffffff;
+            letter-spacing: 0.02em;
         }
 
         .n8n-chat-widget .new-conversation {
@@ -93,11 +95,12 @@
         }
 
         .n8n-chat-widget .welcome-text {
-            font-size: 24px;
-            font-weight: 600;
+            font-size: 20px;
+            font-weight: 700;
             color: var(--chat--color-font);
             margin-bottom: 24px;
             line-height: 1.3;
+            letter-spacing: -0.02em;
         }
 
         .n8n-chat-widget .new-chat-btn {
@@ -107,21 +110,25 @@
             gap: 8px;
             width: 100%;
             max-width: 280px;
-            padding: 16px 24px;
-            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
-            color: white;
-            border: none;
-            border-radius: 8px;
+            padding: 14px 24px;
+            background: #F5D800;
+            color: #111111;
+            border: 2px solid #111111;
+            border-radius: 4px;
             cursor: pointer;
-            font-size: 16px;
-            transition: transform 0.3s;
-            font-weight: 500;
+            font-size: 14px;
+            font-weight: 700;
             font-family: inherit;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
             margin-bottom: 12px;
+            box-shadow: 3px 3px 0 #111;
+            transition: transform 0.15s, box-shadow 0.15s;
         }
 
         .n8n-chat-widget .new-chat-btn:hover {
-            transform: scale(1.02);
+            transform: translate(2px, 2px);
+            box-shadow: 1px 1px 0 #111;
         }
 
         .n8n-chat-widget .message-icon {
@@ -130,9 +137,8 @@
         }
 
         .n8n-chat-widget .response-text {
-            font-size: 14px;
-            color: #5a6c7d;
-						 
+            font-size: 13px;
+            color: #666;
             margin: 0;
         }
 
@@ -149,75 +155,68 @@
         .n8n-chat-widget .chat-messages {
             flex: 1;
             overflow-y: auto;
-            padding: 20px;
-            background: #f8f9fa;
+            padding: 16px;
+            background: var(--chat--color-background);
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 10px;
         }
 
         .n8n-chat-widget .chat-messages::-webkit-scrollbar {
-            width: 6px;
+            width: 4px;
         }
 
         .n8n-chat-widget .chat-messages::-webkit-scrollbar-thumb {
-            background: #3498db;
-            border-radius: 3px;
+            background: #F5D800;
+            border-radius: 2px;
         }
 
         .n8n-chat-widget .chat-message {
-            padding: 12px 16px;
-						  
-            border-radius: 12px;
-            max-width: 80%;
+            padding: 11px 14px;
+            border-radius: 4px;
+            max-width: 82%;
             word-wrap: break-word;
             font-size: 14px;
-            line-height: 1.5;
-            animation: messageSlide 0.3s ease-out;
+            line-height: 1.55;
+            animation: messageSlide 0.25s ease-out;
+            border: 1px solid #111;
         }
 
         @keyframes messageSlide {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(8px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
 
         .n8n-chat-widget .chat-message.user {
-            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
-            color: white;
+            background: #111111;
+            color: #ffffff;
             align-self: flex-end;
-            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.2);
-						 
+            box-shadow: 2px 2px 0 #444;
         }
 
         .n8n-chat-widget .chat-message.bot {
             background: #ffffff;
-            border: 1px solid #e0e0e0;
-            color: var(--chat--color-font);
+            border: 1px solid #ddd;
+            color: #111;
             align-self: flex-start;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            box-shadow: 2px 2px 0 #ccc;
         }
 
         .n8n-chat-widget .chat-input {
-            padding: 16px;
+            padding: 12px;
             background: var(--chat--color-background);
-            border-top: 1px solid #e0e0e0;
+            border-top: 2px solid #111;
             display: flex;
             gap: 8px;
         }
 
         .n8n-chat-widget .chat-input textarea {
             flex: 1;
-            padding: 12px;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            background: var(--chat--color-background);
-            color: var(--chat--color-font);
+            padding: 10px 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background: #fff;
+            color: #111;
             resize: none;
             font-family: inherit;
             font-size: 14px;
@@ -225,47 +224,51 @@
         }
 
         .n8n-chat-widget .chat-input textarea:focus {
-            border-color: #3498db;
+            border-color: #111;
         }
 
         .n8n-chat-widget .chat-input textarea::placeholder {
-            color: #5a6c7d;
-            opacity: 0.6;
+            color: #999;
         }
 
         .n8n-chat-widget .chat-input button {
-            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            padding: 0 20px;
+            background: #F5D800;
+            color: #111;
+            border: 2px solid #111;
+            border-radius: 4px;
+            padding: 0 16px;
             cursor: pointer;
-            transition: transform 0.2s;
             font-family: inherit;
-            font-weight: 500;
+            font-weight: 700;
+            font-size: 13px;
+            letter-spacing: 0.04em;
+            box-shadow: 2px 2px 0 #111;
+            transition: transform 0.15s, box-shadow 0.15s;
         }
 
         .n8n-chat-widget .chat-input button:hover {
-            transform: scale(1.05);
+            transform: translate(1px,1px);
+            box-shadow: 1px 1px 0 #111;
         }
 
         .n8n-chat-widget .chat-toggle {
             position: fixed;
             bottom: 30px;
             right: 30px;
-            width: 60px;
-            height: 60px;
-            border-radius: 30px;
-            background: #3498db;
-            color: white;
-            border: none;
+            width: 64px;
+            height: 64px;
+            border-radius: 4px;
+            background: #F5D800;
+            color: #111;
+            border: 2px solid #111;
             cursor: pointer;
-            box-shadow: 0 5px 20px rgba(52, 152, 219, 0.4);
+            box-shadow: 4px 4px 0px #111;
             z-index: 999;
-            transition: all 0.3s;
+            transition: transform 0.15s, box-shadow 0.15s;
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
         }
 
 													 
@@ -274,8 +277,8 @@
 		 
 
         .n8n-chat-widget .chat-toggle:hover {
-            transform: scale(1.1);
-            background: #2980b9;
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0 #111;
         }
 
         .n8n-chat-widget .chat-toggle svg {
@@ -286,23 +289,22 @@
 
         .n8n-chat-widget .chat-footer {
             display: none;
-            padding: 12px;
+            padding: 10px;
             text-align: center;
             background: var(--chat--color-background);
-            border-top: 1px solid #e0e0e0;
+            border-top: 1px solid #ddd;
         }
 
         .n8n-chat-widget .chat-footer a {
-            color: #3498db;
+            color: #666;
             text-decoration: none;
-            font-size: 12px;
-						 
-            transition: opacity 0.2s;
+            font-size: 11px;
+            transition: color 0.2s;
             font-family: inherit;
         }
 
         .n8n-chat-widget .chat-footer a:hover {
-            opacity: 0.8;
+            color: #111;
         }
 	  
 

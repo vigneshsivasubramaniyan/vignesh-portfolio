@@ -4,111 +4,521 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vigneshwaran Sivasubramaniyan - Portfolio</title>
-    <link rel="shortcut icon" href="assets/images/vs-logo.ico" type="image/svg+xml">
+    <title>Vigneshwaran Sivasubramaniyan — Cloud & DevOps Engineer</title>
+    <meta name="description" content="Portfolio of Vigneshwaran Sivasubramaniyan — Cloud & DevOps Engineer with 8+ years of experience in AWS, Kubernetes, Terraform, CI/CD pipelines, and infrastructure automation.">
+    <link rel="shortcut icon" href="assets/images/vs-logo.ico" type="image/x-icon">
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
-    <nav id="mainNav">
-        <ul>
-            <li><a href="#hero">Home</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#guides">Guides</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
 
-    <section id="hero">
-        <div class="profile-img"></div>
-        <h1>Vigneshwaran Sivasubramaniyan</h1>
-        <p class="subtitle">Cloud & DevOps Engineer</p>
-        <p class="experience-line"><span class="highlight-years">8+ years</span> crafting scalable infrastructure,
-            automating CI/CD pipelines, and optimizing cloud operations for high-performance systems.</p>
+<!-- ==================== NAVIGATION ==================== -->
+<nav id="mainNav" role="navigation" aria-label="Main navigation">
+    <div class="container">
+        <div class="nav-inner">
 
-        <div class="cta-buttons">
-            <a href="assets/resume/VigneshWaran Sivasubramaniyan_DevOps.pdf" download="Vigneshwaran_Resume.pdf"
-                class="btn btn-primary">Download CV</a>
-            <a href="https://www.linkedin.com/in/vigneshwaran-sivasubramaniyan/" target="_blank"
-                class="btn btn-secondary">LinkedIn</a>
-        </div>
+            <!-- Logo -->
+            <a href="#hero" class="nav-logo" aria-label="Home">
+                <div class="nav-logo-mark" aria-hidden="true">VS</div>
+                <span>Vigneshwaran</span>
+            </a>
 
-        <div class="about-section">
-            <h3></h3>
-            <div class="about-underline"></div>
-            <div class="about-content">
-                <p>A passionate and skilled DevOps, SRE, and Cloud Engineer with a strong background in infrastructure
-                    provisioning, automation, and monitoring. </p>
-                <p>Have experience working with tools such as Jenkins, Terraform, and Ansible to streamline development
-                    processes and ensure efficient code deployment.</p>
+            <!-- Desktop Links -->
+            <ul class="nav-links" role="list">
+                <li><a href="#about">About</a></li>
+                <li><a href="#expertise">Skills</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#guides">Guides</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+
+            <!-- Right: Resume + Hamburger -->
+            <div class="nav-right">
+                <a href="assets/resume/VigneshWaran Sivasubramaniyan_DevOps_Resume.pdf"
+                   download="Vigneshwaran_Resume.pdf"
+                   class="btn btn-primary nav-resume-btn"
+                   aria-label="Download Resume">
+                    Resume ↓
+                </a>
+                <button class="nav-hamburger" id="navHamburger" aria-label="Toggle navigation menu" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
             </div>
-            <div class="about-content">
-                <p>Proficient in managing and monitoring cloud infrastructure services on AWS. as well as maintaining
-                    high availability in Kubernetes-based container clusters.</p>
-                <p>Successfully implemented monitoring and logging tools like ELK, Grafana, and Datadog to ensure
-                    comprehensive visibility into system performance and implemented GitOps for managing infrastructure
-                    as code. My expertise also includes integrating automation testing into the CI/CD pipeline and
-                    developing scripts to automate tasks, improving efficiency and reducing manual effort</p>
-            </div>
-        </div>
-    </section>
 
-    <section id="projects">
-        <h2 class="split-heading">Featured <span class="highlight">Projects</span></h2>
-        <div class="projects-grid" id="projectsGrid">
-            <!-- Projects will be dynamically loaded -->
-        </div>
-    </section>
-
-    <section id="guides">
-        <h2 class="split-heading">Guides & <span class="highlight">Notes</span></h2>
-        <div class="guides-grid" id="guidesGrid">
-            <!-- Guides will be dynamically loaded -->
-        </div>
-    </section>
-
-    <section id="contact">
-        <div class="contact-header">
-            <h2 class="split-heading">Get In <span class="highlight">Touch</span></h2>
-            <div class="contact-underline"></div>
         </div>
 
-        <div class="contact-content-wrapper">
-            <div class="contact-left">
-                <p class="contact-intro">I'm always interested in hearing about new opportunities, interesting projects,
-                    or just having a conversation about DevOps and cloud technologies.</p>
+        <!-- Mobile Menu -->
+        <nav class="nav-mobile-menu" id="navMobileMenu" aria-label="Mobile navigation">
+            <a href="#about">About</a>
+            <a href="#expertise">Skills</a>
+            <a href="#experience">Experience</a>
+            <a href="#projects">Projects</a>
+            <a href="#guides">Guides</a>
+            <a href="#contact">Contact</a>
+            <a href="assets/resume/VigneshWaran Sivasubramaniyan_DevOps_Resume.pdf" download="Vigneshwaran_Resume.pdf">Download Resume ↓</a>
+        </nav>
+    </div>
+</nav>
 
-                <div class="contact-info-list" id="contactInfoList">
-                    <!-- Contact info will be dynamically loaded-->
+
+<!-- ==================== HERO ==================== -->
+<section id="hero" aria-label="Introduction">
+    <div class="container">
+        <div class="hero-inner">
+
+            <!-- Left: Text -->
+            <div class="hero-left">
+                <p class="hero-intro-label">👋 Hello, I'm</p>
+
+                <h1 class="hero-name">
+                    <span>Vigneshwaran</span>
+                    <span>Sivasubramaniyan</span>
+                </h1>
+
+                <div class="hero-role-badge">
+                    <span class="role-dot" aria-hidden="true"></span>
+                    Cloud &amp; DevOps Engineer
+                </div>
+
+                <p class="hero-summary">
+                    <strong>8+ years</strong> crafting scalable infrastructure, automating CI/CD pipelines,
+                    and optimizing cloud operations for high-performance systems. Passionate about DevOps culture,
+                    SRE principles, and building resilient platforms on AWS and Kubernetes.
+                </p>
+
+                <div class="hero-cta-row">
+                    <a href="#contact" class="btn btn-primary btn-lg">Contact Me →</a>
+                    <a href="assets/resume/VigneshWaran Sivasubramaniyan_DevOps_Resume.pdf"
+                       download="Vigneshwaran_Resume.pdf"
+                       class="btn btn-secondary btn-lg">Resume ↓</a>
+                </div>
+
+                <div class="hero-social-row">
+                    <span class="hero-social-label">Find me on</span>
+
+                    <!-- GitHub -->
+                    <a href="https://github.com/vigneshsivasubramaniyan"
+                       target="_blank" rel="noopener noreferrer"
+                       class="social-icon-btn" aria-label="GitHub Profile">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                        </svg>
+                    </a>
+
+                    <!-- LinkedIn -->
+                    <a href="https://www.linkedin.com/in/vigneshwaran-sivasubramaniyan/"
+                       target="_blank" rel="noopener noreferrer"
+                       class="social-icon-btn" aria-label="LinkedIn Profile">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                            <rect x="2" y="9" width="4" height="12"/>
+                            <circle cx="4" cy="4" r="2"/>
+                        </svg>
+                    </a>
+
+                    <!-- Email -->
+                    <a href="mailto:vigneshsivasubramaniyan@gmail.com"
+                       class="social-icon-btn" aria-label="Send Email">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <rect x="2" y="4" width="20" height="16" rx="2"/>
+                            <path d="M2 6l10 7 10-7"/>
+                        </svg>
+                    </a>
                 </div>
             </div>
 
-            <div class="contact-form-container">
-                <form id="contactForm">
+            <!-- Right: Profile Image Card -->
+            <div class="hero-right">
+                <div class="profile-card-wrap">
+                    <div class="profile-card">
+                        <img src="assets/images/vignesh.png"
+                             alt="Vigneshwaran Sivasubramaniyan — Cloud & DevOps Engineer"
+                             loading="eager">
+                        <div class="profile-card-badge" aria-hidden="true">
+                            ☁️ Cloud & DevOps
+                        </div>
+                        <div class="profile-card-sticker" aria-hidden="true">
+                            OPEN TO<br>WORK
+                        </div>
+                    </div>
+                    <div class="hero-decoration-box" aria-hidden="true"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ==================== STATS ==================== -->
+<section id="stats" aria-label="Key statistics">
+    <div class="container">
+        <div class="stats-grid">
+
+            <div class="stat-card">
+                <div class="stat-number">8+</div>
+                <div class="stat-label">Years Experience</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-number">5</div>
+                <div class="stat-label">Open Source Projects</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-number">3+</div>
+                <div class="stat-label">Cloud Platforms</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-number">6</div>
+                <div class="stat-label">Technical Guides</div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ==================== ABOUT ==================== -->
+<section id="about" aria-labelledby="about-heading">
+    <div class="container">
+        <div class="about-inner">
+
+            <!-- Left -->
+            <div class="about-left">
+                <span class="section-label reveal">// About Me</span>
+                <h2 class="section-heading reveal reveal-delay-1" id="about-heading">
+                    Passionate about<br>reliable systems
+                </h2>
+                <div class="section-subheading reveal reveal-delay-2" style="max-width:100%;margin-top:24px;">
+                    <p>A passionate and skilled DevOps, SRE, and Cloud Engineer with a strong background in infrastructure
+                    provisioning, automation, and monitoring. I have experience working with tools such as Jenkins, Terraform,
+                    and Ansible to streamline development processes and ensure efficient code deployment.</p>
+                    <br>
+                    <p>Proficient in managing and monitoring cloud infrastructure services on AWS, as well as maintaining
+                    high availability in Kubernetes-based container clusters.</p>
+                    <br>
+                    <p>Successfully implemented monitoring and logging tools like ELK, Grafana, and Datadog to ensure
+                    comprehensive visibility into system performance and implemented GitOps for managing infrastructure
+                    as code. My expertise also includes integrating automation testing into the CI/CD pipeline and
+                    developing scripts to automate tasks, improving efficiency and reducing manual effort.</p>
+                </div>
+            </div>
+
+            <!-- Right: Fact Card -->
+            <div class="about-right-card reveal reveal-delay-2">
+                <div class="about-fact-row">
+
+                    <div class="about-fact-item">
+                        <div class="about-fact-icon" aria-hidden="true">☁️</div>
+                        <div>
+                            <div class="about-fact-label">Primary Cloud</div>
+                            <div class="about-fact-value">Amazon Web Services (AWS)</div>
+                        </div>
+                    </div>
+
+                    <div class="about-fact-item">
+                        <div class="about-fact-icon" aria-hidden="true">⚙️</div>
+                        <div>
+                            <div class="about-fact-label">Specialization</div>
+                            <div class="about-fact-value">DevOps · SRE · Cloud Engineering</div>
+                        </div>
+                    </div>
+
+                    <div class="about-fact-item">
+                        <div class="about-fact-icon" aria-hidden="true">🚀</div>
+                        <div>
+                            <div class="about-fact-label">CI/CD</div>
+                            <div class="about-fact-value">Jenkins · GitOps · Automated Pipelines</div>
+                        </div>
+                    </div>
+
+                    <div class="about-fact-item">
+                        <div class="about-fact-icon" aria-hidden="true">📊</div>
+                        <div>
+                            <div class="about-fact-label">Observability</div>
+                            <div class="about-fact-value">ELK · Grafana · Datadog</div>
+                        </div>
+                    </div>
+
+                    <div class="about-fact-item">
+                        <div class="about-fact-icon" aria-hidden="true">🤖</div>
+                        <div>
+                            <div class="about-fact-label">AI & Automation</div>
+                            <div class="about-fact-value">n8n · Gemini API · Python scripts</div>
+                        </div>
+                    </div>
+
+                    <div class="about-fact-item">
+                        <div class="about-fact-icon" aria-hidden="true">📍</div>
+                        <div>
+                            <div class="about-fact-label">Location</div>
+                            <div class="about-fact-value">India — Available Remotely</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ==================== EXPERTISE ==================== -->
+<section id="expertise" aria-labelledby="expertise-heading">
+    <div class="container">
+        <span class="section-label reveal">// Tech Stack</span>
+        <h2 class="section-heading reveal reveal-delay-1" id="expertise-heading">
+            Tools &amp; Technologies
+        </h2>
+        <p class="section-subheading reveal reveal-delay-2">
+            The technologies I work with every day to build, automate, and scale infrastructure.
+        </p>
+
+        <div class="expertise-grid">
+
+            <div class="expertise-card reveal reveal-delay-1">
+                <div class="expertise-card-title">☁️ Cloud Platforms</div>
+                <div class="expertise-tags">
+                    <span class="expertise-tag t-yellow">AWS EC2</span>
+                    <span class="expertise-tag t-yellow">AWS EKS</span>
+                    <span class="expertise-tag t-yellow">AWS S3</span>
+                    <span class="expertise-tag t-yellow">AWS RDS</span>
+                    <span class="expertise-tag t-yellow">AWS VPC</span>
+                    <span class="expertise-tag t-yellow">AWS IAM</span>
+                    <span class="expertise-tag">CloudFlare</span>
+                </div>
+            </div>
+
+            <div class="expertise-card reveal reveal-delay-2">
+                <div class="expertise-card-title">🔧 CI/CD & DevOps</div>
+                <div class="expertise-tags">
+                    <span class="expertise-tag t-blue">Jenkins</span>
+                    <span class="expertise-tag t-blue">GitOps</span>
+                    <span class="expertise-tag t-blue">GitHub Actions</span>
+                    <span class="expertise-tag">Git</span>
+                    <span class="expertise-tag">Webhooks</span>
+                    <span class="expertise-tag">ArgoCD</span>
+                </div>
+            </div>
+
+            <div class="expertise-card reveal reveal-delay-3">
+                <div class="expertise-card-title">🐳 Containers & Orchestration</div>
+                <div class="expertise-tags">
+                    <span class="expertise-tag t-blue">Docker</span>
+                    <span class="expertise-tag t-blue">Kubernetes</span>
+                    <span class="expertise-tag">Portainer</span>
+                    <span class="expertise-tag">Helm</span>
+                    <span class="expertise-tag">Docker Compose</span>
+                </div>
+            </div>
+
+            <div class="expertise-card reveal reveal-delay-1">
+                <div class="expertise-card-title">🏗️ Infrastructure as Code</div>
+                <div class="expertise-tags">
+                    <span class="expertise-tag t-coral">Terraform</span>
+                    <span class="expertise-tag t-coral">Ansible</span>
+                    <span class="expertise-tag">CloudFormation</span>
+                    <span class="expertise-tag">Packer</span>
+                </div>
+            </div>
+
+            <div class="expertise-card reveal reveal-delay-2">
+                <div class="expertise-card-title">📊 Monitoring & Observability</div>
+                <div class="expertise-tags">
+                    <span class="expertise-tag t-green">Grafana</span>
+                    <span class="expertise-tag t-green">Datadog</span>
+                    <span class="expertise-tag t-green">ELK Stack</span>
+                    <span class="expertise-tag">Prometheus</span>
+                    <span class="expertise-tag">Alertmanager</span>
+                </div>
+            </div>
+
+            <div class="expertise-card reveal reveal-delay-3">
+                <div class="expertise-card-title">🤖 AI & Automation</div>
+                <div class="expertise-tags">
+                    <span class="expertise-tag t-yellow">n8n</span>
+                    <span class="expertise-tag t-yellow">Gemini API</span>
+                    <span class="expertise-tag t-yellow">Perplexity API</span>
+                    <span class="expertise-tag">Python</span>
+                    <span class="expertise-tag">Bash</span>
+                    <span class="expertise-tag">RAG</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ==================== EXPERIENCE ==================== -->
+<section id="experience" aria-labelledby="experience-heading">
+    <div class="container">
+        <span class="section-label reveal">// Work History</span>
+        <h2 class="section-heading reveal reveal-delay-1" id="experience-heading">
+            Professional Experience
+        </h2>
+        <p class="section-subheading reveal reveal-delay-2">
+            8+ years of building, automating, and scaling infrastructure across cloud and DevOps domains.
+        </p>
+
+        <div class="experience-list" id="experienceList" aria-label="Work experience list">
+            <!-- Dynamically loaded by main.js -->
+        </div>
+    </div>
+</section>
+
+
+<!-- ==================== PROJECTS ==================== -->
+<section id="projects" aria-labelledby="projects-heading">
+    <div class="container">
+        <div class="projects-header">
+            <div>
+                <span class="section-label reveal">// Open Source</span>
+                <h2 class="section-heading reveal reveal-delay-1" id="projects-heading">
+                    Featured Projects
+                </h2>
+            </div>
+            <a href="https://github.com/vigneshsivasubramaniyan"
+               target="_blank" rel="noopener noreferrer"
+               class="btn btn-secondary reveal reveal-delay-2"
+               aria-label="View all projects on GitHub">
+                All Projects →
+            </a>
+        </div>
+
+        <div class="projects-grid" id="projectsGrid" aria-label="Projects grid">
+            <!-- Dynamically loaded by main.js -->
+        </div>
+    </div>
+</section>
+
+
+<!-- ==================== GUIDES ==================== -->
+<section id="guides" aria-labelledby="guides-heading">
+    <div class="container">
+        <div class="guides-header">
+            <span class="section-label reveal">// Knowledge Base</span>
+            <h2 class="section-heading reveal reveal-delay-1" id="guides-heading">
+                DevOps Guides &amp; Notes
+            </h2>
+            <p class="section-subheading reveal reveal-delay-2">
+                Technical notes, deep dives, and best practices I've documented across DevOps, cloud, and AI topics.
+            </p>
+        </div>
+
+        <div class="guides-grid" id="guidesGrid" aria-label="Technical guides">
+            <!-- Dynamically loaded by main.js -->
+        </div>
+    </div>
+</section>
+
+
+<!-- ==================== CONTACT ==================== -->
+<section id="contact" aria-labelledby="contact-heading">
+    <div class="container">
+        <span class="section-label reveal">// Get In Touch</span>
+        <h2 class="contact-big-heading reveal reveal-delay-1" id="contact-heading">
+            Let's Build<br><span>Something.</span>
+        </h2>
+
+        <div class="contact-inner">
+
+            <!-- Left: Links -->
+            <div class="reveal reveal-delay-2">
+                <p style="color:rgba(255,255,255,0.65);font-size:1rem;line-height:1.75;margin-bottom:28px;max-width:420px;">
+                    I'm always open to new opportunities, interesting projects, and conversations about
+                    DevOps, cloud infrastructure, and AI automation.
+                </p>
+                <div class="contact-links" id="contactLinks" aria-label="Contact links">
+                    <!-- Dynamically loaded by main.js -->
+                </div>
+            </div>
+
+            <!-- Right: Form -->
+            <div class="contact-form-container reveal reveal-delay-3">
+                <h3>Send a Message</h3>
+                <form id="contactForm" aria-label="Contact form" novalidate>
                     <div class="form-row">
                         <div class="form-group">
-                            <input type="text" id="fullname" name="fullname" required placeholder="Your Name">
+                            <label for="fullname">Your Name</label>
+                            <input type="text" id="fullname" name="fullname" required placeholder="Your Name" autocomplete="name">
                         </div>
                         <div class="form-group">
-                            <input type="email" id="email" name="email" required placeholder="Your Email">
+                            <label for="email">Your Email</label>
+                            <input type="email" id="email" name="email" required placeholder="Your Email" autocomplete="email">
                         </div>
                         <div class="form-group">
+                            <label for="message">Message</label>
                             <textarea id="message" name="message" required placeholder="Your Message"></textarea>
                         </div>
                     </div>
-                    <button type="submit" class="submit-btn">Send Message</button>
-                    <div id="formMessage" class="form-message"></div>
+                    <button type="submit" class="submit-btn">Send Message →</button>
+                    <div id="formMessage" class="form-message" role="alert" aria-live="polite"></div>
                 </form>
             </div>
+
         </div>
-    </section>
+    </div>
+</section>
 
-    <script src="assets/js/data.js"></script>
-    <script src="assets/js/main.js"></script>
+
+<!-- ==================== FOOTER ==================== -->
+<footer role="contentinfo">
+    <div class="container">
+        <div class="footer-inner">
+
+            <div>
+                <div class="footer-name">Vigneshwaran Sivasubramaniyan</div>
+                <div class="footer-copy">© 2025 — Cloud &amp; DevOps Engineer</div>
+            </div>
+
+            <div class="footer-socials">
+                <a href="https://github.com/vigneshsivasubramaniyan"
+                   target="_blank" rel="noopener noreferrer"
+                   class="footer-social-link" aria-label="GitHub">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                    </svg>
+                </a>
+                <a href="https://www.linkedin.com/in/vigneshwaran-sivasubramaniyan/"
+                   target="_blank" rel="noopener noreferrer"
+                   class="footer-social-link" aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                        <rect x="2" y="9" width="4" height="12"/>
+                        <circle cx="4" cy="4" r="2"/>
+                    </svg>
+                </a>
+                <a href="mailto:vigneshsivasubramaniyan@gmail.com"
+                   class="footer-social-link" aria-label="Email">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <rect x="2" y="4" width="20" height="16" rx="2"/>
+                        <path d="M2 6l10 7 10-7"/>
+                    </svg>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</footer>
+
+
+<!-- ==================== SCRIPTS ==================== -->
+<script src="assets/js/data.js"></script>
+<script src="assets/js/main.js"></script>
+
 </body>
-
 </html>
