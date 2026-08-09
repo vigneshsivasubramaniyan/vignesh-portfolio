@@ -639,6 +639,25 @@ ul {
   overflow: visible;
 }
 
+.paperclip {
+  position: absolute;
+  top: -36px;
+  left: -38px;
+  width: 125px;
+  height: 125px;
+  background-image: url("../images/paperclip.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 10;
+  pointer-events: none;
+  transform: rotate(0deg);
+  transition: transform 0.1s ease;
+}
+
+.profile-card-wrap:hover .paperclip {
+  transform: rotate(-3deg);
+}
+
 .profile-card {
   position: relative;
   background: var(--white);
@@ -1709,17 +1728,29 @@ footer {
 /* The chat-widget.js injects its own styles dynamically;
    these overrides complement it at the page level */
 
-/* ===================== RESPONSIVE ========================== */
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
 
-/* Tablet */
+/* =========================
+   Tablet / Small Laptop
+   ========================= */
+
 @media (max-width: 900px) {
+
+  /* Keep hero compact and content-driven */
+  #hero {
+    min-height: auto;
+    padding: 80px 0 50px;
+  }
+
   .hero-inner {
     grid-template-columns: 1fr;
-    gap: 48px;
+    gap: 40px;
   }
 
   .hero-right {
-    max-width: 380px;
+    max-width: 360px;
     margin: 0 auto;
   }
 
@@ -1754,8 +1785,13 @@ footer {
   }
 }
 
-/* Mobile */
+
+/* =========================
+   Mobile
+   ========================= */
+
 @media (max-width: 768px) {
+
   :root {
     --shadow: 4px 4px 0px #111111;
   }
@@ -1764,7 +1800,11 @@ footer {
     padding: 0 20px;
   }
 
-  /* Nav */
+
+  /* =====================
+       Navigation
+       ===================== */
+
   .nav-links {
     display: none;
   }
@@ -1777,26 +1817,73 @@ footer {
     display: flex;
   }
 
-  /* Hero */
+
+  /* =====================
+       Hero
+       ===================== */
+
   #hero {
-    padding: 100px 0 60px;
     min-height: auto;
+    height: auto;
+    padding: 55px 0 35px;
   }
 
   .hero-inner {
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: 28px;
     text-align: left;
   }
 
+  .hero-left {
+    width: 100%;
+  }
+
   .hero-right {
-    order: -1;
+    width: 100%;
     max-width: 280px;
     margin: 0 auto;
+    order: 0;
+  }
+
+  .hero-intro-label {
+    margin-bottom: 8px;
+  }
+
+  .hero-name {
+    margin-bottom: 12px;
+  }
+
+  .hero-role-badge {
+    margin-bottom: 14px;
+    font-size: 0.9rem;
+    padding: 8px 14px;
+  }
+
+  .hero-summary {
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+    line-height: 1.55;
   }
 
   .hero-cta-row {
-    flex-wrap: wrap;
+    margin-bottom: 20px;
+    gap: 10px;
+  }
+
+  .hero-cta-row .btn-lg {
+    padding: 12px 22px;
+    font-size: 0.9rem;
+  }
+
+  .profile-card-wrap {
+    padding-bottom: 22px;
+  }
+
+  .paperclip {
+    width: 60px;
+    height: 60px;
+    top: -20px;
+    left: -18px;
   }
 
   .profile-card-sticker {
@@ -1814,9 +1901,13 @@ footer {
     right: -12px;
   }
 
-  /* Stats */
+
+  /* =====================
+       Stats
+       ===================== */
+
   #stats {
-    padding-bottom: 60px;
+    padding-bottom: 50px;
   }
 
   .stat-card {
@@ -1839,22 +1930,34 @@ footer {
     transform: rotate(1deg);
   }
 
-  /* Sections */
+
+  /* =====================
+       Sections
+       ===================== */
+
   #about,
   #expertise,
   #experience,
   #projects,
   #guides,
   #contact {
-    padding: 60px 0;
+    padding: 55px 0;
   }
 
-  /* Expertise */
+
+  /* =====================
+       Expertise
+       ===================== */
+
   .expertise-grid {
     grid-template-columns: 1fr;
   }
 
-  /* Projects */
+
+  /* =====================
+       Projects
+       ===================== */
+
   .projects-grid {
     grid-template-columns: 1fr;
   }
@@ -1868,12 +1971,20 @@ footer {
     align-items: flex-start;
   }
 
-  /* Guides */
+
+  /* =====================
+       Guides
+       ===================== */
+
   .guides-grid {
     grid-template-columns: 1fr;
   }
 
-  /* Contact */
+
+  /* =====================
+       Contact
+       ===================== */
+
   .contact-big-heading {
     font-size: clamp(2rem, 10vw, 3rem);
   }
@@ -1886,7 +1997,11 @@ footer {
     padding: 24px 20px;
   }
 
-  /* About */
+
+  /* =====================
+       About
+       ===================== */
+
   .about-inner {
     grid-template-columns: 1fr;
   }
@@ -1895,7 +2010,11 @@ footer {
     padding: 24px;
   }
 
-  /* Exp */
+
+  /* =====================
+       Experience
+       ===================== */
+
   .exp-card {
     padding: 24px 20px;
   }
@@ -1910,7 +2029,11 @@ footer {
     font-size: 1.1rem;
   }
 
-  /* Footer */
+
+  /* =====================
+       Footer
+       ===================== */
+
   .footer-inner {
     flex-direction: column;
     align-items: flex-start;
@@ -1918,12 +2041,198 @@ footer {
   }
 }
 
+
+/* =========================
+   Small Mobile
+   ========================= */
+
 @media (max-width: 480px) {
+
+  .container {
+    padding: 0 16px;
+  }
+
   .stats-grid {
     grid-template-columns: 1fr 1fr;
   }
 
   .hero-name {
-    font-size: 2.2rem;
+    font-size: 2rem;
+  }
+
+  .hero-role-badge {
+    font-size: 0.85rem;
+    padding: 6px 12px;
+  }
+
+  #hero {
+    padding-top: 45px;
+    padding-bottom: 30px;
+  }
+
+  .hero-inner {
+    gap: 24px;
+  }
+
+  .hero-summary {
+    margin-bottom: 18px;
+  }
+
+  .hero-cta-row {
+    margin-bottom: 18px;
+  }
+}
+
+/* =========================================================
+   MOBILE OVERFLOW FIX
+   ========================================================= */
+
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
+/* Prevent sections from becoming wider than viewport */
+#hero,
+#stats,
+#about,
+#expertise,
+#experience,
+#projects,
+#guides,
+#contact,
+footer {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+
+/* =========================
+   Mobile width safety
+   ========================= */
+
+@media (max-width: 768px) {
+
+  .container {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 16px;
+    padding-right: 16px;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .hero-inner,
+  .about-inner,
+  .contact-inner,
+  .projects-grid,
+  .guides-grid,
+  .expertise-grid,
+  .stats-grid {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .hero-left,
+  .hero-right,
+  .profile-card-wrap,
+  .contact-inner>*,
+  .contact-links,
+  .contact-form-container,
+  .form-row,
+  .form-group {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  /* Prevent long email / GitHub / LinkedIn text
+       from forcing the page wider */
+  .contact-links,
+  .contact-links *,
+  .contact-form-container,
+  .contact-form-container * {
+    max-width: 100%;
+    min-width: 0;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  /* Form controls must stay inside viewport */
+  input,
+  textarea,
+  select,
+  button {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  textarea {
+    width: 100%;
+  }
+
+  /* Hero image */
+  .hero-right {
+    display: flex;
+    justify-content: center;
+  }
+
+  .profile-card-wrap {
+    width: min(280px, 100%);
+  }
+
+  .profile-card {
+    max-width: 100%;
+  }
+
+  /* Decorative box must not create horizontal overflow */
+  .hero-decoration-box {
+    max-width: 80px;
+  }
+}
+
+
+/* =========================
+   Very small phones
+   ========================= */
+
+@media (max-width: 380px) {
+
+  .container {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .hero-name {
+    font-size: 1.9rem;
+    line-height: 1.05;
+  }
+
+  .hero-summary {
+    font-size: 0.9rem;
+  }
+
+  .hero-cta-row {
+    width: 100%;
+  }
+
+  .hero-cta-row .btn-lg {
+    max-width: 100%;
+  }
+
+  .contact-form-container {
+    padding-left: 18px;
+    padding-right: 18px;
   }
 }
