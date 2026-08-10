@@ -1,17 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CI/CD Best Practices - AWS Jenkins Pipeline Guide</title>
+    <title>DevOps Complete Notes - Master Guide</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        :root {
+            --paper: #eee5d0;
+            --paper-light: #f7f0df;
+            --ink: #111111;
+            --muted: #555555;
+            --yellow: #ffdf00;
+            --blue: #245fe5;
+            --red: #ff4b4b;
+            --green: #dff2d8;
+            --white: #ffffff;
         }
 
         html {
@@ -20,115 +35,210 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: #f8f9fa;
-            color: #2c3e50;
+            background:
+                radial-gradient(circle at 12% 18%, rgba(0, 0, 0, .035) 0 2px, transparent 3px),
+                radial-gradient(circle at 72% 62%, rgba(0, 0, 0, .025) 0 2px, transparent 3px),
+                linear-gradient(90deg, rgba(255, 255, 255, .18), rgba(0, 0, 0, .025), rgba(255, 255, 255, .14)),
+                var(--paper);
+            background-size: 35px 35px, 49px 49px, 100% 100%, auto;
+            color: var(--ink);
             line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.38;
+            background-color: #f8f8f8;
+            background-image: url("../images/paper-texture.png");
+            background-size: cover;
+            background-position: center top;
+            background-repeat: repeat;
+            background-attachment: fixed;
+            z-index: -1;
         }
 
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 20px 0;
-            background: rgba(255, 255, 255, 0.95);
+            padding: 16px 0;
+            background: rgba(238, 229, 208, .97);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid #e0e0e0;
+            border-bottom: 2px solid var(--ink);
             z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 3px 0 rgba(17, 17, 17, .10);
         }
 
         nav .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 24px;
         }
 
         .back-btn {
-            color: #3498db;
+            color: var(--ink);
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 800;
             display: flex;
             align-items: center;
             gap: 8px;
-            transition: color 0.3s;
+            transition: transform .2s ease;
         }
 
         .back-btn:hover {
-            color: #2980b9;
+            color: var(--ink);
+            transform: translateX(-4px);
+        }
+
+        nav span {
+            color: var(--ink) !important;
+            font-weight: 800 !important;
+            letter-spacing: .04em;
+            background: var(--yellow);
+            border: 2px solid var(--ink);
+            box-shadow: 4px 4px 0 var(--ink);
+            padding: 8px 14px;
+            border-radius: 5px;
         }
 
         .hero {
-            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
-            color: white;
+            position: relative;
+            max-width: 1200px;
+            margin: 60px auto 0;
             padding: 120px 20px 80px;
+            background: #ffffff;
+            color: var(--ink);
             text-align: center;
-            margin-top: 60px;
+            border-bottom: 2px solid var(--ink);
+            overflow: hidden;
         }
 
         .hero h1 {
+            max-width: 1000px;
+            margin: 25px auto;
             font-size: 3em;
-            margin-bottom: 20px;
-            font-weight: 700;
+            line-height: 1;
+            font-weight: 800;
+            letter-spacing: -.055em;
         }
 
         .hero p {
-            font-size: 1.2em;
-            opacity: 0.95;
-            max-width: 800px;
+            max-width: 850px;
             margin: 0 auto;
+            font-size: 1.18rem;
+            line-height: 1.75;
+            color: var(--muted);
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 60px 20px;
+            padding: 46px 24px 80px;
         }
 
-        .section {
-            background: white;
-            border-radius: 12px;
-            padding: 40px;
+        .section,
+        .toc {
+            position: relative;
+            background: #ffffff;
+            border: 2px solid var(--ink);
+            border-radius: 3px;
+            padding: 38px 42px;
             margin-bottom: 30px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            border: 1px solid #e0e0e0;
+            box-shadow: 7px 7px 0 var(--ink);
+        }
+
+        .section::before,
+        .toc::before {
+            content: "";
+            position: absolute;
+            inset: 7px -7px -7px 7px;
+            border: 1px solid #11111126;
+            pointer-events: none;
+            z-index: -1;
         }
 
         h2 {
-            color: #2c3e50;
-            font-size: 2em;
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 3px solid #3498db;
+            color: var(--ink);
+            font-size: clamp(1.8rem, 3vw, 2.65rem);
+            line-height: 1.1;
+            margin-bottom: 27px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid var(--ink);
+            letter-spacing: -.035em;
         }
 
         h3 {
-            color: #3498db;
-            font-size: 1.4em;
-            margin: 30px 0 15px 0;
+            color: var(--ink);
+            font-size: 1.45em;
+            margin: 30px 0 15px;
+            line-height: 1.25;
+            letter-spacing: -.02em;
+        }
+
+        h4 {
+            display: inline-block;
+            color: var(--ink);
+            font-size: 1.05rem;
+            margin: 20px 0 10px;
+            padding: 5px 11px;
+            background: var(--yellow);
+            border: 2px solid var(--ink);
+            box-shadow: 3px 3px 0 var(--ink);
+            line-height: 1.2;
+        }
+
+        p {
+            color: #303030;
+        }
+
+        ul,
+        ol {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 9px;
+            line-height: 1.75;
+        }
+
+        li::marker {
+            color: var(--blue);
+        }
+
+        a {
+            color: var(--blue);
         }
 
         pre {
-            background: #2c3e50;
-            color: #ecf0f1;
-            padding: 20px;
-            border-radius: 8px;
+            background: var(--ink);
+            color: #f7f2e7;
+            padding: 22px;
+            border: 2px solid var(--ink);
+            border-radius: 3px;
             overflow-x: auto;
-            margin: 20px 0;
+            margin: 22px 0;
             font-family: 'Fira Code', monospace;
-            font-size: 0.9em;
-            line-height: 1.5;
+            font-size: .9em;
+            line-height: 1.55;
+            box-shadow: 5px 5px 0 var(--blue);
         }
 
         code {
             font-family: 'Fira Code', monospace;
-            background: #e8f4fd;
-            color: #2980b9;
+            background: #e6edff;
+            color: #1747b0;
             padding: 2px 6px;
-            border-radius: 4px;
-            font-size: 0.9em;
+            border-radius: 3px;
+            font-size: .9em;
         }
 
         pre code {
@@ -137,93 +247,92 @@
             padding: 0;
         }
 
-        ul, ol {
-            margin-left: 25px;
-            margin-bottom: 20px;
-        }
-
-        li {
-            margin-bottom: 10px;
-            line-height: 1.8;
+        .info-box,
+        .warning-box,
+        .success-box,
+        .fire-box {
+            padding: 20px;
+            margin: 22px 0;
+            border: 2px solid var(--ink);
+            border-left-width: 9px;
+            border-radius: 3px;
+            box-shadow: 4px 4px 0 var(--ink);
         }
 
         .info-box {
-            background: #e8f4fd;
-            border-left: 4px solid #3498db;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 4px;
+            background: #e6edff;
+            border-left-color: var(--blue);
         }
 
         .warning-box {
-            background: #fff3cd;
-            border-left: 4px solid #ffc107;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 4px;
-        }
-
-        .error-box {
-            background: #f8d7da;
-            border-left: 4px solid #dc3545;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 4px;
+            background: #fff1a8;
+            border-left-color: var(--yellow);
         }
 
         .success-box {
-            background: #d4edda;
-            border-left: 4px solid #28a745;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 4px;
+            background: var(--green);
+            border-left-color: var(--ink);
+        }
+
+        .fire-box {
+            background: #ffdede;
+            border-left-color: var(--red);
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 20px 0;
+            margin: 22px 0;
+            border: 2px solid var(--ink);
+            background: var(--white);
         }
 
-        th, td {
-            padding: 15px;
+        th,
+        td {
+            padding: 14px 15px;
             text-align: left;
-            border: 1px solid #e0e0e0;
+            border: 1px solid var(--ink);
         }
 
         th {
-            background: #3498db;
-            color: white;
-            font-weight: 600;
+            background: var(--ink);
+            color: var(--yellow);
+            font-weight: 800;
         }
 
         tr:nth-child(even) {
-            background: #f8f9fa;
+            background: #f5f1e8;
         }
 
-        .step-number {
-            display: inline-block;
-            background: #3498db;
-            color: white;
-            width: 35px;
-            height: 35px;
-            line-height: 35px;
+        tr:hover {
+            background: #fff2a8;
+        }
+
+        .chapter-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--yellow);
+            color: var(--ink);
+            width: 44px;
+            height: 44px;
+            line-height: 1;
             text-align: center;
+            border: 2px solid var(--ink);
             border-radius: 50%;
-            font-weight: 600;
+            font-weight: 800;
             margin-right: 10px;
+            font-size: 1.05em;
+            box-shadow: 3px 3px 0 var(--ink);
+            vertical-align: middle;
         }
 
         .toc {
-            background: #f8f9fa;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 25px;
-            margin-bottom: 40px;
+            background: #ffffff;
         }
 
         .toc h3 {
-            color: #2c3e50;
+            color: var(--ink);
             margin-top: 0;
             margin-bottom: 15px;
         }
@@ -238,48 +347,156 @@
         }
 
         .toc a {
-            color: #3498db;
+            color: var(--ink);
             text-decoration: none;
-            transition: color 0.3s;
+            font-weight: 700;
+            transition: color .2s ease, padding-left .2s ease;
         }
 
         .toc a:hover {
-            color: #2980b9;
-            text-decoration: underline;
+            color: var(--blue);
+            text-decoration: none;
+            padding-left: 4px;
+        }
+
+        .highlight-box {
+            background: var(--yellow);
+            color: var(--ink);
+            padding: 30px;
+            border: 2px solid var(--ink);
+            border-radius: 3px;
+            margin: 30px 0;
+            box-shadow: 6px 6px 0 var(--ink);
+        }
+
+        .highlight-box h3 {
+            color: var(--ink);
+            margin-top: 0;
+        }
+
+        .pillar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .pillar-card {
+            background: #fff;
+            border: 2px solid var(--ink);
+            border-radius: 3px;
+            padding: 15px;
+            text-align: center;
+            font-weight: 700;
+            color: var(--ink);
+            box-shadow: 4px 4px 0 var(--ink);
+            transition: all 0.2s ease;
+        }
+
+        .pillar-card:hover {
+            background: var(--yellow);
+            color: var(--ink);
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 var(--ink);
+        }
+
+        .roadmap-step {
+            background: var(--blue);
+            color: white;
+            padding: 20px;
+            margin: 15px 0;
+            border: 2px solid var(--ink);
+            border-radius: 3px;
+            font-weight: 700;
+            box-shadow: 5px 5px 0 var(--ink);
+        }
+
+        .command-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .command-grid div {
+            padding: 10px;
+            background: #f5f1e8;
+            border: 1px solid var(--ink);
+            border-radius: 3px;
+        }
+
+        .command-grid div:nth-child(odd) {
+            font-weight: 700;
+            background: #e6edff;
         }
 
         @media (max-width: 768px) {
+            nav .container {
+                padding: 0 16px;
+            }
+
+            nav span {
+                font-size: .78rem;
+                padding: 6px 9px;
+                box-shadow: 3px 3px 0 var(--ink);
+            }
+
+            .hero {
+                margin-top: 88px;
+                padding: 54px 24px 50px;
+            }
+
             .hero h1 {
-                font-size: 2em;
+                max-width: 92%;
+                font-size: 2.65rem;
             }
 
             .hero p {
-                font-size: 1em;
+                font-size: 1rem;
+                margin-left: 0;
             }
 
-            .section {
-                padding: 25px;
+            .container {
+                padding: 30px 16px 55px;
+            }
+
+            .section,
+            .toc {
+                padding: 26px 22px;
+                box-shadow: 5px 5px 0 var(--ink);
             }
 
             h2 {
-                font-size: 1.6em;
+                font-size: 1.75em;
             }
 
             pre {
-                font-size: 0.8em;
-                padding: 15px;
+                font-size: .78em;
+                padding: 16px;
             }
 
             table {
-                font-size: 0.9em;
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
             }
 
-            th, td {
+            th,
+            td {
                 padding: 10px;
+            }
+
+            .pillar-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .command-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
+
 <body>
     <nav>
         <div class="container">
@@ -325,7 +542,8 @@
                 <li>Selected region: <code>ap-south-1</code> (Mumbai)</li>
             </ul>
             <div class="info-box">
-                <strong>💡 Tip:</strong> Use IAM roles for EC2 instances in production environments instead of storing credentials directly.
+                <strong>💡 Tip:</strong> Use IAM roles for EC2 instances in production environments instead of storing
+                credentials directly.
             </div>
         </div>
 
@@ -341,7 +559,8 @@ Security Group Rules:
   - Port 8080 → Jenkins Web UI
   - Port 8085 → Application</pre>
             <div class="warning-box">
-                <strong>⚠️ Security Note:</strong> Restrict SSH access (port 22) to your IP address only. Never use 0.0.0.0/0 in production.
+                <strong>⚠️ Security Note:</strong> Restrict SSH access (port 22) to your IP address only. Never use
+                0.0.0.0/0 in production.
             </div>
         </div>
 
@@ -357,7 +576,8 @@ sudo usermod -aG docker ec2-user
 # Verify installation
 docker --version</pre>
             <div class="success-box">
-                <strong>✓ Verification:</strong> After running these commands, logout and login again for group changes to take effect.
+                <strong>✓ Verification:</strong> After running these commands, logout and login again for group changes
+                to take effect.
             </div>
         </div>
 
@@ -426,7 +646,8 @@ exit</pre>
  ├── Jenkinsfile
  └── index.html</pre>
             <div class="info-box">
-                <strong>💡 Best Practice:</strong> Keep your Jenkinsfile in the root of your repository for easy pipeline configuration.
+                <strong>💡 Best Practice:</strong> Keep your Jenkinsfile in the root of your repository for easy
+                pipeline configuration.
             </div>
         </div>
 
@@ -511,7 +732,8 @@ EXPOSE 80</pre>
                 <li>Click <strong>Add webhook</strong></li>
             </ol>
             <div class="warning-box">
-                <strong>⚠️ Important:</strong> The webhook URL must end with <code>/github-webhook/</code> (note the trailing slash).
+                <strong>⚠️ Important:</strong> The webhook URL must end with <code>/github-webhook/</code> (note the
+                trailing slash).
             </div>
         </div>
 
@@ -546,13 +768,14 @@ docker run -d --name html-ci-demo -p 8085:80 \
 docker ps
 curl http://localhost:8085</pre>
             <div class="info-box">
-                <strong>💡 Pro Tip:</strong> Tag stable releases with semantic versions (v1.0.0) in addition to build numbers for easier rollbacks.
+                <strong>💡 Pro Tip:</strong> Tag stable releases with semantic versions (v1.0.0) in addition to build
+                numbers for easier rollbacks.
             </div>
         </div>
 
         <div class="section" id="section14">
             <h2><span class="step-number">14</span>Troubleshooting Guide</h2>
-            
+
             <h3>❌ Issue: "docker: permission denied"</h3>
             <div class="error-box">
                 <strong>Cause:</strong> Jenkins user doesn't have Docker permissions
@@ -605,7 +828,7 @@ aws ecr list-images --repository-name html-ci-demo --region ap-south-1
         <div class="section" id="section15">
             <h2><span class="step-number">15</span>What Companies Do Differently</h2>
             <p>Understanding the gap between learning projects and production systems:</p>
-            
+
             <table>
                 <thead>
                     <tr>
@@ -636,7 +859,8 @@ aws ecr list-images --repository-name html-ci-demo --region ap-south-1
                     </tr>
                     <tr>
                         <td>One pipeline per application</td>
-                        <td>Shared libraries, reusable templates, centralized CI/CD platform (e.g., Jenkins X, Tekton)</td>
+                        <td>Shared libraries, reusable templates, centralized CI/CD platform (e.g., Jenkins X, Tekton)
+                        </td>
                     </tr>
                     <tr>
                         <td>Direct SSH access</td>
@@ -658,7 +882,8 @@ aws ecr list-images --repository-name html-ci-demo --region ap-south-1
             </table>
 
             <div class="success-box">
-                <strong>✓ Key Takeaway:</strong> This guide follows real enterprise principles while staying within free-tier constraints. It's an excellent foundation for understanding production CI/CD workflows.
+                <strong>✓ Key Takeaway:</strong> This guide follows real enterprise principles while staying within
+                free-tier constraints. It's an excellent foundation for understanding production CI/CD workflows.
             </div>
 
             <h3>Next Steps for Production-Ready Pipelines:</h3>
@@ -689,4 +914,5 @@ aws ecr list-images --repository-name html-ci-demo --region ap-south-1
         </div>
     </div>
 </body>
+
 </html>

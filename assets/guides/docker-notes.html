@@ -1,17 +1,32 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Docker Notes - Comprehensive Guide with Real DevOps Experience</title>
+    <title>DevOps Complete Notes - Master Guide</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        :root {
+            --paper: #eee5d0;
+            --paper-light: #f7f0df;
+            --ink: #111111;
+            --muted: #555555;
+            --yellow: #ffdf00;
+            --blue: #245fe5;
+            --red: #ff4b4b;
+            --green: #dff2d8;
+            --white: #ffffff;
         }
 
         html {
@@ -20,115 +35,210 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: #f8f9fa;
-            color: #2c3e50;
+            background:
+                radial-gradient(circle at 12% 18%, rgba(0, 0, 0, .035) 0 2px, transparent 3px),
+                radial-gradient(circle at 72% 62%, rgba(0, 0, 0, .025) 0 2px, transparent 3px),
+                linear-gradient(90deg, rgba(255, 255, 255, .18), rgba(0, 0, 0, .025), rgba(255, 255, 255, .14)),
+                var(--paper);
+            background-size: 35px 35px, 49px 49px, 100% 100%, auto;
+            color: var(--ink);
             line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.38;
+            background-color: #f8f8f8;
+            background-image: url("../images/paper-texture.png");
+            background-size: cover;
+            background-position: center top;
+            background-repeat: repeat;
+            background-attachment: fixed;
+            z-index: -1;
         }
 
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 20px 0;
-            background: rgba(255, 255, 255, 0.95);
+            padding: 16px 0;
+            background: rgba(238, 229, 208, .97);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid #e0e0e0;
+            border-bottom: 2px solid var(--ink);
             z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 3px 0 rgba(17, 17, 17, .10);
         }
 
         nav .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 24px;
         }
 
         .back-btn {
-            color: #3498db;
+            color: var(--ink);
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 800;
             display: flex;
             align-items: center;
             gap: 8px;
-            transition: color 0.3s;
+            transition: transform .2s ease;
         }
 
         .back-btn:hover {
-            color: #2980b9;
+            color: var(--ink);
+            transform: translateX(-4px);
+        }
+
+        nav span {
+            color: var(--ink) !important;
+            font-weight: 800 !important;
+            letter-spacing: .04em;
+            background: var(--yellow);
+            border: 2px solid var(--ink);
+            box-shadow: 4px 4px 0 var(--ink);
+            padding: 8px 14px;
+            border-radius: 5px;
         }
 
         .hero {
-            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
-            color: white;
+            position: relative;
+            max-width: 1200px;
+            margin: 60px auto 0;
             padding: 120px 20px 80px;
+            background: #ffffff;
+            color: var(--ink);
             text-align: center;
-            margin-top: 60px;
+            border-bottom: 2px solid var(--ink);
+            overflow: hidden;
         }
 
         .hero h1 {
+            max-width: 1000px;
+            margin: 25px auto;
             font-size: 3em;
-            margin-bottom: 20px;
-            font-weight: 700;
+            line-height: 1;
+            font-weight: 800;
+            letter-spacing: -.055em;
         }
 
         .hero p {
-            font-size: 1.2em;
-            opacity: 0.95;
-            max-width: 900px;
+            max-width: 850px;
             margin: 0 auto;
+            font-size: 1.18rem;
+            line-height: 1.75;
+            color: var(--muted);
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 60px 20px;
+            padding: 46px 24px 80px;
         }
 
-        .section {
-            background: white;
-            border-radius: 12px;
-            padding: 40px;
+        .section,
+        .toc {
+            position: relative;
+            background: #ffffff;
+            border: 2px solid var(--ink);
+            border-radius: 3px;
+            padding: 38px 42px;
             margin-bottom: 30px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            border: 1px solid #e0e0e0;
+            box-shadow: 7px 7px 0 var(--ink);
+        }
+
+        .section::before,
+        .toc::before {
+            content: "";
+            position: absolute;
+            inset: 7px -7px -7px 7px;
+            border: 1px solid #11111126;
+            pointer-events: none;
+            z-index: -1;
         }
 
         h2 {
-            color: #2c3e50;
-            font-size: 2em;
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 3px solid #3498db;
+            color: var(--ink);
+            font-size: clamp(1.8rem, 3vw, 2.65rem);
+            line-height: 1.1;
+            margin-bottom: 27px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid var(--ink);
+            letter-spacing: -.035em;
         }
 
         h3 {
-            color: #3498db;
-            font-size: 1.4em;
-            margin: 30px 0 15px 0;
+            color: var(--ink);
+            font-size: 1.45em;
+            margin: 30px 0 15px;
+            line-height: 1.25;
+            letter-spacing: -.02em;
+        }
+
+        h4 {
+            display: inline-block;
+            color: var(--ink);
+            font-size: 1.05rem;
+            margin: 20px 0 10px;
+            padding: 5px 11px;
+            background: var(--yellow);
+            border: 2px solid var(--ink);
+            box-shadow: 3px 3px 0 var(--ink);
+            line-height: 1.2;
+        }
+
+        p {
+            color: #303030;
+        }
+
+        ul,
+        ol {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 9px;
+            line-height: 1.75;
+        }
+
+        li::marker {
+            color: var(--blue);
+        }
+
+        a {
+            color: var(--blue);
         }
 
         pre {
-            background: #2c3e50;
-            color: #ecf0f1;
-            padding: 20px;
-            border-radius: 8px;
+            background: var(--ink);
+            color: #f7f2e7;
+            padding: 22px;
+            border: 2px solid var(--ink);
+            border-radius: 3px;
             overflow-x: auto;
-            margin: 20px 0;
+            margin: 22px 0;
             font-family: 'Fira Code', monospace;
-            font-size: 0.9em;
-            line-height: 1.5;
+            font-size: .9em;
+            line-height: 1.55;
+            box-shadow: 5px 5px 0 var(--blue);
         }
 
         code {
             font-family: 'Fira Code', monospace;
-            background: #e8f4fd;
-            color: #2980b9;
+            background: #e6edff;
+            color: #1747b0;
             padding: 2px 6px;
-            border-radius: 4px;
-            font-size: 0.9em;
+            border-radius: 3px;
+            font-size: .9em;
         }
 
         pre code {
@@ -137,85 +247,92 @@
             padding: 0;
         }
 
-        ul, ol {
-            margin-left: 25px;
-            margin-bottom: 20px;
-        }
-
-        li {
-            margin-bottom: 10px;
-            line-height: 1.8;
+        .info-box,
+        .warning-box,
+        .success-box,
+        .fire-box {
+            padding: 20px;
+            margin: 22px 0;
+            border: 2px solid var(--ink);
+            border-left-width: 9px;
+            border-radius: 3px;
+            box-shadow: 4px 4px 0 var(--ink);
         }
 
         .info-box {
-            background: #e8f4fd;
-            border-left: 4px solid #3498db;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 4px;
+            background: #e6edff;
+            border-left-color: var(--blue);
         }
 
         .warning-box {
-            background: #fff3cd;
-            border-left: 4px solid #ffc107;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 4px;
+            background: #fff1a8;
+            border-left-color: var(--yellow);
         }
 
         .success-box {
-            background: #d4edda;
-            border-left: 4px solid #28a745;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 4px;
+            background: var(--green);
+            border-left-color: var(--ink);
+        }
+
+        .fire-box {
+            background: #ffdede;
+            border-left-color: var(--red);
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 20px 0;
+            margin: 22px 0;
+            border: 2px solid var(--ink);
+            background: var(--white);
         }
 
-        th, td {
-            padding: 15px;
+        th,
+        td {
+            padding: 14px 15px;
             text-align: left;
-            border: 1px solid #e0e0e0;
+            border: 1px solid var(--ink);
         }
 
         th {
-            background: #3498db;
-            color: white;
-            font-weight: 600;
+            background: var(--ink);
+            color: var(--yellow);
+            font-weight: 800;
         }
 
         tr:nth-child(even) {
-            background: #f8f9fa;
+            background: #f5f1e8;
         }
 
-        .step-number {
-            display: inline-block;
-            background: #3498db;
-            color: white;
-            width: 35px;
-            height: 35px;
-            line-height: 35px;
+        tr:hover {
+            background: #fff2a8;
+        }
+
+        .chapter-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--yellow);
+            color: var(--ink);
+            width: 44px;
+            height: 44px;
+            line-height: 1;
             text-align: center;
+            border: 2px solid var(--ink);
             border-radius: 50%;
-            font-weight: 600;
+            font-weight: 800;
             margin-right: 10px;
+            font-size: 1.05em;
+            box-shadow: 3px 3px 0 var(--ink);
+            vertical-align: middle;
         }
 
         .toc {
-            background: #f8f9fa;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 25px;
-            margin-bottom: 40px;
+            background: #ffffff;
         }
 
         .toc h3 {
-            color: #2c3e50;
+            color: var(--ink);
             margin-top: 0;
             margin-bottom: 15px;
         }
@@ -230,61 +347,156 @@
         }
 
         .toc a {
-            color: #3498db;
+            color: var(--ink);
             text-decoration: none;
-            transition: color 0.3s;
+            font-weight: 700;
+            transition: color .2s ease, padding-left .2s ease;
         }
 
         .toc a:hover {
-            color: #2980b9;
-            text-decoration: underline;
+            color: var(--blue);
+            text-decoration: none;
+            padding-left: 4px;
         }
 
         .highlight-box {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: var(--yellow);
+            color: var(--ink);
             padding: 30px;
-            border-radius: 12px;
+            border: 2px solid var(--ink);
+            border-radius: 3px;
             margin: 30px 0;
+            box-shadow: 6px 6px 0 var(--ink);
         }
 
         .highlight-box h3 {
-            color: white;
+            color: var(--ink);
             margin-top: 0;
         }
 
+        .pillar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .pillar-card {
+            background: #fff;
+            border: 2px solid var(--ink);
+            border-radius: 3px;
+            padding: 15px;
+            text-align: center;
+            font-weight: 700;
+            color: var(--ink);
+            box-shadow: 4px 4px 0 var(--ink);
+            transition: all 0.2s ease;
+        }
+
+        .pillar-card:hover {
+            background: var(--yellow);
+            color: var(--ink);
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 var(--ink);
+        }
+
+        .roadmap-step {
+            background: var(--blue);
+            color: white;
+            padding: 20px;
+            margin: 15px 0;
+            border: 2px solid var(--ink);
+            border-radius: 3px;
+            font-weight: 700;
+            box-shadow: 5px 5px 0 var(--ink);
+        }
+
+        .command-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .command-grid div {
+            padding: 10px;
+            background: #f5f1e8;
+            border: 1px solid var(--ink);
+            border-radius: 3px;
+        }
+
+        .command-grid div:nth-child(odd) {
+            font-weight: 700;
+            background: #e6edff;
+        }
+
         @media (max-width: 768px) {
+            nav .container {
+                padding: 0 16px;
+            }
+
+            nav span {
+                font-size: .78rem;
+                padding: 6px 9px;
+                box-shadow: 3px 3px 0 var(--ink);
+            }
+
+            .hero {
+                margin-top: 88px;
+                padding: 54px 24px 50px;
+            }
+
             .hero h1 {
-                font-size: 2em;
+                max-width: 92%;
+                font-size: 2.65rem;
             }
 
             .hero p {
-                font-size: 1em;
+                font-size: 1rem;
+                margin-left: 0;
             }
 
-            .section {
-                padding: 25px;
+            .container {
+                padding: 30px 16px 55px;
+            }
+
+            .section,
+            .toc {
+                padding: 26px 22px;
+                box-shadow: 5px 5px 0 var(--ink);
             }
 
             h2 {
-                font-size: 1.6em;
+                font-size: 1.75em;
             }
 
             pre {
-                font-size: 0.8em;
-                padding: 15px;
+                font-size: .78em;
+                padding: 16px;
             }
 
             table {
-                font-size: 0.9em;
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
             }
 
-            th, td {
+            th,
+            td {
                 padding: 10px;
+            }
+
+            .pillar-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .command-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
+
 <body>
     <nav>
         <div class="container">
@@ -323,39 +535,50 @@
 
         <div class="section" id="section0">
             <h2><span class="step-number">0</span>Real-World Experience Behind This Document</h2>
-            <p>The content in this Docker guide incorporates practical knowledge based on the following hands-on experience:</p>
+            <p>The content in this Docker guide incorporates practical knowledge based on the following hands-on
+                experience:</p>
 
             <div class="highlight-box">
                 <h3>🚀 Practical Experience Highlights</h3>
                 <ul>
-                    <li><strong>Deploying real applications using Docker Desktop</strong> - Running multiple containers including n8n, Jellyfin, Ollama LLM server, PostgreSQL, Cloudflare Tunnel, and custom web apps</li>
-                    <li><strong>Using Jenkins → Docker-based CI/CD pipelines</strong> - Automated Docker image builds, tagging, version control using build numbers, ECR pushes, and container-based deployments</li>
-                    <li><strong>Managing multi-service setups</strong> - Reverse-proxy routing, persistent volumes, network isolation, and orchestration using Docker Compose</li>
-                    <li><strong>Building real CI/CD workflows</strong> - GitHub → Jenkins → Docker → Deploy pipelines with rollback strategies, blue-green concepts, and container version pinning</li>
-                    <li><strong>Transition from VM-based hosting → Cloud → DevOps automation</strong> - Migrating workloads from local VMs to AWS EC2, ECR, and cloud-native infrastructure</li>
+                    <li><strong>Deploying real applications using Docker Desktop</strong> - Running multiple containers
+                        including n8n, Jellyfin, Ollama LLM server, PostgreSQL, Cloudflare Tunnel, and custom web apps
+                    </li>
+                    <li><strong>Using Jenkins → Docker-based CI/CD pipelines</strong> - Automated Docker image builds,
+                        tagging, version control using build numbers, ECR pushes, and container-based deployments</li>
+                    <li><strong>Managing multi-service setups</strong> - Reverse-proxy routing, persistent volumes,
+                        network isolation, and orchestration using Docker Compose</li>
+                    <li><strong>Building real CI/CD workflows</strong> - GitHub → Jenkins → Docker → Deploy pipelines
+                        with rollback strategies, blue-green concepts, and container version pinning</li>
+                    <li><strong>Transition from VM-based hosting → Cloud → DevOps automation</strong> - Migrating
+                        workloads from local VMs to AWS EC2, ECR, and cloud-native infrastructure</li>
                 </ul>
             </div>
 
             <div class="info-box">
-                <strong>💡 Note:</strong> This experience is woven throughout the guide to keep the content practical and production-focused.
+                <strong>💡 Note:</strong> This experience is woven throughout the guide to keep the content practical
+                and production-focused.
             </div>
         </div>
 
         <div class="section" id="section1">
             <h2><span class="step-number">1</span>Introduction to Docker</h2>
-            <p>Docker is a containerization engine used to run applications in isolated, reproducible environments. It is heavily used in DevOps, cloud, local development, and CI/CD workflows like Jenkins pipelines.</p>
+            <p>Docker is a containerization engine used to run applications in isolated, reproducible environments. It
+                is heavily used in DevOps, cloud, local development, and CI/CD workflows like Jenkins pipelines.</p>
 
             <h3>Why Docker Matters for Real Projects</h3>
             <ul>
                 <li><strong>Consistency:</strong> Identical environments from local Docker Desktop → cloud EC2</li>
-                <li><strong>Multi-Service Apps:</strong> Ideal for n8n, Ollama, Jellyfin, databases running together</li>
+                <li><strong>Multi-Service Apps:</strong> Ideal for n8n, Ollama, Jellyfin, databases running together
+                </li>
                 <li><strong>CI/CD Friendly:</strong> Jenkins builds → Docker images → automated deploy</li>
                 <li><strong>Fast Rollback:</strong> Using image tags for instant version switching</li>
                 <li><strong>Isolation:</strong> No dependency conflicts on host machines</li>
             </ul>
 
             <div class="success-box">
-                <strong>✓ Real-World Use Case:</strong> Running multiple services (n8n automation, Jellyfin media server, Ollama AI models) on a single machine without conflicts.
+                <strong>✓ Real-World Use Case:</strong> Running multiple services (n8n automation, Jellyfin media
+                server, Ollama AI models) on a single machine without conflicts.
             </div>
         </div>
 
@@ -365,7 +588,8 @@
             <h3>Docker Desktop (Local Setup)</h3>
             <p>Used for running n8n, Ollama, Jellyfin, Cloudflare Tunnel, and multi-container stacks.</p>
             <ul>
-                <li><strong>Windows/Mac:</strong> Download from <a href="https://www.docker.com/products/docker-desktop" target="_blank">docker.com</a></li>
+                <li><strong>Windows/Mac:</strong> Download from <a href="https://www.docker.com/products/docker-desktop"
+                        target="_blank">docker.com</a></li>
                 <li>Includes Docker Engine, Docker Compose, and GUI management</li>
                 <li>Perfect for local development and testing</li>
             </ul>
@@ -391,13 +615,15 @@ sudo systemctl enable docker
 sudo usermod -aG docker ec2-user</pre>
 
             <div class="warning-box">
-                <strong>⚠️ Important:</strong> After adding user to docker group, logout and login again for changes to take effect.
+                <strong>⚠️ Important:</strong> After adding user to docker group, logout and login again for changes to
+                take effect.
             </div>
         </div>
 
         <div class="section" id="section3">
             <h2><span class="step-number">3</span>Docker Images</h2>
-            <p>Docker images are read-only templates used to create containers. They contain the application code, runtime, libraries, and dependencies.</p>
+            <p>Docker images are read-only templates used to create containers. They contain the application code,
+                runtime, libraries, and dependencies.</p>
 
             <h3>Basic Image Commands</h3>
             <pre># Pull an image from Docker Hub
@@ -419,7 +645,8 @@ docker images
 docker rmi myapp:1.0</pre>
 
             <div class="info-box">
-                <strong>💡 CI/CD Pattern:</strong> This reflects real workflows where Jenkins builds images → tags with build number → pushes to registry → deploys.
+                <strong>💡 CI/CD Pattern:</strong> This reflects real workflows where Jenkins builds images → tags with
+                build number → pushes to registry → deploys.
                 <pre>docker build -t myapp:${BUILD_NUMBER} .
 docker tag myapp:${BUILD_NUMBER} ecr/myapp:${BUILD_NUMBER}
 docker push ecr/myapp:${BUILD_NUMBER}</pre>
@@ -470,7 +697,8 @@ docker inspect webserver
 docker stats webserver</pre>
 
             <div class="success-box">
-                <strong>✓ Real Usage:</strong> This pattern is used to run services like n8n, Jellyfin, Ollama, and local web apps.
+                <strong>✓ Real Usage:</strong> This pattern is used to run services like n8n, Jellyfin, Ollama, and
+                local web apps.
             </div>
         </div>
 
@@ -533,7 +761,8 @@ CMD ["nginx", "-g", "daemon off;"]</pre>
 
         <div class="section" id="section6">
             <h2><span class="step-number">6</span>Multi-Stage Build (Production Pipelines)</h2>
-            <p>Multi-stage builds allow you to create smaller, optimized production images by separating the build and runtime environments.</p>
+            <p>Multi-stage builds allow you to create smaller, optimized production images by separating the build and
+                runtime environments.</p>
 
             <h3>React/Node.js Example</h3>
             <pre>FROM node:18 AS build
@@ -549,7 +778,9 @@ EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]</pre>
 
             <div class="success-box">
-                <strong>✓ Production Use:</strong> This is the exact approach used when deploying optimized frontend builds via Docker. Build stage installs dependencies and compiles code, then only the compiled output is copied to the final lightweight nginx image.
+                <strong>✓ Production Use:</strong> This is the exact approach used when deploying optimized frontend
+                builds via Docker. Build stage installs dependencies and compiles code, then only the compiled output is
+                copied to the final lightweight nginx image.
             </div>
 
             <h3>Benefits of Multi-Stage Builds</h3>
@@ -649,13 +880,15 @@ docker volume rm n8n-data</pre>
             </ul>
 
             <div class="warning-box">
-                <strong>⚠️ Important:</strong> Without volumes, all data is lost when container is removed. Always use volumes for databases and stateful applications.
+                <strong>⚠️ Important:</strong> Without volumes, all data is lost when container is removed. Always use
+                volumes for databases and stateful applications.
             </div>
         </div>
 
         <div class="section" id="section9">
             <h2><span class="step-number">9</span>Docker Compose (Heavy Use Case)</h2>
-            <p>Docker Compose is a tool for defining and running multi-container Docker applications using a YAML file.</p>
+            <p>Docker Compose is a tool for defining and running multi-container Docker applications using a YAML file.
+            </p>
 
             <h3>Real Multi-Service Stack</h3>
             <p>Services currently managed with Docker Compose:</p>
@@ -756,7 +989,7 @@ docker-compose up -d --scale worker=3</pre>
 
         <div class="section" id="section10">
             <h2><span class="step-number">10</span>Docker in CI/CD (Jenkins → Docker)</h2>
-            
+
             <h3>Real Workflow Pipeline</h3>
             <div class="highlight-box">
                 <h3>🔄 Complete CI/CD Flow</h3>
@@ -793,7 +1026,8 @@ docker ps
 curl http://localhost:8085</pre>
 
             <div class="success-box">
-                <strong>✓ Production Pattern:</strong> This matches real Jenkins rollback and image versioning systems used in production environments.
+                <strong>✓ Production Pattern:</strong> This matches real Jenkins rollback and image versioning systems
+                used in production environments.
             </div>
         </div>
 
@@ -889,7 +1123,8 @@ EXPOSE 3000
 CMD ["node", "server.js"]</pre>
 
             <div class="warning-box">
-                <strong>⚠️ Security Alert:</strong> Running containers as root is a major security risk. Always use non-root users in production.
+                <strong>⚠️ Security Alert:</strong> Running containers as root is a major security risk. Always use
+                non-root users in production.
             </div>
         </div>
 
@@ -989,7 +1224,7 @@ docker rmi image-id</pre>
 
         <div class="section" id="section14">
             <h2><span class="step-number">14</span>VM → Docker → Cloud → CI/CD Journey</h2>
-            
+
             <h3>🚀 Evolution of Infrastructure</h3>
             <table>
                 <tr>
@@ -1096,7 +1331,9 @@ docker rmi image-id</pre>
             </table>
 
             <div class="success-box">
-                <strong>✓ Important Note:</strong> Your current setup follows real enterprise principles while staying within free-tier/personal constraints. It's an excellent foundation for understanding production workflows.
+                <strong>✓ Important Note:</strong> Your current setup follows real enterprise principles while staying
+                within free-tier/personal constraints. It's an excellent foundation for understanding production
+                workflows.
             </div>
 
             <h3>🎯 Next Steps Toward Production-Ready Systems</h3>
@@ -1114,7 +1351,8 @@ docker rmi image-id</pre>
 
         <div class="section">
             <h2>🎓 Conclusion</h2>
-            <p>This comprehensive Docker guide covers everything from basic concepts to production CI/CD workflows, based on real hands-on experience with:</p>
+            <p>This comprehensive Docker guide covers everything from basic concepts to production CI/CD workflows,
+                based on real hands-on experience with:</p>
             <ul>
                 <li>Running multiple production services (n8n, Ollama, Jellyfin, PostgreSQL)</li>
                 <li>Building and maintaining Jenkins → Docker pipelines</li>
@@ -1142,7 +1380,8 @@ docker rmi image-id</pre>
                 <li><a href="https://docs.docker.com/compose/" target="_blank">Docker Compose Documentation</a></li>
                 <li><a href="https://hub.docker.com/" target="_blank">Docker Hub - Public Images</a></li>
                 <li><a href="https://docs.aws.amazon.com/ecr/" target="_blank">AWS ECR Documentation</a></li>
-                <li><a href="https://kubernetes.io/docs/home/" target="_blank">Kubernetes Documentation (Next Step)</a></li>
+                <li><a href="https://kubernetes.io/docs/home/" target="_blank">Kubernetes Documentation (Next Step)</a>
+                </li>
             </ul>
         </div>
 
@@ -1151,4 +1390,5 @@ docker rmi image-id</pre>
         </div>
     </div>
 </body>
+
 </html>

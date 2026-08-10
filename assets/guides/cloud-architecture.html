@@ -1,0 +1,1476 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>DevOps Complete Notes - Master Guide</title>
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap"
+      rel="stylesheet">
+   <style>
+      * {
+         margin: 0;
+         padding: 0;
+         box-sizing: border-box;
+      }
+
+      :root {
+         --paper: #eee5d0;
+         --paper-light: #f7f0df;
+         --ink: #111111;
+         --muted: #555555;
+         --yellow: #ffdf00;
+         --blue: #245fe5;
+         --red: #ff4b4b;
+         --green: #dff2d8;
+         --white: #ffffff;
+      }
+
+      html {
+         scroll-behavior: smooth;
+      }
+
+      body {
+         font-family: 'Poppins', sans-serif;
+         background:
+            radial-gradient(circle at 12% 18%, rgba(0, 0, 0, .035) 0 2px, transparent 3px),
+            radial-gradient(circle at 72% 62%, rgba(0, 0, 0, .025) 0 2px, transparent 3px),
+            linear-gradient(90deg, rgba(255, 255, 255, .18), rgba(0, 0, 0, .025), rgba(255, 255, 255, .14)),
+            var(--paper);
+         background-size: 35px 35px, 49px 49px, 100% 100%, auto;
+         color: var(--ink);
+         line-height: 1.6;
+         min-height: 100vh;
+      }
+
+      body::before {
+         content: "";
+         position: fixed;
+         inset: 0;
+         pointer-events: none;
+         opacity: 0.38;
+         background-color: #f8f8f8;
+         background-image: url("../images/paper-texture.png");
+         background-size: cover;
+         background-position: center top;
+         background-repeat: repeat;
+         background-attachment: fixed;
+         z-index: -1;
+      }
+
+      nav {
+         position: fixed;
+         top: 0;
+         width: 100%;
+         padding: 16px 0;
+         background: rgba(238, 229, 208, .97);
+         backdrop-filter: blur(10px);
+         border-bottom: 2px solid var(--ink);
+         z-index: 100;
+         box-shadow: 0 3px 0 rgba(17, 17, 17, .10);
+      }
+
+      nav .container {
+         max-width: 1200px;
+         margin: 0 auto;
+         padding: 0 24px;
+         display: flex;
+         justify-content: space-between;
+         align-items: center;
+         gap: 24px;
+      }
+
+      .back-btn {
+         color: var(--ink);
+         text-decoration: none;
+         font-weight: 800;
+         display: flex;
+         align-items: center;
+         gap: 8px;
+         transition: transform .2s ease;
+      }
+
+      .back-btn:hover {
+         color: var(--ink);
+         transform: translateX(-4px);
+      }
+
+      nav span {
+         color: var(--ink) !important;
+         font-weight: 800 !important;
+         letter-spacing: .04em;
+         background: var(--yellow);
+         border: 2px solid var(--ink);
+         box-shadow: 4px 4px 0 var(--ink);
+         padding: 8px 14px;
+         border-radius: 5px;
+      }
+
+      .hero {
+         position: relative;
+         max-width: 1200px;
+         margin: 60px auto 0;
+         padding: 120px 20px 80px;
+         background: #ffffff;
+         color: var(--ink);
+         text-align: center;
+         border-bottom: 2px solid var(--ink);
+         overflow: hidden;
+      }
+
+      .hero h1 {
+         max-width: 1000px;
+         margin: 25px auto;
+         font-size: 3em;
+         line-height: 1;
+         font-weight: 800;
+         letter-spacing: -.055em;
+      }
+
+      .hero p {
+         max-width: 850px;
+         margin: 0 auto;
+         font-size: 1.18rem;
+         line-height: 1.75;
+         color: var(--muted);
+      }
+
+      .container {
+         max-width: 1200px;
+         margin: 0 auto;
+         padding: 46px 24px 80px;
+      }
+
+      .section,
+      .toc {
+         position: relative;
+         background: #ffffff;
+         border: 2px solid var(--ink);
+         border-radius: 3px;
+         padding: 38px 42px;
+         margin-bottom: 30px;
+         box-shadow: 7px 7px 0 var(--ink);
+      }
+
+      .section::before,
+      .toc::before {
+         content: "";
+         position: absolute;
+         inset: 7px -7px -7px 7px;
+         border: 1px solid #11111126;
+         pointer-events: none;
+         z-index: -1;
+      }
+
+      h2 {
+         color: var(--ink);
+         font-size: clamp(1.8rem, 3vw, 2.65rem);
+         line-height: 1.1;
+         margin-bottom: 27px;
+         padding-bottom: 16px;
+         border-bottom: 2px solid var(--ink);
+         letter-spacing: -.035em;
+      }
+
+      h3 {
+         color: var(--ink);
+         font-size: 1.45em;
+         margin: 30px 0 15px;
+         line-height: 1.25;
+         letter-spacing: -.02em;
+      }
+
+      h4 {
+         display: inline-block;
+         color: var(--ink);
+         font-size: 1.05rem;
+         margin: 20px 0 10px;
+         padding: 5px 11px;
+         background: var(--yellow);
+         border: 2px solid var(--ink);
+         box-shadow: 3px 3px 0 var(--ink);
+         line-height: 1.2;
+      }
+
+      p {
+         color: #303030;
+      }
+
+      ul,
+      ol {
+         margin-left: 25px;
+         margin-bottom: 20px;
+      }
+
+      li {
+         margin-bottom: 9px;
+         line-height: 1.75;
+      }
+
+      li::marker {
+         color: var(--blue);
+      }
+
+      a {
+         color: var(--blue);
+      }
+
+      pre {
+         background: var(--ink);
+         color: #f7f2e7;
+         padding: 22px;
+         border: 2px solid var(--ink);
+         border-radius: 3px;
+         overflow-x: auto;
+         margin: 22px 0;
+         font-family: 'Fira Code', monospace;
+         font-size: .9em;
+         line-height: 1.55;
+         box-shadow: 5px 5px 0 var(--blue);
+      }
+
+      code {
+         font-family: 'Fira Code', monospace;
+         background: #e6edff;
+         color: #1747b0;
+         padding: 2px 6px;
+         border-radius: 3px;
+         font-size: .9em;
+      }
+
+      pre code {
+         background: none;
+         color: inherit;
+         padding: 0;
+      }
+
+      .info-box,
+      .warning-box,
+      .success-box,
+      .fire-box {
+         padding: 20px;
+         margin: 22px 0;
+         border: 2px solid var(--ink);
+         border-left-width: 9px;
+         border-radius: 3px;
+         box-shadow: 4px 4px 0 var(--ink);
+      }
+
+      .info-box {
+         background: #e6edff;
+         border-left-color: var(--blue);
+      }
+
+      .warning-box {
+         background: #fff1a8;
+         border-left-color: var(--yellow);
+      }
+
+      .success-box {
+         background: var(--green);
+         border-left-color: var(--ink);
+      }
+
+      .fire-box {
+         background: #ffdede;
+         border-left-color: var(--red);
+      }
+
+      table {
+         width: 100%;
+         border-collapse: collapse;
+         margin: 22px 0;
+         border: 2px solid var(--ink);
+         background: var(--white);
+      }
+
+      th,
+      td {
+         padding: 14px 15px;
+         text-align: left;
+         border: 1px solid var(--ink);
+      }
+
+      th {
+         background: var(--ink);
+         color: var(--yellow);
+         font-weight: 800;
+      }
+
+      tr:nth-child(even) {
+         background: #f5f1e8;
+      }
+
+      tr:hover {
+         background: #fff2a8;
+      }
+
+      .chapter-number {
+         display: inline-flex;
+         align-items: center;
+         justify-content: center;
+         background: var(--yellow);
+         color: var(--ink);
+         width: 44px;
+         height: 44px;
+         line-height: 1;
+         text-align: center;
+         border: 2px solid var(--ink);
+         border-radius: 50%;
+         font-weight: 800;
+         margin-right: 10px;
+         font-size: 1.05em;
+         box-shadow: 3px 3px 0 var(--ink);
+         vertical-align: middle;
+      }
+
+      .toc {
+         background: #ffffff;
+      }
+
+      .toc h3 {
+         color: var(--ink);
+         margin-top: 0;
+         margin-bottom: 15px;
+      }
+
+      .toc ul {
+         list-style: none;
+         margin: 0;
+      }
+
+      .toc li {
+         margin-bottom: 8px;
+      }
+
+      .toc a {
+         color: var(--ink);
+         text-decoration: none;
+         font-weight: 700;
+         transition: color .2s ease, padding-left .2s ease;
+      }
+
+      .toc a:hover {
+         color: var(--blue);
+         text-decoration: none;
+         padding-left: 4px;
+      }
+
+      .highlight-box {
+         background: var(--yellow);
+         color: var(--ink);
+         padding: 30px;
+         border: 2px solid var(--ink);
+         border-radius: 3px;
+         margin: 30px 0;
+         box-shadow: 6px 6px 0 var(--ink);
+      }
+
+      .highlight-box h3 {
+         color: var(--ink);
+         margin-top: 0;
+      }
+
+      .pillar-grid {
+         display: grid;
+         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+         gap: 15px;
+         margin: 20px 0;
+      }
+
+      .pillar-card {
+         background: #fff;
+         border: 2px solid var(--ink);
+         border-radius: 3px;
+         padding: 15px;
+         text-align: center;
+         font-weight: 700;
+         color: var(--ink);
+         box-shadow: 4px 4px 0 var(--ink);
+         transition: all 0.2s ease;
+      }
+
+      .pillar-card:hover {
+         background: var(--yellow);
+         color: var(--ink);
+         transform: translate(-2px, -2px);
+         box-shadow: 6px 6px 0 var(--ink);
+      }
+
+      .roadmap-step {
+         background: var(--blue);
+         color: white;
+         padding: 20px;
+         margin: 15px 0;
+         border: 2px solid var(--ink);
+         border-radius: 3px;
+         font-weight: 700;
+         box-shadow: 5px 5px 0 var(--ink);
+      }
+
+      .command-grid {
+         display: grid;
+         grid-template-columns: 1fr 2fr;
+         gap: 10px;
+         margin: 20px 0;
+      }
+
+      .command-grid div {
+         padding: 10px;
+         background: #f5f1e8;
+         border: 1px solid var(--ink);
+         border-radius: 3px;
+      }
+
+      .command-grid div:nth-child(odd) {
+         font-weight: 700;
+         background: #e6edff;
+      }
+
+      @media (max-width: 768px) {
+         nav .container {
+            padding: 0 16px;
+         }
+
+         nav span {
+            font-size: .78rem;
+            padding: 6px 9px;
+            box-shadow: 3px 3px 0 var(--ink);
+         }
+
+         .hero {
+            margin-top: 88px;
+            padding: 54px 24px 50px;
+         }
+
+         .hero h1 {
+            max-width: 92%;
+            font-size: 2.65rem;
+         }
+
+         .hero p {
+            font-size: 1rem;
+            margin-left: 0;
+         }
+
+         .container {
+            padding: 30px 16px 55px;
+         }
+
+         .section,
+         .toc {
+            padding: 26px 22px;
+            box-shadow: 5px 5px 0 var(--ink);
+         }
+
+         h2 {
+            font-size: 1.75em;
+         }
+
+         pre {
+            font-size: .78em;
+            padding: 16px;
+         }
+
+         table {
+            display: block;
+            overflow-x: auto;
+            white-space: nowrap;
+         }
+
+         th,
+         td {
+            padding: 10px;
+         }
+
+         .pillar-grid {
+            grid-template-columns: 1fr;
+         }
+
+         .command-grid {
+            grid-template-columns: 1fr;
+         }
+      }
+   </style>
+</head>
+
+<body>
+   <nav>
+      <div class="container">
+         <a href="/index.html" class="back-btn">← Back to Portfolio</a>
+         <span style="color: #e74c3c; font-weight: 600;">⚙️ CLOUD ARCHITECTURE</span>
+      </div>
+   </nav>
+   <header class="hero">
+      <h1>☁️ Cloud Architecture</h1>
+      <p>Complete Professional Guide — From Traditional Infrastructure to AWS, Azure &amp; GCP</p>
+   </header>
+   <main class="container">
+      <section class="toc">
+         <h2>Table of Contents</h2>
+         <ol>
+            <li><a href="#ch1">Cloud Architecture Fundamentals</a></li>
+            <li><a href="#ch2">Traditional / Native Systems vs Cloud</a></li>
+            <li><a href="#ch3">Why Companies Are Moving to Cloud</a></li>
+            <li><a href="#ch4">Cloud Computing Models</a></li>
+            <li><a href="#ch5">Cloud Architecture Core Concepts</a></li>
+            <li><a href="#ch6">AWS — Complete Cloud Guide</a></li>
+            <li><a href="#ch7">Azure — Complete Cloud Guide</a></li>
+            <li><a href="#ch8">GCP — Complete Cloud Guide</a></li>
+            <li><a href="#ch9">AWS vs Azure vs GCP</a></li>
+            <li><a href="#ch10">Cloud Networking</a></li>
+            <li><a href="#ch11">Cloud Security</a></li>
+            <li><a href="#ch12">Cloud Storage &amp; Databases</a></li>
+            <li><a href="#ch13">Compute &amp; Containers</a></li>
+            <li><a href="#ch14">Kubernetes &amp; Cloud-Native Architecture</a></li>
+            <li><a href="#ch15">Infrastructure as Code</a></li>
+            <li><a href="#ch16">Cloud CI/CD &amp; DevOps</a></li>
+            <li><a href="#ch17">Observability &amp; Monitoring</a></li>
+            <li><a href="#ch18">High Availability &amp; Disaster Recovery</a></li>
+            <li><a href="#ch19">Cloud Cost Optimization</a></li>
+            <li><a href="#ch20">Real-World Cloud Architectures</a></li>
+            <li><a href="#ch21">Cloud Migration Strategy</a></li>
+            <li><a href="#ch22">Cloud Architecture Interview Preparation</a></li>
+            <li><a href="#ch23">Practical Cloud Projects</a></li>
+            <li><a href="#ch24">Final Cloud Architecture Roadmap</a></li>
+         </ol>
+      </section>
+      <section class="section" id="ch1">
+         <h2><span class="num">1</span>Cloud Architecture Fundamentals</h2>
+         <p>Cloud computing is on-demand access to shared compute, storage, networking, databases and higher-level
+            services. Cloud architecture is the design of those capabilities around workload requirements for security,
+            reliability, performance, scalability, operability and cost.</p>
+         <div class="grid">
+            <div class="card">
+               <h3>Regions</h3>
+               <p>Geographic areas containing provider infrastructure. Select them using latency, sovereignty, service
+                  availability and resilience requirements.</p>
+            </div>
+            <div class="card">
+               <h3>Availability Zones</h3>
+               <p>Separated infrastructure locations inside a region. Multi-zone designs reduce dependence on a single
+                  facility.</p>
+            </div>
+            <div class="card">
+               <h3>Control plane</h3>
+               <p>APIs and management systems used to create and configure resources.</p>
+            </div>
+            <div class="card">
+               <h3>Data plane</h3>
+               <p>The path through which application traffic and workload data actually flows.</p>
+            </div>
+         </div>
+         <p>Other foundations include edge locations, global resources, resource hierarchies, multi-tenancy,
+            scalability, elasticity, resilience, fault tolerance and high availability. High availability is not the
+            same as disaster recovery.</p>
+         <div class="info"><b>Example:</b> A production web service can use a global DNS layer, CDN/WAF, a load
+            balancer, stateless application instances across zones, a replicated database and centralized observability.
+         </div>
+      </section>
+      <section class="section" id="ch2">
+         <h2><span class="num">2</span>Traditional / Native Systems vs Cloud</h2>
+         <h3>Traditional environment</h3>
+         <div class="arch">Internet
+            ↓
+            Firewall
+            ↓
+            Load Balancer
+            ↓
+            Web Servers
+            ↓
+            Application Servers
+            ↓
+            Database
+            ↓
+            SAN / NAS Storage</div>
+         <p>On-premises environments commonly include physical servers, VMware ESXi and vCenter, SAN/NAS, switching,
+            firewalls, load balancers, backup platforms and a DR site. Procurement and capacity planning happen before
+            the workload needs the capacity.</p>
+         <h3>Cloud equivalent</h3>
+         <div class="arch">Internet
+            ↓
+            DNS / CDN / WAF
+            ↓
+            Managed Load Balancer
+            ↓
+            Auto-scaled Compute / Containers
+            ↓
+            Managed Database
+            ↓
+            Object / Block / File Storage</div>
+         <table>
+            <tr>
+               <th>Area</th>
+               <th>Traditional</th>
+               <th>Cloud</th>
+            </tr>
+            <tr>
+               <td>Hardware</td>
+               <td>Owned or leased and lifecycle-managed</td>
+               <td>Provider-owned infrastructure exposed as services</td>
+            </tr>
+            <tr>
+               <td>Provisioning</td>
+               <td>Procure, rack, configure, install</td>
+               <td>API, console or IaC</td>
+            </tr>
+            <tr>
+               <td>Scaling</td>
+               <td>Capacity often purchased ahead</td>
+               <td>Can be automated, subject to limits and cost</td>
+            </tr>
+            <tr>
+               <td>DR</td>
+               <td>Often second site and replication</td>
+               <td>Zones, regions, backups and managed replication</td>
+            </tr>
+            <tr>
+               <td>Operations</td>
+               <td>Hardware, hypervisor, storage and network</td>
+               <td>More provider-managed layers, but customer security/configuration remain</td>
+            </tr>
+         </table>
+         <div class="warn"><b>Trade-off:</b> Cloud changes the abstraction boundary; it does not eliminate
+            infrastructure responsibility.</div>
+      </section>
+      <section class="section" id="ch3">
+         <h2><span class="num">3</span>Why Companies Are Moving to Cloud</h2>
+         <p>Cloud adoption is driven by speed, elasticity, global reach, managed services, automation, DevOps, CI/CD,
+            IaC, analytics, AI/ML and reduced hardware lifecycle work.</p>
+         <div class="grid">
+            <div class="card">
+               <h3>Faster provisioning</h3>
+               <p>Resources can be created through APIs and pipelines.</p>
+            </div>
+            <div class="card">
+               <h3>Elastic capacity</h3>
+               <p>Workloads can add or remove capacity when demand changes.</p>
+            </div>
+            <div class="card">
+               <h3>Managed services</h3>
+               <p>Teams can consume databases, queues and identity without operating every layer.</p>
+            </div>
+            <div class="card">
+               <h3>Global delivery</h3>
+               <p>Applications can be deployed near users and across failure domains.</p>
+            </div>
+         </div>
+         <div class="danger"><b>Why not move everything?</b> Cost unpredictability, vendor lock-in, data residency,
+            compliance, latency, legacy dependencies, licensing, migration complexity, skills gaps, security
+            responsibility and egress costs can justify retaining or hybridizing workloads.</div>
+      </section>
+      <section class="section" id="ch4">
+         <h2><span class="num">4</span>Cloud Computing Models</h2>
+         <table>
+            <tr>
+               <th>Model</th>
+               <th>Provider manages</th>
+               <th>Customer focuses on</th>
+               <th>Use</th>
+            </tr>
+            <tr>
+               <td>IaaS</td>
+               <td>Physical infrastructure and virtualization</td>
+               <td>OS, runtime, application, data</td>
+               <td>VM-based workloads</td>
+            </tr>
+            <tr>
+               <td>PaaS</td>
+               <td>Infrastructure and application platform</td>
+               <td>Code and data</td>
+               <td>Managed application platforms</td>
+            </tr>
+            <tr>
+               <td>SaaS</td>
+               <td>Application through infrastructure</td>
+               <td>Configuration, users and governance</td>
+               <td>Business applications</td>
+            </tr>
+            <tr>
+               <td>FaaS / Serverless</td>
+               <td>Execution infrastructure</td>
+               <td>Functions and event logic</td>
+               <td>Event-driven APIs</td>
+            </tr>
+            <tr>
+               <td>CaaS</td>
+               <td>Container platform, depending on service</td>
+               <td>Containers and workloads</td>
+               <td>Containerized applications</td>
+            </tr>
+         </table>
+      </section>
+      <section class="section" id="ch5">
+         <h2><span class="num">5</span>Cloud Architecture Core Concepts</h2>
+         <div class="grid">
+            <div class="card">
+               <h3>Scalability</h3>
+               <p>Ability to handle increased workload by adding capacity.</p>
+            </div>
+            <div class="card">
+               <h3>Elasticity</h3>
+               <p>Dynamic adjustment of capacity as demand changes.</p>
+            </div>
+            <div class="card">
+               <h3>Resilience</h3>
+               <p>Ability to continue or recover when components fail.</p>
+            </div>
+            <div class="card">
+               <h3>Statelessness</h3>
+               <p>Durable state is externalized so requests can move between instances.</p>
+            </div>
+         </div>
+         <p>Horizontal scaling adds instances; vertical scaling increases instance capacity. Load balancing distributes
+            traffic. Caching reduces repeated reads. Queues decouple producers and consumers. Event-driven systems react
+            to events. Monoliths can be simpler; microservices provide independent scaling/deployment at the cost of
+            distributed-system complexity. Serverless reduces infrastructure operations but has service-specific limits.
+         </p>
+      </section>
+      <section class="section" id="ch6">
+         <h2><span class="num">6</span>AWS — Complete Cloud Guide</h2>
+         <table>
+            <tr>
+               <th>Service</th>
+               <th>Architecture role</th>
+            </tr>
+            <tr>
+               <td>IAM / STS</td>
+               <td>Identity, authorization and temporary credentials. Prefer roles and least privilege.</td>
+            </tr>
+            <tr>
+               <td>EC2 / AMI / EBS</td>
+               <td>VM compute, machine images and block storage.</td>
+            </tr>
+            <tr>
+               <td>VPC</td>
+               <td>Network boundary containing subnets, routes and gateways.</td>
+            </tr>
+            <tr>
+               <td>ALB / NLB</td>
+               <td>Managed load balancing for application and transport-level traffic.</td>
+            </tr>
+            <tr>
+               <td>S3 / EFS / FSx</td>
+               <td>Object and managed file-storage patterns.</td>
+            </tr>
+            <tr>
+               <td>Lambda / ECS / EKS / Fargate</td>
+               <td>Serverless functions and container orchestration/execution.</td>
+            </tr>
+            <tr>
+               <td>RDS / Aurora / DynamoDB / ElastiCache</td>
+               <td>Managed relational, NoSQL and caching capabilities.</td>
+            </tr>
+            <tr>
+               <td>Route 53 / CloudFront / API Gateway</td>
+               <td>DNS, CDN and API entry patterns.</td>
+            </tr>
+            <tr>
+               <td>SQS / SNS / EventBridge / Kinesis</td>
+               <td>Queues, fan-out, event routing and streaming.</td>
+            </tr>
+            <tr>
+               <td>CloudWatch / CloudTrail / X-Ray</td>
+               <td>Metrics, logs, audit events and tracing.</td>
+            </tr>
+            <tr>
+               <td>KMS / Secrets Manager / WAF / GuardDuty</td>
+               <td>Keys, secrets, web protection and threat detection.</td>
+            </tr>
+            <tr>
+               <td>ECR / CodeBuild / CodeDeploy / CodePipeline</td>
+               <td>Container registry and CI/CD building blocks.</td>
+            </tr>
+            <tr>
+               <td>CloudFormation / CDK</td>
+               <td>AWS Infrastructure as Code.</td>
+            </tr>
+         </table>
+         <h3>Production pattern</h3>
+         <div class="arch">Route 53 → CloudFront/WAF → ALB → ECS/EKS/EC2 → RDS/DynamoDB
+            ↘ S3 / EFS</div>
+         <pre><code>aws sts get-caller-identity
+aws ec2 describe-instances
+aws s3 ls
+aws eks list-clusters</code></pre>
+         <div class="warn">Common failures include public databases, excessive IAM permissions, long-lived access keys,
+            uncontrolled logs and ignoring NAT/egress cost.</div>
+      </section>
+      <section class="section" id="ch7">
+         <h2><span class="num">7</span>Azure — Complete Cloud Guide</h2>
+         <table>
+            <tr>
+               <th>Service</th>
+               <th>Architecture role</th>
+            </tr>
+            <tr>
+               <td>Microsoft Entra ID / RBAC / Managed Identity</td>
+               <td>Identity, authorization and workload identity.</td>
+            </tr>
+            <tr>
+               <td>Virtual Network / NSG / Azure Firewall</td>
+               <td>Network segmentation and traffic controls.</td>
+            </tr>
+            <tr>
+               <td>VM / VM Scale Sets / App Service</td>
+               <td>VM and managed application compute.</td>
+            </tr>
+            <tr>
+               <td>Functions / AKS / Container Instances</td>
+               <td>Serverless and container workloads.</td>
+            </tr>
+            <tr>
+               <td>Blob / Files / Managed Disks</td>
+               <td>Object, file and block-style storage.</td>
+            </tr>
+            <tr>
+               <td>Azure SQL / Cosmos DB</td>
+               <td>Managed relational and distributed NoSQL data.</td>
+            </tr>
+            <tr>
+               <td>Application Gateway / Load Balancer / Front Door</td>
+               <td>Regional and global traffic delivery.</td>
+            </tr>
+            <tr>
+               <td>Private Link / VPN Gateway / ExpressRoute</td>
+               <td>Private and dedicated connectivity.</td>
+            </tr>
+            <tr>
+               <td>Azure Monitor / Log Analytics / App Insights</td>
+               <td>Metrics, logs and application telemetry.</td>
+            </tr>
+            <tr>
+               <td>Key Vault / Defender for Cloud</td>
+               <td>Secrets/keys and security posture.</td>
+            </tr>
+            <tr>
+               <td>Azure DevOps / ACR / Pipelines</td>
+               <td>Source, artifacts, containers and delivery.</td>
+            </tr>
+            <tr>
+               <td>ARM / Bicep / Terraform</td>
+               <td>Infrastructure as Code approaches.</td>
+            </tr>
+         </table>
+         <pre><code>az account show
+az group list
+az vm list -o table
+az aks list -o table</code></pre>
+      </section>
+      <section class="section" id="ch8">
+         <h2><span class="num">8</span>GCP — Complete Cloud Guide</h2>
+         <table>
+            <tr>
+               <th>Service</th>
+               <th>Architecture role</th>
+            </tr>
+            <tr>
+               <td>IAM / Service Accounts / Workload Identity</td>
+               <td>Identity and workload authorization.</td>
+            </tr>
+            <tr>
+               <td>Organizations / Folders / Projects</td>
+               <td>Resource hierarchy, governance and billing.</td>
+            </tr>
+            <tr>
+               <td>VPC / Routes / Cloud NAT</td>
+               <td>Network and outbound connectivity.</td>
+            </tr>
+            <tr>
+               <td>Compute Engine / Managed Instance Groups</td>
+               <td>VM compute and scalable groups.</td>
+            </tr>
+            <tr>
+               <td>Cloud Run / Cloud Functions / GKE</td>
+               <td>Managed containers, functions and Kubernetes.</td>
+            </tr>
+            <tr>
+               <td>Cloud Storage / Persistent Disk / Filestore</td>
+               <td>Object, block and file storage.</td>
+            </tr>
+            <tr>
+               <td>Cloud SQL / Spanner / Firestore / Bigtable / BigQuery</td>
+               <td>Relational, distributed, document, wide-column and analytics services.</td>
+            </tr>
+            <tr>
+               <td>Cloud Load Balancing / Cloud Armor</td>
+               <td>Traffic distribution and edge security.</td>
+            </tr>
+            <tr>
+               <td>Pub/Sub / Eventarc / Dataflow</td>
+               <td>Messaging, event routing and data processing.</td>
+            </tr>
+            <tr>
+               <td>Cloud Monitoring / Logging / Trace</td>
+               <td>Observability.</td>
+            </tr>
+            <tr>
+               <td>Cloud Build / Artifact Registry / Cloud Deploy</td>
+               <td>Build, artifacts and delivery.</td>
+            </tr>
+            <tr>
+               <td>Terraform</td>
+               <td>Common IaC approach for GCP and multi-cloud.</td>
+            </tr>
+         </table>
+         <pre><code>gcloud auth list
+gcloud projects list
+gcloud compute instances list
+gcloud container clusters list</code></pre>
+      </section>
+      <section class="section" id="ch9">
+         <h2><span class="num">9</span>AWS vs Azure vs GCP</h2>
+         <table>
+            <tr>
+               <th>Capability</th>
+               <th>AWS</th>
+               <th>Azure</th>
+               <th>GCP</th>
+            </tr>
+            <tr>
+               <td>VM</td>
+               <td>EC2</td>
+               <td>Azure VM</td>
+               <td>Compute Engine</td>
+            </tr>
+            <tr>
+               <td>Object</td>
+               <td>S3</td>
+               <td>Blob Storage</td>
+               <td>Cloud Storage</td>
+            </tr>
+            <tr>
+               <td>Network</td>
+               <td>VPC</td>
+               <td>VNet</td>
+               <td>VPC</td>
+            </tr>
+            <tr>
+               <td>Kubernetes</td>
+               <td>EKS</td>
+               <td>AKS</td>
+               <td>GKE</td>
+            </tr>
+            <tr>
+               <td>Functions</td>
+               <td>Lambda</td>
+               <td>Functions</td>
+               <td>Cloud Functions</td>
+            </tr>
+            <tr>
+               <td>Relational</td>
+               <td>RDS/Aurora</td>
+               <td>Azure SQL</td>
+               <td>Cloud SQL</td>
+            </tr>
+            <tr>
+               <td>NoSQL</td>
+               <td>DynamoDB</td>
+               <td>Cosmos DB</td>
+               <td>Firestore/Bigtable</td>
+            </tr>
+            <tr>
+               <td>Monitoring</td>
+               <td>CloudWatch</td>
+               <td>Azure Monitor</td>
+               <td>Cloud Monitoring</td>
+            </tr>
+            <tr>
+               <td>Identity</td>
+               <td>IAM</td>
+               <td>Entra/RBAC</td>
+               <td>Cloud IAM</td>
+            </tr>
+         </table>
+         <p>AWS has a broad catalog and large enterprise footprint; Azure integrates deeply with Microsoft estates; GCP
+            is strong in Kubernetes, data analytics and cloud-native engineering. Select based on requirements, existing
+            skills, contracts, compliance, latency and operational fit.</p>
+      </section>
+      <section class="section" id="ch10">
+         <h2><span class="num">10</span>Cloud Networking</h2>
+         <div class="arch">Internet
+            ↓
+            DNS → CDN → WAF → Load Balancer
+            ↓
+            Web/API Tier
+            ↓
+            Application Tier
+            ↓
+            Database Tier</div>
+         <p>Master CIDR, IPv4/IPv6, public/private IPs, subnets, routing, NAT, firewalls, security groups, NACLs, load
+            balancers, DNS, CDN, VPN, dedicated connectivity and private endpoints.</p>
+         <pre><code>ip addr
+ip route
+ss -tulpn
+curl -I https://example.com
+dig example.com
+traceroute example.com</code></pre>
+      </section>
+      <section class="section" id="ch11">
+         <h2><span class="num">11</span>Cloud Security</h2>
+         <p>The Shared Responsibility Model changes with the service model. Customers remain responsible for identity,
+            configuration, data protection and workload security even when the provider manages the underlying
+            infrastructure.</p>
+         <div class="grid">
+            <div class="card">
+               <h3>Identity</h3>
+               <p>Least privilege, MFA, roles, workload identities and access review.</p>
+            </div>
+            <div class="card">
+               <h3>Data</h3>
+               <p>Encryption at rest/in transit, key management, backups and classification.</p>
+            </div>
+            <div class="card">
+               <h3>Network</h3>
+               <p>Segmentation, private subnets, controlled ingress/egress and WAF.</p>
+            </div>
+            <div class="card">
+               <h3>Operations</h3>
+               <p>Audit logs, vulnerability management, security findings and incident response.</p>
+            </div>
+         </div>
+      </section>
+      <section class="section" id="ch12">
+         <h2><span class="num">12</span>Cloud Storage & Databases</h2>
+         <table>
+            <tr>
+               <th>Type</th>
+               <th>Best fit</th>
+               <th>Examples</th>
+            </tr>
+            <tr>
+               <td>Object</td>
+               <td>Files, backups, media, data lakes</td>
+               <td>S3 / Blob / Cloud Storage</td>
+            </tr>
+            <tr>
+               <td>Block</td>
+               <td>VM disks</td>
+               <td>EBS / Managed Disks / Persistent Disk</td>
+            </tr>
+            <tr>
+               <td>File</td>
+               <td>Shared filesystems</td>
+               <td>EFS / Azure Files / Filestore</td>
+            </tr>
+            <tr>
+               <td>SQL</td>
+               <td>Transactions and relational integrity</td>
+               <td>RDS / Azure SQL / Cloud SQL</td>
+            </tr>
+            <tr>
+               <td>Key-value/document</td>
+               <td>High-scale application access patterns</td>
+               <td>DynamoDB / Cosmos DB / Firestore</td>
+            </tr>
+            <tr>
+               <td>Columnar analytics</td>
+               <td>Large analytical queries</td>
+               <td>Redshift / BigQuery</td>
+            </tr>
+         </table>
+         <p>Select databases from access patterns, consistency, transaction requirements, latency, scale and operational
+            capability.</p>
+      </section>
+      <section class="section" id="ch13">
+         <h2><span class="num">13</span>Compute & Containers</h2>
+         <table>
+            <tr>
+               <th>Technology</th>
+               <th>Control</th>
+               <th>Good fit</th>
+            </tr>
+            <tr>
+               <td>VM</td>
+               <td>High OS control</td>
+               <td>Legacy/custom software</td>
+            </tr>
+            <tr>
+               <td>Container</td>
+               <td>Application packaging</td>
+               <td>Portable application delivery</td>
+            </tr>
+            <tr>
+               <td>Kubernetes</td>
+               <td>Workload orchestration</td>
+               <td>Large container platforms</td>
+            </tr>
+            <tr>
+               <td>Serverless</td>
+               <td>Application logic</td>
+               <td>Event-driven/API workloads</td>
+            </tr>
+         </table>
+         <p>Containers improve packaging consistency; Kubernetes adds orchestration; managed Kubernetes reduces
+            control-plane operations but not workload design, networking, security or observability responsibilities.
+         </p>
+      </section>
+      <section class="section" id="ch14">
+         <h2><span class="num">14</span>Kubernetes & Cloud-Native Architecture</h2>
+         <div class="arch">Users → Cloud LB / Ingress → Services → Pods → Persistent Volumes → Managed Cloud Data
+            Services</div>
+         <p>EKS, AKS and GKE provide managed Kubernetes control planes. Production architecture still requires node
+            capacity planning, workload identity, networking, ingress, storage, autoscaling, observability, secrets,
+            upgrades, security and multi-cluster governance.</p>
+      </section>
+      <section class="section" id="ch15">
+         <h2><span class="num">15</span>Infrastructure as Code</h2>
+         <p>Terraform is multi-cloud; CloudFormation/CDK are AWS-oriented; Bicep is Azure-oriented. IaC should be
+            versioned, reviewed and deployed through controlled pipelines.</p>
+         <div class="arch">Git → Pull Request → Validate / Scan → Plan → Review → Apply → Cloud</div>
+         <pre><code>resource "aws_s3_bucket" "example" {
+  bucket = "example-production-bucket"
+}
+
+output "bucket_name" {
+  value = aws_s3_bucket.example.bucket
+}</code></pre>
+         <p>Production concerns include remote state, locking where supported, modules, drift, secrets, state protection
+            and CI/CD integration.</p>
+      </section>
+      <section class="section" id="ch16">
+         <h2><span class="num">16</span>Cloud CI/CD & DevOps</h2>
+         <div class="arch">Developer → Git → CI → Test → Security Scan → Registry → IaC/Deploy →
+            Kubernetes/Serverless/VM → Monitoring</div>
+         <p>Jenkins, GitHub Actions, GitLab CI, AWS CodePipeline, Azure DevOps and Cloud Build can implement delivery
+            pipelines. ArgoCD supports GitOps for Kubernetes.</p>
+         <div class="success"><b>Best practice:</b> Build immutable artifacts, scan dependencies/images, separate build
+            from deployment, use environment promotion and keep deployment credentials out of source code.</div>
+      </section>
+      <section class="section" id="ch17">
+         <h2><span class="num">17</span>Observability & Monitoring</h2>
+         <p><b>Metrics</b> quantify behavior, <b>logs</b> explain events and <b>traces</b> follow requests across
+            distributed systems.</p>
+         <table>
+            <tr>
+               <th>Term</th>
+               <th>Meaning</th>
+            </tr>
+            <tr>
+               <td>SLI</td>
+               <td>Measured reliability indicator.</td>
+            </tr>
+            <tr>
+               <td>SLO</td>
+               <td>Target for an SLI.</td>
+            </tr>
+            <tr>
+               <td>SLA</td>
+               <td>Formal service commitment.</td>
+            </tr>
+            <tr>
+               <td>Alert</td>
+               <td>Actionable signal requiring response.</td>
+            </tr>
+         </table>
+         <p>CloudWatch, Azure Monitor and Google Cloud Monitoring provide provider-native telemetry; Prometheus, Grafana
+            and OpenTelemetry are common cross-platform tools.</p>
+      </section>
+      <section class="section" id="ch18">
+         <h2><span class="num">18</span>High Availability & Disaster Recovery</h2>
+         <table>
+            <tr>
+               <th>Pattern</th>
+               <th>Purpose</th>
+            </tr>
+            <tr>
+               <td>Single AZ</td>
+               <td>Simple but vulnerable to zone failure.</td>
+            </tr>
+            <tr>
+               <td>Multi-AZ</td>
+               <td>Reduces dependence on one zone.</td>
+            </tr>
+            <tr>
+               <td>Multi-region</td>
+               <td>Protects against regional failure at higher complexity/cost.</td>
+            </tr>
+            <tr>
+               <td>Active-passive</td>
+               <td>Standby takes traffic after failover.</td>
+            </tr>
+            <tr>
+               <td>Active-active</td>
+               <td>Multiple sites serve traffic concurrently.</td>
+            </tr>
+         </table>
+         <p><b>RPO</b> is acceptable data loss measured in time. <b>RTO</b> is target restoration time. Backups,
+            snapshots and replication solve different failure modes and must be tested.</p>
+      </section>
+      <section class="section" id="ch19">
+         <h2><span class="num">19</span>Cloud Cost Optimization</h2>
+         <ul>
+            <li>Right-size compute and databases.</li>
+            <li>Remove idle resources.</li>
+            <li>Use autoscaling for variable workloads.</li>
+            <li>Use commitments when utilization is predictable.</li>
+            <li>Use spot/preemptible capacity for interruptible jobs.</li>
+            <li>Apply storage and log-retention policies.</li>
+            <li>Monitor network transfer and egress.</li>
+            <li>Tag resources and assign cost ownership.</li>
+            <li>Use budgets and anomaly alerts.</li>
+         </ul>
+         <div class="warn">Cloud is not automatically cheaper. Stable workloads may favor owned infrastructure while
+            bursty workloads may benefit from elasticity.</div>
+      </section>
+      <section class="section" id="ch20">
+         <h2><span class="num">20</span>Real-World Cloud Architectures</h2>
+         <div class="grid">
+            <div class="card">
+               <h3>Three-tier web</h3>
+               <p>DNS/CDN/WAF → load balancer → stateless web/app tier → managed database.</p>
+            </div>
+            <div class="card">
+               <h3>Microservices</h3>
+               <p>API gateway → services → queues/events → service data stores. Requires tracing, timeouts and
+                  idempotency.</p>
+            </div>
+            <div class="card">
+               <h3>E-commerce</h3>
+               <p>Global edge → web → catalog/order → cache → database → events/payment integrations.</p>
+            </div>
+            <div class="card">
+               <h3>Hybrid VMware + Cloud</h3>
+               <p>On-prem VMware connected by private connectivity or VPN to cloud networks for phased migration and
+                  integration.</p>
+            </div>
+            <div class="card">
+               <h3>DR</h3>
+               <p>Primary region → backup/replication → secondary region → tested failover.</p>
+            </div>
+            <div class="card">
+               <h3>Multi-cloud</h3>
+               <p>Global traffic layer → provider-specific stacks → carefully designed data strategy. Use only when
+                  there is a clear reason.</p>
+            </div>
+         </div>
+         <p>For every architecture ask: what happens when an instance, zone, database, dependency or network path fails?
+            How is it detected, recovered, secured, monitored and paid for?</p>
+      </section>
+      <section class="section" id="ch21">
+         <h2><span class="num">21</span>Cloud Migration Strategy</h2>
+         <div class="arch">Assess → Discover → Plan → Design → Migrate → Validate → Optimize</div>
+         <table>
+            <tr>
+               <th>Strategy</th>
+               <th>Meaning</th>
+            </tr>
+            <tr>
+               <td>Rehost</td>
+               <td>Move with minimal application changes.</td>
+            </tr>
+            <tr>
+               <td>Replatform</td>
+               <td>Move while adopting selected managed capabilities.</td>
+            </tr>
+            <tr>
+               <td>Refactor</td>
+               <td>Redesign internals for cloud-native operation.</td>
+            </tr>
+            <tr>
+               <td>Repurchase</td>
+               <td>Replace with another product/service.</td>
+            </tr>
+            <tr>
+               <td>Retain</td>
+               <td>Keep where it is when migration is not justified.</td>
+            </tr>
+            <tr>
+               <td>Retire</td>
+               <td>Remove workloads that no longer provide value.</td>
+            </tr>
+         </table>
+         <p>For VMware-to-cloud migration: inventory VMs and dependencies, classify workloads, map networks/identity,
+            assess licensing and performance, pilot, validate, migrate in waves, then optimize.</p>
+      </section>
+      <section class="section" id="ch22">
+         <h2><span class="num">22</span>Cloud Architecture Interview Preparation</h2>
+         <div class="grid">
+            <div class="card">
+               <h3>Q: What is scalability vs elasticity?</h3>
+               <p><b>Answer:</b> Scalability is the ability to handle more load; elasticity emphasizes dynamically
+                  adjusting capacity as demand changes.</p>
+            </div>
+            <div class="card">
+               <h3>Q: What is an Availability Zone?</h3>
+               <p><b>Answer:</b> A physically separated infrastructure location inside a cloud region.</p>
+            </div>
+            <div class="card">
+               <h3>Q: What is shared responsibility?</h3>
+               <p><b>Answer:</b> The provider secures the cloud infrastructure while customer responsibilities depend on
+                  the service and include configuration, identity and data/workload security.</p>
+            </div>
+            <div class="card">
+               <h3>Q: What is RPO?</h3>
+               <p><b>Answer:</b> Maximum acceptable data loss measured in time.</p>
+            </div>
+            <div class="card">
+               <h3>Q: What is RTO?</h3>
+               <p><b>Answer:</b> Target time to restore service.</p>
+            </div>
+            <div class="card">
+               <h3>Q: Why use a queue?</h3>
+               <p><b>Answer:</b> To decouple producers and consumers, absorb bursts and enable asynchronous processing.
+               </p>
+            </div>
+            <div class="card">
+               <h3>Q: Why can cloud cost more?</h3>
+               <p><b>Answer:</b> Idle resources, overprovisioning, egress, service premiums and weak governance can
+                  raise total cost.</p>
+            </div>
+            <div class="card">
+               <h3>Q: What is GitOps?</h3>
+               <p><b>Answer:</b> A delivery approach where version-controlled desired state drives automated
+                  reconciliation.</p>
+            </div>
+            <div class="card">
+               <h3>Q: Object vs block storage?</h3>
+               <p><b>Answer:</b> Object storage is API/object based; block storage presents volumes suitable for
+                  filesystems and VM disks.</p>
+            </div>
+            <div class="card">
+               <h3>Q: Why private subnets?</h3>
+               <p><b>Answer:</b> To reduce direct internet exposure for resources that do not need public inbound
+                  connectivity.</p>
+            </div>
+         </div>
+         <div class="info">For architecture interviews, explain requirements, trade-offs, failure modes, security,
+            operations and cost—not just service names.</div>
+      </section>
+      <section class="section" id="ch23">
+         <h2><span class="num">23</span>Practical Cloud Projects</h2>
+         <div class="grid">
+            <div class="card">
+               <h3>Beginner — Simple cloud application</h3>
+               <p>DNS, compute, network security, storage and monitoring.</p>
+               <p><b>Deliverables:</b> diagram, repository, IaC, pipeline, monitoring and runbook.</p>
+            </div>
+            <div class="card">
+               <h3>Intermediate — Three-tier application</h3>
+               <p>Load balancing, private tiers, database and backups.</p>
+               <p><b>Deliverables:</b> diagram, repository, IaC, pipeline, monitoring and runbook.</p>
+            </div>
+            <div class="card">
+               <h3>Intermediate — Terraform platform</h3>
+               <p>Network and workload provisioning through version-controlled IaC.</p>
+               <p><b>Deliverables:</b> diagram, repository, IaC, pipeline, monitoring and runbook.</p>
+            </div>
+            <div class="card">
+               <h3>Intermediate — Docker + Kubernetes</h3>
+               <p>Build and deploy a containerized application on managed Kubernetes.</p>
+               <p><b>Deliverables:</b> diagram, repository, IaC, pipeline, monitoring and runbook.</p>
+            </div>
+            <div class="card">
+               <h3>Advanced — CI/CD pipeline</h3>
+               <p>Build, scan, publish and deploy immutable artifacts.</p>
+               <p><b>Deliverables:</b> diagram, repository, IaC, pipeline, monitoring and runbook.</p>
+            </div>
+            <div class="card">
+               <h3>Advanced — Observability</h3>
+               <p>Prometheus/Grafana dashboards and actionable alerts.</p>
+               <p><b>Deliverables:</b> diagram, repository, IaC, pipeline, monitoring and runbook.</p>
+            </div>
+            <div class="card">
+               <h3>Advanced — HA application</h3>
+               <p>Multi-zone design and tested recovery.</p>
+               <p><b>Deliverables:</b> diagram, repository, IaC, pipeline, monitoring and runbook.</p>
+            </div>
+            <div class="card">
+               <h3>Advanced — Hybrid VMware + Cloud</h3>
+               <p>Connect and migrate a representative workload.</p>
+               <p><b>Deliverables:</b> diagram, repository, IaC, pipeline, monitoring and runbook.</p>
+            </div>
+            <div class="card">
+               <h3>Expert — Multi-region</h3>
+               <p>Global traffic, replication and failover.</p>
+               <p><b>Deliverables:</b> diagram, repository, IaC, pipeline, monitoring and runbook.</p>
+            </div>
+            <div class="card">
+               <h3>Expert — Production DevOps platform</h3>
+               <p>IaC, CI/CD, security, observability, policy and DR.</p>
+               <p><b>Deliverables:</b> diagram, repository, IaC, pipeline, monitoring and runbook.</p>
+            </div>
+         </div>
+      </section>
+      <section class="section" id="ch24">
+         <h2><span class="num">24</span>Final Cloud Architecture Roadmap</h2>
+         <table>
+            <tr>
+               <th>Level</th>
+               <th>Focus</th>
+               <th>Learn</th>
+            </tr>
+            <tr>
+               <td><b>LEVEL 1</b></td>
+               <td>Cloud fundamentals</td>
+               <td>Regions, zones, service models, shared responsibility</td>
+            </tr>
+            <tr>
+               <td><b>LEVEL 2</b></td>
+               <td>Networking</td>
+               <td>CIDR, routing, DNS, NAT, load balancing, VPN</td>
+            </tr>
+            <tr>
+               <td><b>LEVEL 3</b></td>
+               <td>AWS/Azure/GCP</td>
+               <td>Learn one deeply, then map concepts across the others</td>
+            </tr>
+            <tr>
+               <td><b>LEVEL 4</b></td>
+               <td>Linux + Docker</td>
+               <td>OS, networking, processes and containers</td>
+            </tr>
+            <tr>
+               <td><b>LEVEL 5</b></td>
+               <td>Kubernetes</td>
+               <td>Managed Kubernetes, storage, networking, scaling, security</td>
+            </tr>
+            <tr>
+               <td><b>LEVEL 6</b></td>
+               <td>Terraform</td>
+               <td>State, modules, remote state, plan/apply, CI</td>
+            </tr>
+            <tr>
+               <td><b>LEVEL 7</b></td>
+               <td>CI/CD</td>
+               <td>Git, pipelines, artifacts and security scanning</td>
+            </tr>
+            <tr>
+               <td><b>LEVEL 8</b></td>
+               <td>Security</td>
+               <td>IAM, secrets, encryption, segmentation, audit</td>
+            </tr>
+            <tr>
+               <td><b>LEVEL 9</b></td>
+               <td>Observability</td>
+               <td>Metrics, logs, traces, SLOs and incidents</td>
+            </tr>
+            <tr>
+               <td><b>LEVEL 10</b></td>
+               <td>Cloud Architecture</td>
+               <td>HA, DR, distributed and event-driven design</td>
+            </tr>
+            <tr>
+               <td><b>LEVEL 11</b></td>
+               <td>Projects</td>
+               <td>Build production-style systems and document decisions</td>
+            </tr>
+            <tr>
+               <td><b>LEVEL 12</b></td>
+               <td>Interviews</td>
+               <td>Practice system design, trade-offs and failure scenarios</td>
+            </tr>
+         </table>
+         <div class="success"><b>Target:</b> translate business requirements into a secure, observable, scalable
+            architecture; implement it with IaC and CI/CD; and explain availability, recovery and cost trade-offs.</div>
+      </section>
+   </main>
+   <footer class="footer"><b>Cloud Architecture Engineering Handbook</b>
+      <p>Traditional Infrastructure → Cloud → Cloud-Native → Production Architecture</p>
+   </footer>
+</body>
+
+</html>

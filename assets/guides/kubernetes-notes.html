@@ -1,17 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kubernetes & Docker Notes - Complete Professional Guide</title>
+    <title>DevOps Complete Notes - Master Guide</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        :root {
+            --paper: #eee5d0;
+            --paper-light: #f7f0df;
+            --ink: #111111;
+            --muted: #555555;
+            --yellow: #ffdf00;
+            --blue: #245fe5;
+            --red: #ff4b4b;
+            --green: #dff2d8;
+            --white: #ffffff;
         }
 
         html {
@@ -20,121 +35,210 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: #f8f9fa;
-            color: #2c3e50;
+            background:
+                radial-gradient(circle at 12% 18%, rgba(0, 0, 0, .035) 0 2px, transparent 3px),
+                radial-gradient(circle at 72% 62%, rgba(0, 0, 0, .025) 0 2px, transparent 3px),
+                linear-gradient(90deg, rgba(255, 255, 255, .18), rgba(0, 0, 0, .025), rgba(255, 255, 255, .14)),
+                var(--paper);
+            background-size: 35px 35px, 49px 49px, 100% 100%, auto;
+            color: var(--ink);
             line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.38;
+            background-color: #f8f8f8;
+            background-image: url("../images/paper-texture.png");
+            background-size: cover;
+            background-position: center top;
+            background-repeat: repeat;
+            background-attachment: fixed;
+            z-index: -1;
         }
 
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 20px 0;
-            background: rgba(255, 255, 255, 0.95);
+            padding: 16px 0;
+            background: rgba(238, 229, 208, .97);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid #e0e0e0;
+            border-bottom: 2px solid var(--ink);
             z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 3px 0 rgba(17, 17, 17, .10);
         }
 
         nav .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 24px;
         }
 
         .back-btn {
-            color: #3498db;
+            color: var(--ink);
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 800;
             display: flex;
             align-items: center;
             gap: 8px;
-            transition: color 0.3s;
+            transition: transform .2s ease;
         }
 
         .back-btn:hover {
-            color: #2980b9;
+            color: var(--ink);
+            transform: translateX(-4px);
+        }
+
+        nav span {
+            color: var(--ink) !important;
+            font-weight: 800 !important;
+            letter-spacing: .04em;
+            background: var(--yellow);
+            border: 2px solid var(--ink);
+            box-shadow: 4px 4px 0 var(--ink);
+            padding: 8px 14px;
+            border-radius: 5px;
         }
 
         .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            position: relative;
+            max-width: 1200px;
+            margin: 60px auto 0;
             padding: 120px 20px 80px;
+            background: #ffffff;
+            color: var(--ink);
             text-align: center;
-            margin-top: 60px;
+            border-bottom: 2px solid var(--ink);
+            overflow: hidden;
         }
 
         .hero h1 {
+            max-width: 1000px;
+            margin: 25px auto;
             font-size: 3em;
-            margin-bottom: 20px;
-            font-weight: 700;
+            line-height: 1;
+            font-weight: 800;
+            letter-spacing: -.055em;
         }
 
         .hero p {
-            font-size: 1.2em;
-            opacity: 0.95;
-            max-width: 900px;
+            max-width: 850px;
             margin: 0 auto;
+            font-size: 1.18rem;
+            line-height: 1.75;
+            color: var(--muted);
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 60px 20px;
+            padding: 46px 24px 80px;
         }
 
-        .section {
-            background: white;
-            border-radius: 12px;
-            padding: 40px;
+        .section,
+        .toc {
+            position: relative;
+            background: #ffffff;
+            border: 2px solid var(--ink);
+            border-radius: 3px;
+            padding: 38px 42px;
             margin-bottom: 30px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            border: 1px solid #e0e0e0;
+            box-shadow: 7px 7px 0 var(--ink);
+        }
+
+        .section::before,
+        .toc::before {
+            content: "";
+            position: absolute;
+            inset: 7px -7px -7px 7px;
+            border: 1px solid #11111126;
+            pointer-events: none;
+            z-index: -1;
         }
 
         h2 {
-            color: #2c3e50;
-            font-size: 2em;
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 3px solid #667eea;
+            color: var(--ink);
+            font-size: clamp(1.8rem, 3vw, 2.65rem);
+            line-height: 1.1;
+            margin-bottom: 27px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid var(--ink);
+            letter-spacing: -.035em;
         }
 
         h3 {
-            color: #667eea;
-            font-size: 1.4em;
-            margin: 30px 0 15px 0;
+            color: var(--ink);
+            font-size: 1.45em;
+            margin: 30px 0 15px;
+            line-height: 1.25;
+            letter-spacing: -.02em;
         }
 
         h4 {
-            color: #764ba2;
-            font-size: 1.2em;
-            margin: 20px 0 10px 0;
+            display: inline-block;
+            color: var(--ink);
+            font-size: 1.05rem;
+            margin: 20px 0 10px;
+            padding: 5px 11px;
+            background: var(--yellow);
+            border: 2px solid var(--ink);
+            box-shadow: 3px 3px 0 var(--ink);
+            line-height: 1.2;
+        }
+
+        p {
+            color: #303030;
+        }
+
+        ul,
+        ol {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 9px;
+            line-height: 1.75;
+        }
+
+        li::marker {
+            color: var(--blue);
+        }
+
+        a {
+            color: var(--blue);
         }
 
         pre {
-            background: #2c3e50;
-            color: #ecf0f1;
-            padding: 20px;
-            border-radius: 8px;
+            background: var(--ink);
+            color: #f7f2e7;
+            padding: 22px;
+            border: 2px solid var(--ink);
+            border-radius: 3px;
             overflow-x: auto;
-            margin: 20px 0;
+            margin: 22px 0;
             font-family: 'Fira Code', monospace;
-            font-size: 0.9em;
-            line-height: 1.5;
+            font-size: .9em;
+            line-height: 1.55;
+            box-shadow: 5px 5px 0 var(--blue);
         }
 
         code {
             font-family: 'Fira Code', monospace;
-            background: #f0e7ff;
-            color: #764ba2;
+            background: #e6edff;
+            color: #1747b0;
             padding: 2px 6px;
-            border-radius: 4px;
-            font-size: 0.9em;
+            border-radius: 3px;
+            font-size: .9em;
         }
 
         pre code {
@@ -143,94 +247,92 @@
             padding: 0;
         }
 
-        ul, ol {
-            margin-left: 25px;
-            margin-bottom: 20px;
-        }
-
-        li {
-            margin-bottom: 10px;
-            line-height: 1.8;
+        .info-box,
+        .warning-box,
+        .success-box,
+        .fire-box {
+            padding: 20px;
+            margin: 22px 0;
+            border: 2px solid var(--ink);
+            border-left-width: 9px;
+            border-radius: 3px;
+            box-shadow: 4px 4px 0 var(--ink);
         }
 
         .info-box {
-            background: #e8f4fd;
-            border-left: 4px solid #3498db;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 4px;
+            background: #e6edff;
+            border-left-color: var(--blue);
         }
 
         .warning-box {
-            background: #fff3cd;
-            border-left: 4px solid #ffc107;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 4px;
+            background: #fff1a8;
+            border-left-color: var(--yellow);
         }
 
         .success-box {
-            background: #d4edda;
-            border-left: 4px solid #28a745;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 4px;
+            background: var(--green);
+            border-left-color: var(--ink);
         }
 
         .fire-box {
-            background: #fff5f5;
-            border-left: 4px solid #e74c3c;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 4px;
+            background: #ffdede;
+            border-left-color: var(--red);
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 20px 0;
+            margin: 22px 0;
+            border: 2px solid var(--ink);
+            background: var(--white);
         }
 
-        th, td {
-            padding: 15px;
+        th,
+        td {
+            padding: 14px 15px;
             text-align: left;
-            border: 1px solid #e0e0e0;
+            border: 1px solid var(--ink);
         }
 
         th {
-            background: #667eea;
-            color: white;
-            font-weight: 600;
+            background: var(--ink);
+            color: var(--yellow);
+            font-weight: 800;
         }
 
         tr:nth-child(even) {
-            background: #f8f9fa;
+            background: #f5f1e8;
+        }
+
+        tr:hover {
+            background: #fff2a8;
         }
 
         .chapter-number {
-            display: inline-block;
-            background: #667eea;
-            color: white;
-            width: 40px;
-            height: 40px;
-            line-height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--yellow);
+            color: var(--ink);
+            width: 44px;
+            height: 44px;
+            line-height: 1;
             text-align: center;
+            border: 2px solid var(--ink);
             border-radius: 50%;
-            font-weight: 600;
+            font-weight: 800;
             margin-right: 10px;
-            font-size: 1.2em;
+            font-size: 1.05em;
+            box-shadow: 3px 3px 0 var(--ink);
+            vertical-align: middle;
         }
 
         .toc {
-            background: #f8f9fa;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 25px;
-            margin-bottom: 40px;
+            background: #ffffff;
         }
 
         .toc h3 {
-            color: #2c3e50;
+            color: var(--ink);
             margin-top: 0;
             margin-bottom: 15px;
         }
@@ -245,27 +347,68 @@
         }
 
         .toc a {
-            color: #667eea;
+            color: var(--ink);
             text-decoration: none;
-            transition: color 0.3s;
+            font-weight: 700;
+            transition: color .2s ease, padding-left .2s ease;
         }
 
         .toc a:hover {
-            color: #764ba2;
-            text-decoration: underline;
+            color: var(--blue);
+            text-decoration: none;
+            padding-left: 4px;
         }
 
         .highlight-box {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: var(--yellow);
+            color: var(--ink);
             padding: 30px;
-            border-radius: 12px;
+            border: 2px solid var(--ink);
+            border-radius: 3px;
             margin: 30px 0;
+            box-shadow: 6px 6px 0 var(--ink);
         }
 
         .highlight-box h3 {
-            color: white;
+            color: var(--ink);
             margin-top: 0;
+        }
+
+        .pillar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .pillar-card {
+            background: #fff;
+            border: 2px solid var(--ink);
+            border-radius: 3px;
+            padding: 15px;
+            text-align: center;
+            font-weight: 700;
+            color: var(--ink);
+            box-shadow: 4px 4px 0 var(--ink);
+            transition: all 0.2s ease;
+        }
+
+        .pillar-card:hover {
+            background: var(--yellow);
+            color: var(--ink);
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 var(--ink);
+        }
+
+        .roadmap-step {
+            background: var(--blue);
+            color: white;
+            padding: 20px;
+            margin: 15px 0;
+            border: 2px solid var(--ink);
+            border-radius: 3px;
+            font-weight: 700;
+            box-shadow: 5px 5px 0 var(--ink);
         }
 
         .command-grid {
@@ -277,47 +420,83 @@
 
         .command-grid div {
             padding: 10px;
-            background: #f8f9fa;
-            border-radius: 4px;
+            background: #f5f1e8;
+            border: 1px solid var(--ink);
+            border-radius: 3px;
         }
 
         .command-grid div:nth-child(odd) {
-            font-weight: 600;
-            background: #f0e7ff;
+            font-weight: 700;
+            background: #e6edff;
         }
 
         @media (max-width: 768px) {
+            nav .container {
+                padding: 0 16px;
+            }
+
+            nav span {
+                font-size: .78rem;
+                padding: 6px 9px;
+                box-shadow: 3px 3px 0 var(--ink);
+            }
+
+            .hero {
+                margin-top: 88px;
+                padding: 54px 24px 50px;
+            }
+
             .hero h1 {
-                font-size: 2em;
+                max-width: 92%;
+                font-size: 2.65rem;
             }
 
             .hero p {
-                font-size: 1em;
+                font-size: 1rem;
+                margin-left: 0;
             }
 
-            .section {
-                padding: 25px;
+            .container {
+                padding: 30px 16px 55px;
+            }
+
+            .section,
+            .toc {
+                padding: 26px 22px;
+                box-shadow: 5px 5px 0 var(--ink);
             }
 
             h2 {
-                font-size: 1.6em;
+                font-size: 1.75em;
             }
 
             pre {
-                font-size: 0.8em;
-                padding: 15px;
+                font-size: .78em;
+                padding: 16px;
             }
 
             table {
-                font-size: 0.9em;
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
             }
 
-            th, td {
+            th,
+            td {
                 padding: 10px;
+            }
+
+            .pillar-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .command-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
+
 <body>
     <nav>
         <div class="container">
@@ -344,13 +523,14 @@
 
         <div class="section" id="docker">
             <h2><span class="chapter-number">7</span>Docker (Full DevOps Guide)</h2>
-            
+
             <div class="fire-box">
-                <strong>🔥 Non-Negotiable:</strong> Docker is essential for DevOps. If you cannot build efficient images, you cannot deploy to Kubernetes.
+                <strong>🔥 Non-Negotiable:</strong> Docker is essential for DevOps. If you cannot build efficient
+                images, you cannot deploy to Kubernetes.
             </div>
 
             <h3>7.1 What Docker Actually Solves</h3>
-            
+
             <ul>
                 <li>✓ Eliminates "works on my machine" syndrome</li>
                 <li>✓ Consistent runtime environment across all stages</li>
@@ -362,7 +542,7 @@
             </ul>
 
             <h3>7.2 Docker Architecture</h3>
-            
+
             <pre>Components:
 ├── Docker CLI (command-line interface)
 ├── Docker Daemon (dockerd - background service)
@@ -372,9 +552,9 @@
 └── Networks (container communication)</pre>
 
             <h3>7.3 Dockerfile - Mandatory Knowledge</h3>
-            
+
             <p>Every DevOps engineer must master these instructions:</p>
-            
+
             <table>
                 <tr>
                     <th>Command</th>
@@ -439,7 +619,7 @@
             </table>
 
             <h3>7.4 Dockerfile Best Practices (Production Level)</h3>
-            
+
             <h4>1. Use Small Base Images</h4>
             <div class="command-grid">
                 <div>❌ Bad</div>
@@ -450,7 +630,7 @@
 
             <h4>2. Multi-Stage Builds (Critical for Production)</h4>
             <p>Reduces image size dramatically by separating build and runtime environments:</p>
-            
+
             <pre># Build stage
 FROM node:18 AS builder
 WORKDIR /app
@@ -466,7 +646,8 @@ EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]</pre>
 
             <div class="success-box">
-                <strong>✓ Result:</strong> Final image is ~20MB instead of 1GB. Only production artifacts are included, no build dependencies.
+                <strong>✓ Result:</strong> Final image is ~20MB instead of 1GB. Only production artifacts are included,
+                no build dependencies.
             </div>
 
             <h4>3. Don't Run as Root User</h4>
@@ -485,7 +666,8 @@ USER appuser
 CMD ["node", "server.js"]</pre>
 
             <div class="warning-box">
-                <strong>⚠️ Security:</strong> Running containers as root is a major security risk. Always use non-root users in production.
+                <strong>⚠️ Security:</strong> Running containers as root is a major security risk. Always use non-root
+                users in production.
             </div>
 
             <h4>4. Use HEALTHCHECK</h4>
@@ -507,7 +689,7 @@ Dockerfile
 .dockerignore</pre>
 
             <h3>7.5 Docker Build & Run Commands</h3>
-            
+
             <pre># Build image
 docker build -t app:v1 .
 docker build -t app:v1 -f Dockerfile.prod .
@@ -535,7 +717,7 @@ docker rm myapp
 docker rm -f myapp               # Force remove running container</pre>
 
             <h3>7.6 Docker Networking</h3>
-            
+
             <table>
                 <tr>
                     <th>Network Type</th>
@@ -574,7 +756,7 @@ docker network create my-network
 docker run -d --network my-network --name web nginx</pre>
 
             <h3>7.7 Docker Volumes (Persistent Data)</h3>
-            
+
             <pre># Create named volume
 docker volume create dbdata
 
@@ -591,11 +773,12 @@ docker volume inspect dbdata
 docker volume rm dbdata</pre>
 
             <div class="info-box">
-                <strong>💡 Important:</strong> Without volumes, all data is lost when container is removed. Always use volumes for databases and stateful applications.
+                <strong>💡 Important:</strong> Without volumes, all data is lost when container is removed. Always use
+                volumes for databases and stateful applications.
             </div>
 
             <h3>7.8 Docker Compose (Multi-Container Local Dev)</h3>
-            
+
             <pre># docker-compose.yml
 version: "3.9"
 
@@ -635,7 +818,7 @@ docker-compose logs -f web      # Follow logs
 docker-compose restart web      # Restart specific service</pre>
 
             <h3>7.9 Working with Private Registries</h3>
-            
+
             <h4>Docker Hub:</h4>
             <pre>docker login
 docker tag app:v1 username/app:v1
@@ -650,7 +833,7 @@ docker tag app:v1 123456.dkr.ecr.ap-south-1.amazonaws.com/app:v1
 docker push 123456.dkr.ecr.ap-south-1.amazonaws.com/app:v1</pre>
 
             <h3>7.10 Docker Security Best Practices</h3>
-            
+
             <ul>
                 <li>✗ Never store secrets inside Dockerfile</li>
                 <li>✓ Always use non-root user</li>
@@ -670,7 +853,7 @@ trivy image myapp:v1
 docker scan myapp:v1</pre>
 
             <h3>7.11 Docker Troubleshooting</h3>
-            
+
             <h4>Container Keeps Restarting:</h4>
             <pre>docker logs container-name
 docker inspect container-name | grep -i error
@@ -694,14 +877,14 @@ curl http://localhost:8080</pre>
 
         <div class="section" id="kubernetes">
             <h2><span class="chapter-number">8</span>Kubernetes (Advanced DevOps Guide)</h2>
-            
+
             <div class="highlight-box">
                 <h3>☸️ The Heart of Modern DevOps</h3>
                 <p>Kubernetes is used by virtually all major tech companies for container orchestration at scale.</p>
             </div>
 
             <h3>8.1 Kubernetes Architecture</h3>
-            
+
             <h4>Control Plane Components:</h4>
             <ul>
                 <li><strong>API Server:</strong> Frontend for Kubernetes, handles all REST requests</li>
@@ -718,7 +901,7 @@ curl http://localhost:8080</pre>
             </ul>
 
             <h3>8.2 Kubernetes Core Concepts</h3>
-            
+
             <table>
                 <tr>
                     <th>Object</th>
@@ -768,7 +951,7 @@ curl http://localhost:8080</pre>
             </table>
 
             <h3>8.3 Pod Example</h3>
-            
+
             <pre>apiVersion: v1
 kind: Pod
 metadata:
@@ -783,7 +966,7 @@ spec:
     - containerPort: 80</pre>
 
             <h3>8.4 Deployments (Most Important Resource)</h3>
-            
+
             <pre>apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -814,7 +997,7 @@ spec:
             cpu: "500m"</pre>
 
             <h3>8.5 Services</h3>
-            
+
             <h4>ClusterIP (Internal Only):</h4>
             <pre>apiVersion: v1
 kind: Service
@@ -856,9 +1039,9 @@ spec:
     targetPort: 8080</pre>
 
             <h3>8.6 Ingress (Mandatory for Real Applications)</h3>
-            
+
             <p>Ingress sits "in front" of services and provides HTTP/HTTPS routing:</p>
-            
+
             <pre>apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -886,7 +1069,7 @@ spec:
               number: 8080</pre>
 
             <h3>8.7 ConfigMaps & Secrets</h3>
-            
+
             <h4>ConfigMap (Non-Sensitive Data):</h4>
             <pre>apiVersion: v1
 kind: ConfigMap
@@ -907,11 +1090,12 @@ data:
   password: cGFzcw==  # Base64 encoded "pass"</pre>
 
             <div class="warning-box">
-                <strong>⚠️ Note:</strong> Secrets are only base64 encoded, not encrypted. Use encryption at rest or external secret managers for production.
+                <strong>⚠️ Note:</strong> Secrets are only base64 encoded, not encrypted. Use encryption at rest or
+                external secret managers for production.
             </div>
 
             <h3>8.8 Persistent Volumes & Claims</h3>
-            
+
             <pre>apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -942,7 +1126,7 @@ spec:
       claimName: data-pvc</pre>
 
             <h3>8.9 Horizontal Pod Autoscaler (HPA)</h3>
-            
+
             <pre>apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
@@ -963,7 +1147,7 @@ spec:
         averageUtilization: 60</pre>
 
             <h3>8.10 Liveness & Readiness Probes</h3>
-            
+
             <h4>Readiness Probe (Is pod ready for traffic?):</h4>
             <pre>readinessProbe:
   httpGet:
@@ -994,9 +1178,9 @@ spec:
             </div>
 
             <h3>8.11 Rolling Updates</h3>
-            
+
             <p>Kubernetes handles zero-downtime releases automatically:</p>
-            
+
             <pre># Update image
 kubectl set image deployment/web-app app=myapp:v2
 
@@ -1021,7 +1205,7 @@ kubectl rollout undo deployment/web-app --to-revision=2</pre>
       maxSurge: 1          # Max extra pods during update</pre>
 
             <h3>8.12 Blue-Green Deployment</h3>
-            
+
             <div class="highlight-box">
                 <h3>🔄 Blue-Green Strategy</h3>
                 <ul>
@@ -1034,9 +1218,9 @@ kubectl rollout undo deployment/web-app --to-revision=2</pre>
             </div>
 
             <h3>8.13 Canary Deployment (SRE Best Practice)</h3>
-            
+
             <p>Percentage-based progressive rollout:</p>
-            
+
             <pre>Rollout Strategy:
 1% traffic   → Monitor metrics
 10% traffic  → Check error rates
@@ -1054,7 +1238,7 @@ If errors detected at any stage → Auto rollback</pre>
             </ul>
 
             <h3>8.14 Kubernetes Security</h3>
-            
+
             <h4>Key Security Concepts:</h4>
             <ul>
                 <li><strong>RBAC:</strong> Role-Based Access Control (who can do what)</li>
@@ -1084,7 +1268,7 @@ spec:
       port: 8080</pre>
 
             <h3>8.15 Kubernetes Troubleshooting</h3>
-            
+
             <h4>Pod Not Starting (Pending):</h4>
             <pre>kubectl describe pod pod-name
 # Check Events section for errors
@@ -1142,7 +1326,7 @@ Check:
             </div>
 
             <h3>8.16 Essential kubectl Commands</h3>
-            
+
             <pre># Get resources
 kubectl get pods
 kubectl get deployments
@@ -1188,11 +1372,11 @@ kubectl get pod pod-name -o json</pre>
 
         <div class="section" id="helm">
             <h2><span class="chapter-number">9</span>Helm (Package Manager for Kubernetes)</h2>
-            
+
             <p>Helm simplifies Kubernetes application deployment by packaging resources into reusable charts.</p>
 
             <h3>9.1 What is Helm?</h3>
-            
+
             <ul>
                 <li>Package manager for Kubernetes (like apt/yum for Linux)</li>
                 <li>Bundles multiple K8s manifests into a single chart</li>
@@ -1202,7 +1386,7 @@ kubectl get pod pod-name -o json</pre>
             </ul>
 
             <h3>9.2 Helm Basic Commands</h3>
-            
+
             <h4>Repository Management:</h4>
             <pre># Add repository
 helm repo add bitnami https://charts.bitnami.com/bitnami
@@ -1253,7 +1437,7 @@ helm rollback mydb 1    # Rollback to revision 1
 helm uninstall mydb</pre>
 
             <h3>9.3 Creating Custom Helm Chart</h3>
-            
+
             <pre># Create new chart
 helm create myapp
 
@@ -1339,7 +1523,7 @@ helm install myrelease myapp-1.0.0.tgz
 helm install myrelease ./myapp --dry-run --debug</pre>
 
             <h3>9.4 Helm Best Practices</h3>
-            
+
             <ul>
                 <li>✓ Use version pinning in Chart.yaml</li>
                 <li>✓ Document all values in values.yaml comments</li>
@@ -1351,13 +1535,14 @@ helm install myrelease ./myapp --dry-run --debug</pre>
             </ul>
 
             <div class="success-box">
-                <strong>✓ Production Tip:</strong> Use Helm charts for all application deployments. Store charts in Git for version control and use ArgoCD for GitOps-based deployment.
+                <strong>✓ Production Tip:</strong> Use Helm charts for all application deployments. Store charts in Git
+                for version control and use ArgoCD for GitOps-based deployment.
             </div>
         </div>
 
         <div class="section" id="argocd">
             <h2><span class="chapter-number">10</span>ArgoCD (GitOps)</h2>
-            
+
             <div class="highlight-box">
                 <h3>🔄 GitOps Workflow</h3>
                 <pre>Git Repository (Single Source of Truth)
@@ -1370,7 +1555,7 @@ helm install myrelease ./myapp --dry-run --debug</pre>
             </div>
 
             <h3>10.1 What is GitOps?</h3>
-            
+
             <p>GitOps is a methodology where:</p>
             <ul>
                 <li>Git is the single source of truth for infrastructure and applications</li>
@@ -1381,7 +1566,7 @@ helm install myrelease ./myapp --dry-run --debug</pre>
             </ul>
 
             <h3>10.2 ArgoCD Core Concepts</h3>
-            
+
             <table>
                 <tr>
                     <th>Concept</th>
@@ -1414,7 +1599,7 @@ helm install myrelease ./myapp --dry-run --debug</pre>
             </table>
 
             <h3>10.3 ArgoCD Installation</h3>
-            
+
             <pre># Create namespace
 kubectl create namespace argocd
 
@@ -1437,7 +1622,7 @@ kubectl port-forward svc/argocd-server -n argocd 8080:443
 # Password: (from command above)</pre>
 
             <h3>10.4 Creating ArgoCD Application</h3>
-            
+
             <pre>apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -1473,7 +1658,7 @@ argocd app create myapp \
   --dest-namespace production</pre>
 
             <h3>10.5 ArgoCD CLI Commands</h3>
-            
+
             <pre># Login
 argocd login localhost:8080
 
@@ -1496,7 +1681,7 @@ argocd app rollback myapp
 argocd app delete myapp</pre>
 
             <h3>10.6 GitOps Workflow Example</h3>
-            
+
             <pre>1. Developer updates deployment manifest in Git
    - Changes image tag from v1.0 to v1.1
    - Commits and pushes to main branch
@@ -1522,7 +1707,7 @@ argocd app delete myapp</pre>
    - Or manual rollback via Git revert</pre>
 
             <h3>10.7 GitOps Benefits</h3>
-            
+
             <div class="success-box">
                 <strong>✓ Key Advantages:</strong>
                 <ul>
@@ -1537,7 +1722,7 @@ argocd app delete myapp</pre>
             </div>
 
             <h3>10.8 Production Setup</h3>
-            
+
             <h4>Repository Structure:</h4>
             <pre>gitops-repo/
 ├── apps/
@@ -1569,13 +1754,14 @@ argocd app delete myapp</pre>
 # Each environment overlays base configs with environment-specific values</pre>
 
             <div class="info-box">
-                <strong>💡 Best Practice:</strong> Use ArgoCD with Helm charts for complex applications. Store Helm values in Git and let ArgoCD manage the deployment lifecycle.
+                <strong>💡 Best Practice:</strong> Use ArgoCD with Helm charts for complex applications. Store Helm
+                values in Git and let ArgoCD manage the deployment lifecycle.
             </div>
         </div>
 
         <div class="section">
             <h2>🎓 Summary & Next Steps</h2>
-            
+
             <div class="highlight-box">
                 <h3>🚀 What You've Learned</h3>
                 <ul>
@@ -1613,7 +1799,8 @@ argocd app delete myapp</pre>
                 <li><a href="https://kubernetes.io/docs/home/" target="_blank">Kubernetes Documentation</a></li>
                 <li><a href="https://helm.sh/docs/" target="_blank">Helm Documentation</a></li>
                 <li><a href="https://argo-cd.readthedocs.io/" target="_blank">ArgoCD Documentation</a></li>
-                <li><a href="https://github.com/kelseyhightower/kubernetes-the-hard-way" target="_blank">Kubernetes The Hard Way</a></li>
+                <li><a href="https://github.com/kelseyhightower/kubernetes-the-hard-way" target="_blank">Kubernetes The
+                        Hard Way</a></li>
             </ul>
         </div>
 
@@ -1622,4 +1809,5 @@ argocd app delete myapp</pre>
         </div>
     </div>
 </body>
+
 </html>
